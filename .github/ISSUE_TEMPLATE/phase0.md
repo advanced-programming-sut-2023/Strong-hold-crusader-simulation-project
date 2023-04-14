@@ -81,11 +81,10 @@ assignees: Arman17Babaei
   <summary>تسک مربوطه</summary>
   
   <div dir="ltr" align='right'>
-    کامیت نام و شماره دانشجویی در README.md
 
   1. [ ] شروع نشده
   2. [ ] در حال انجام
-  3. [. ] تمام شده
+  3. [ ] تمام شده
   </div>
 </details>
 </div>
