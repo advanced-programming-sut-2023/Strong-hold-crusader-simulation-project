@@ -79,7 +79,7 @@ assignees: Arman17Babaei
   **نام و نام خانوادگی:** فرید محمودزاده
 <details>
   <summary>تسک مربوطه</summary>
-
+کامیت نام و شماره دانشجویی در README.md
   <div dir="ltr" align='right'>
 
   1. [ ] شروع نشده
