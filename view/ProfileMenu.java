@@ -2,8 +2,12 @@ package view;
 
 import java.util.Scanner;
 
-public class ProfileMenu {
-    public void run(Scanner scanner) {
+public class ProfileMenu extends Menu {
+    public ProfileMenu(Scanner scanner) {
+        super(scanner);
+    }
+    @Override
+    public void run() {
 
     }
 }

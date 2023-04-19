@@ -2,11 +2,12 @@ package view;
 
 import java.util.Scanner;
 
-public class TradeMenu {
-    public void run(Scanner scanner) {
-        System.out.println(showNews());
+public class TradeMenu extends Menu {
+    public TradeMenu(Scanner scanner) {
+        super(scanner);
     }
-    private String showNews(){
-        return null;
+    @Override
+    public void run() {
+
     }
 }

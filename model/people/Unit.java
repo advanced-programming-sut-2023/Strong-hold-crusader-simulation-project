@@ -1,4 +1,6 @@
-package model;
+package model.people;
+
+import model.Weapon;
 
 import java.util.ArrayList;
 

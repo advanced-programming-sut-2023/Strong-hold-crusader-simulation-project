@@ -1,9 +1,6 @@
 package controller;
 
 
-import model.Map;
-import model.Unit;
-
 import java.util.regex.Matcher;
 
 public class GameMenuController {

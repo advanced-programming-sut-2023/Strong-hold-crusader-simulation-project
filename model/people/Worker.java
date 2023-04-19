@@ -1,4 +1,4 @@
-package model;
+package model.people;
 
 import model.buildings.Building;
 

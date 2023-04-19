@@ -1,4 +1,4 @@
-package model;
+package model.people;
 
 public enum MilitaryType {
     Archer,

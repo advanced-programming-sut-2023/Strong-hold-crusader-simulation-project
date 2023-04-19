@@ -76,10 +76,10 @@ assignees: Arman17Babaei
 
 ## تسک‌های نفر سوم
 
-  **نام و نام خانوادگی:** فرید محمودزاده
+**نام و نام خانوادگی:**
 <details>
   <summary>تسک مربوطه</summary>
-  
+
   <div dir="ltr" align='right'>
 
   1. [ ] شروع نشده

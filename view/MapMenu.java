@@ -2,8 +2,12 @@ package view;
 
 import java.util.Scanner;
 
-public class MapMenu {
-    public void run(Scanner scanner, int x, int y) {
+public class MapMenu extends Menu {
+    public MapMenu(Scanner scanner, int x, int y) {
+        super(scanner);
+    }
+    @Override
+    public void run() {
 
     }
 }
