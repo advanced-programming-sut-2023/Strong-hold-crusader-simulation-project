@@ -2,7 +2,7 @@ package controller;
 
 import java.util.regex.Matcher;
 
-public class SignupMenuController {
+public class SignupMenuController extends Controller {
     public static String createUser(Matcher matcher) {
         return null;
     }

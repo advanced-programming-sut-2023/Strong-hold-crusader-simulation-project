@@ -4,7 +4,7 @@ import model.Map;
 
 import java.util.regex.Matcher;
 
-public class MapMenuController {
+public class MapMenuController extends Controller {
     public static String moveMap(Matcher matcher) {
         return null;
     }

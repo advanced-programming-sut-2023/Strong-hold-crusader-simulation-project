@@ -2,7 +2,7 @@ package controller;
 
 import java.util.regex.Matcher;
 
-public class ProfileMenuController {
+public class ProfileMenuController extends Controller {
     public static String changeUsername(Matcher matcher) {
         return null;
     }

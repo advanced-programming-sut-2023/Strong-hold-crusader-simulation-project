@@ -3,7 +3,7 @@ package controller;
 
 import java.util.regex.Matcher;
 
-public class GameMenuController {
+public class GameMenuController extends Controller {
     public static String showMap(Matcher matcher) {
         return null;
     }
