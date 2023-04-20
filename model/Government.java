@@ -4,8 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Government {
-    public static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
-    //food in alphabetical order
+    private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
     private HashMap<Recourses, Integer> recourseCount;
     private int popularity;
@@ -36,6 +35,10 @@ public class Government {
 
     public Government() {
 
+    }
+
+    public static String[] getPopularityFactors(){
+        return popularityFactors;
     }
 
     public User getOwner() {

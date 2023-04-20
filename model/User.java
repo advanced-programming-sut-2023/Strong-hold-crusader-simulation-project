@@ -5,18 +5,35 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 
 public class User {
+    private static final String[] securityQuestions = {
+            "What is my father's name?",
+            "What was my first pet's name?",
+            "What is my mother's last name?"
+    };
     private static User loggedInUser;
-    private static boolean stayLoggedIn;
+    private static boolean stayLoggedIn = false;
     private static final ArrayList<User> allUsers = new ArrayList<>();
     private String username;
     private String password;
     private String nickname;
     private String email;
     private String slogan = null;
-    private Pair<Integer, String> recoveryQA;
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    private int recoveryQuestion;
+    private String recoveryAnswer;
+    public User() {
+
+    }
+
+    public static String[] getSecurityQuestions(){
+        return securityQuestions;
+    }
+
+    public int getRecoveryQuestion() {
+        return recoveryQuestion;
+    }
+
+    public boolean isSecurityAnswerCorrect(String answer) {
+        return recoveryAnswer.equals(answer);
     }
 
     public static User getUserByUsername(String username) {

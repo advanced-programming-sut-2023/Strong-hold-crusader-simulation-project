@@ -16,9 +16,9 @@ public class LoginMenuController extends Controller {
         String username = Controller.doubleQuoteRemover(usernameMatcher.group("username"));
         String password = Controller.doubleQuoteRemover(passwordMatcher.group("password"));
         boolean stayLoggedIn = LoginMenuCommands.getMatcher(input, LoginMenuCommands.STAY_LOGGED_IN) != null;
-        User user;
         if(System.currentTimeMillis() < lastLoginAttempt + wrongPasswordCount * 5000L)
             return "You have to wait " + (5 * wrongPasswordCount) + " seconds before next attempt";
+        User user;
         if((user = User.getUserByUsername(username)) == null)
             return "Username and password didn't match";
         if(!user.isPasswordCorrect(password)) {
@@ -31,8 +31,5 @@ public class LoginMenuController extends Controller {
         User.setLoggedInUser(user);
         User.stayLoggedIn(stayLoggedIn);
         return "user logged in successfully!";
-    }
-    public static String forgetPassword(User user) {
-        return null;
     }
 }

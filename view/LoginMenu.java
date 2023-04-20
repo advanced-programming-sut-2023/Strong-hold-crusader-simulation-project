@@ -1,6 +1,7 @@
 package view;
 
 import controller.LoginMenuController;
+import model.User;
 import view.commands.LoginMenuCommands;
 
 import java.util.Scanner;
@@ -25,9 +26,29 @@ public class LoginMenu extends Menu {
                     MainMenu mainMenu = new MainMenu(scanner);
                     mainMenu.run();
                 }
-            }
+            } else if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.FORGET_PASS)) != null)
+                forgetPassword();
             else if (input.equals("exit"))
                 return;
+            else System.out.println("invalid command");
         }
+    }
+
+    private void forgetPassword() {
+        String username = matcher.group("username");
+        User user;
+        if ((user = User.getUserByUsername(username)) == null) {
+            System.out.println("username doesn't exist");
+            return;
+        }
+        System.out.println(User.getSecurityQuestions()[user.getRecoveryQuestion() - 1]);
+        String answer = scanner.nextLine();
+        if (!user.isSecurityAnswerCorrect(answer)) {
+            System.out.println("wrong answer to the security question");
+            return;
+        }
+        //
+        // change password ke baad az inke amir signup menu ro zad zade mishe;
+        //
     }
 }
