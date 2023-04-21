@@ -1,8 +1,13 @@
 package model;
 
 import javafx.util.Pair;
+import view.Menu;
+import view.commands.ProfileMenuCommands;
+import view.commands.ProfileMenuResponds;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.regex.Matcher;
 
 public class User {
     private static final String[] securityQuestions = {
@@ -18,12 +23,38 @@ public class User {
     private String nickname;
     private String email;
     private String slogan = null;
+    private int highScore;
+    private int rank;
     private int recoveryQuestion;
     private String recoveryAnswer;
     public User() {
 
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public static User findUserByUserName(String username){
+        for (int i = 0 ; i < allUsers.size() ; i++){
+            if (Objects.equals(allUsers.get(i).getUsername(), username)){
+                return allUsers.get(i);
+            }
+        }
+        return null;
+    }
     public static String[] getSecurityQuestions(){
         return securityQuestions;
     }
@@ -46,19 +77,15 @@ public class User {
     public static void setLoggedInUser(User loggedInUser) {
         User.loggedInUser = loggedInUser;
     }
-
     public static void stayLoggedIn(boolean stayLoggedIn) {
         User.stayLoggedIn = stayLoggedIn;
     }
-
     public static void readFile(){
 
     }
-
     public static void saveFile(){
 
     }
-
     public static ArrayList<User> getAllUsers() {
         return allUsers;
     }
@@ -99,17 +126,76 @@ public class User {
     }
 
     public static String checkUsernameFormat(String username) {
-        return null;
+        if (username!=null){
+            if (username.matches("[a-zA-Z0-9_]+")){
+                if (User.findUserByUserName(username)==null){
+                    return null;
+                }
+                else {
+                    return "this username" + ProfileMenuResponds.ALREADY_EXITS.getText();
+                }
+            }
+            else {
+                return "username" + ProfileMenuResponds.INVALID_FORMAT.getText();
+            }
+        }
+        else {
+            return "username " + ProfileMenuResponds.EMPTY_FIELD.getText();
+        }
     }
 
-    public static String checkPasswordFormat(String password) {
-        return null;
-    }
+    public static String checkPasswordFormat(String newPassword) {
 
+
+        if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SPACE)==null){
+            return "password" + ProfileMenuResponds.INVALID_FORMAT.getText();
+        }
+        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_NUMBER)==null){
+            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 8 characters";
+        }
+        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_CAPITAL)==null){
+            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 capital letter";
+        }
+        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SMALL)==null){
+            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 small letter";
+        }
+        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_DIGITS)==null){
+            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 digit";
+        }
+        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_OTHER)==null){
+            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 special character";
+        }
+        else if (User.getLoggedInUser().isPasswordCorrect(newPassword)){
+            return ProfileMenuResponds.SAME_PASSWORD.getText();
+        }
+        else{
+            return null;
+        }
+    }
+    public static boolean isEmailDuplicate(String email){
+        for (int i=0; i < allUsers.size();i++){
+            if (Objects.equals(allUsers.get(i).getEmail(), email)){
+                return true;
+            }
+        }
+        return false;
+    }
     public static String checkEmailFormat(String email) {
-        return null;
+        if (email==null){
+            return "email "+ProfileMenuResponds.EMPTY_FIELD.getText();
+        }
+        if (ProfileMenuCommands.getMatcher(email,ProfileMenuCommands.EMAIL_FORMAT)!=null){
+            if (isEmailDuplicate(email)){
+                return ProfileMenuResponds.DUPLICATE_EMAIL.getText();
+            }
+            else {
+                return null;
+            }
+        }
+        else {
+            return "email "+ProfileMenuResponds.INVALID_FORMAT.getText();
+        }
     }
-
     public static User getLoggedInUser() {
         return loggedInUser;
     }
