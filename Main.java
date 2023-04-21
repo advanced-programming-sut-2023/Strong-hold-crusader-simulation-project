@@ -1,6 +1,7 @@
 import controller.Controller;
 import model.User;
 import view.LoginMenu;
+import view.ProfileMenu;
 
 import java.util.Scanner;
 
