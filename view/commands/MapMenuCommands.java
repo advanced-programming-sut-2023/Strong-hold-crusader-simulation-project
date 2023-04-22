@@ -4,9 +4,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MapMenuCommands {
-    ;
+    MOVE_MAP("map( up| down| right| left)+( (?<number>\\d+))?"),
+    UP(".+up.*"),
+    DOWN(".+down.*"),
+    RIGHT(".+right.*"),
+    LEFT(".+left.*");
     private final String regex;
-
     MapMenuCommands(String regex) {
         this.regex = regex;
     }

@@ -1,6 +1,6 @@
 package model.buildings;
 
-public enum CastleBuildingType implements BuildingUsage {
+public enum CastleBuildingTypes implements BuildingUsage {
     SMALL_STONE_GATEHOUSE {
         @Override
         public void usage() {
@@ -110,6 +110,6 @@ public enum CastleBuildingType implements BuildingUsage {
         }
     };
 
-    CastleBuildingType() {
+    CastleBuildingTypes() {
     }
 }

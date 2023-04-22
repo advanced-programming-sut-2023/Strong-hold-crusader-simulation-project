@@ -5,11 +5,11 @@ import java.util.regex.Pattern;
 
 public enum LoginMenuCommands {
     SIGNUP("signup"),
-    LOGIN("user login.+"),
+    LOGIN("user login (-u|-p|\\S|\".+\"| )+"),
     STAY_LOGGED_IN(LOGIN.regex + " --stay-logged-in"),
-    USERNAME(".+ -u (?<username>(\\S+|\".+\")).*"),
-    PASSWORD(".+ -p (?<password>(\\S+|\".+\")).*"),
-    FORGET_PASS("forgot my password" + USERNAME.regex.substring(2,29));
+    USERNAME(".+ -u (?<username>([^\\-\\s]\\S+|\".+\")).*"),
+    PASSWORD(".+ -p (?<password>([^\\-\\s]\\S+|\".+\")).*"),
+    FORGET_PASS("forgot my password" + USERNAME.regex.substring(2,36));
     private final String regex;
 
     LoginMenuCommands(String regex) {

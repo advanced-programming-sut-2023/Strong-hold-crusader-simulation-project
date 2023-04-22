@@ -1,4 +1,4 @@
-package view.InputOut;
+package model.InputOut;
 
 public enum Response {
     emptyField,
@@ -19,54 +19,38 @@ public enum Response {
     createUserSuccess;
     public String getResponse(){
         switch (this){
-            case emptyField -> {
+            case emptyField:
                 return "the fields with a sign can't be empty!!";
-            }
-            case noNumberPassword -> {
+            case noNumberPassword:
                 return "password must include at least one number!!";
-            }
-            case noLowerCasePassword -> {
+            case noLowerCasePassword:
                 return "password must include at least one lower case letter!!";
-            }
-            case noUpperCasePassword -> {
+            case noUpperCasePassword:
                 return "password must include at least one upper case letter!!";
-            }
-            case noSpecialCharacterPassword -> {
+            case noSpecialCharacterPassword:
                 return "password must include at least one special character!!";
-            }
-            case inValidLengthPassword -> {
+            case inValidLengthPassword:
                 return "password must include at least 6 characters!!";
-            }
-            case unknownError -> {
+            case unknownError:
                 return "password must include numbers, lowerCase letters, upperCase letters, and special characters!!";
-            }
-            case invalidEmail -> {
+            case invalidEmail:
                 return "invalid email address!!";
-            }
-            case emailAlreadyExist -> {
+            case emailAlreadyExist:
                 return "your email is already exist in database!!";
-            }
-            case invalidUsername -> {
+            case invalidUsername:
                 return "invalid username username; username must include just numbers, letters, and underScore!!";
-            }
-            case passwordDifferentWithConfirm -> {
+            case passwordDifferentWithConfirm:
                 return "password doesn't match with password confirm!!";
-            }
-            case usernameAlreadyExist -> {
+            case usernameAlreadyExist:
                 return "this username already exist in database!!";
-            }
-            case youAreInSignupMenu -> {
+            case youAreInSignupMenu:
                 return "you are in signup menu now.";
-            }
-            case pickYourSecurityQuestion -> {
+            case pickYourSecurityQuestion:
                 return "pick your question please :";
-            }
-            case pickQuestionFormat -> {
+            case pickQuestionFormat:
                 return "please pick question with this format : pick -q <question number> -a <answer> -c <confirm>";
-            }
-            case createUserSuccess -> {
+            case createUserSuccess:
                 return "create user -> result : success";
-            }
         }
         return null;
     }

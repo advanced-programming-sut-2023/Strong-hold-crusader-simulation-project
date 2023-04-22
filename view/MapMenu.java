@@ -2,6 +2,7 @@ package view;
 
 import model.Map;
 import model.MapCell;
+import view.commands.MapMenuCommands;
 
 import java.util.Scanner;
 
@@ -20,11 +21,33 @@ public class MapMenu extends Menu {
         printMap();
         while (true) {
             input = scanner.nextLine();
+
+            if ((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.MOVE_MAP)) != null)
+                moveMap();
         }
     }
 
+    private void moveMap() {
+        int number = 1;
+        if(matcher.group("number") != null)
+            number = Integer.parseInt(matcher.group("number"));
+        int xMove, yMove;
+        xMove = yMove = 0;
+        if (MapMenuCommands.getMatcher(input, MapMenuCommands.UP) != null)
+            yMove++;
+        if (MapMenuCommands.getMatcher(input, MapMenuCommands.DOWN) != null)
+            yMove--;
+        if (MapMenuCommands.getMatcher(input, MapMenuCommands.RIGHT) != null)
+            xMove++;
+        if (MapMenuCommands.getMatcher(input, MapMenuCommands.LEFT) != null)
+            xMove--;
+        this.x = possibleX(this.x + number * xMove);
+        this.y = possibleY(this.y + number * yMove);
+        printMap();
+    }
+
     private void printMap() {
-        for (int i = 0; i < 5 * 4 + 1; i++) {
+        for (int i = 0; i < 7 * 4 + 1; i++) {
             for (int j = 0; j < 15 * 7 + 1; j++) {
                 if (i % 4 == 0) {
                     System.out.print("-");
@@ -33,7 +56,7 @@ public class MapMenu extends Menu {
                 if (j % 7 == 0)
                     System.out.print("|");
                 else {
-                    MapCell cell = map.getCells()[x - 8 + i / 4][y - 4 + j / 7];
+                    MapCell cell = map.getCells()[x - 8 + j / 7][y - 4 + i / 4];
                     System.out.print(cell.getTexture().getColor());
                     System.out.print(cell.getCellState());
                 }
