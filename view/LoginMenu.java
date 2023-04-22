@@ -1,5 +1,6 @@
 package view;
 
+import controller.Controller;
 import controller.LoginMenuController;
 import model.User;
 import view.commands.LoginMenuCommands;
@@ -12,7 +13,7 @@ public class LoginMenu extends Menu {
     }
     @Override
     public void run() {
-        if(User.isStayLoggedIn()) {
+        if(Controller.stayLoggedInCheck()) {
             MainMenu mainMenu = new MainMenu(scanner);
             mainMenu.run();
         }

@@ -9,13 +9,18 @@ public class Unit extends People{
     public Unit(MilitaryType militaryType){
 
     }
+
+    public MilitaryType getType() {
+        return type;
+    }
+
+    private MilitaryType type;
     private Weapon weapon;
     private UnitState unitState;
     private Boolean doHaveHorse;
     private Boolean isAttacking;
     private Boolean getDoHaveOil;
     private Boolean patrol;
-
     private int numberOfSoldiers;
     private int posX;
     private int posY;

@@ -1,7 +1,5 @@
 package view;
 
-import controller.GameMenuController;
-import model.Game;
 import model.Map;
 import view.commands.GameMenuCommands;
 
@@ -26,7 +24,9 @@ public class GameMenu extends Menu {
     private void showMap() {
         Matcher xMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_X);
         Matcher yMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_Y);
+        assert xMatcher != null;
         int x = Integer.parseInt(xMatcher.group("mapX"));
+        assert yMatcher != null;
         int y = Integer.parseInt(yMatcher.group("mapY"));
         if(x < 0 || x > currentMap.getSize() || y < 0 || y > currentMap.getSize()) {
             System.out.println("invalid coordinates");

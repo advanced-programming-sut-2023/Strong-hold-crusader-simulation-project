@@ -8,4 +8,8 @@ public class WeaponBuilding extends Building{
         super(government, HP);
         this.type = type;
     }
+
+    public WeaponBuildingTypes getType() {
+        return type;
+    }
 }

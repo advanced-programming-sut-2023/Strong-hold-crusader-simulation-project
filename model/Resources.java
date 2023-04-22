@@ -1,6 +1,6 @@
 package model;
 
-public enum Recourses {
+public enum Resources {
     APPLE,
     BREAD,
     CHEESE,

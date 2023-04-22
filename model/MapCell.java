@@ -4,6 +4,7 @@ import model.buildings.Building;
 import model.people.Unit;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapCell {
     private Texture texture = Texture.BASE_GROUND;
@@ -14,7 +15,7 @@ public class MapCell {
 
     private char cellState;
 
-    private final ArrayList<Recourses> recourses = new ArrayList<>();
+    private final HashMap<Resources, Integer> resources = new HashMap<>();
 
     public Texture getTexture() {
         return texture;
@@ -30,5 +31,17 @@ public class MapCell {
 
     public char getCellState() {
         return cellState;
+    }
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public HashMap<Resources, Integer> getResources() {
+        return resources;
     }
 }

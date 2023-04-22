@@ -8,4 +8,8 @@ public class CityStructure extends Building{
         super(government, HP);
         this.type = type;
     }
+
+    public CityStructureTypes getType() {
+        return type;
+    }
 }

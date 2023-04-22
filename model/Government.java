@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Government {
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
-    private HashMap<Recourses, Integer> recourseCount;
+    private HashMap<Resources, Integer> resourceCount;
     private int popularity;
     private int taxRate;
     private int fearRate;
@@ -69,8 +69,8 @@ public class Government {
         this.population += change;
     }
 
-    public HashMap<Recourses, Integer> getRecourseCount() {
-        return recourseCount;
+    public HashMap<Resources, Integer> getResourceCount() {
+        return resourceCount;
     }
 
     public int getPopularity() {

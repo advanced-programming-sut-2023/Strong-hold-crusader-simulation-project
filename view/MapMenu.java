@@ -1,22 +1,27 @@
 package view;
 
+import controller.MapMenuController;
 import model.Map;
 import model.MapCell;
+import model.Texture;
+import view.commands.GameMenuCommands;
 import view.commands.MapMenuCommands;
 
 import java.util.Scanner;
+import java.util.regex.Matcher;
 
 public class MapMenu extends Menu {
-    private int x, y;
-    private Map map;
-    public MapMenu(Scanner scanner, int x, int y, Map map) {
+    private int middleX, middleY;
+    private final Map map;
+    public MapMenu(Scanner scanner, int middleX, int middleY, Map map) {
         super(scanner);
-        this.x = possibleX(x);
-        this.y = possibleY(y);
+        this.middleX = possibleX(middleX);
+        this.middleY = possibleY(middleY);
         this.map = map;
     }
     @Override
     public void run() {
+        MapMenuController.setMap(map);
         System.out.println("Map Menu");
         printMap();
         while (true) {
@@ -24,7 +29,26 @@ public class MapMenu extends Menu {
 
             if ((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.MOVE_MAP)) != null)
                 moveMap();
+            else if (MapMenuCommands.getMatcher(input, MapMenuCommands.SHOW_DETAILS) != null)
+                System.out.println(showDetails());
+            else if (input.equals("exit")) {
+                MapMenuController.setMap(null);
+                return;
+            }
+            else System.out.println("invalid command");
         }
+    }
+
+    private String showDetails() {
+        Matcher xMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_X);
+        Matcher yMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_Y);
+        assert xMatcher != null;
+        int x = Integer.parseInt(xMatcher.group("mapX"));
+        assert yMatcher != null;
+        int y = Integer.parseInt(yMatcher.group("mapY"));
+        if(x < middleX - 7 || x > middleX + 7 || y < middleY - 3 || y > middleY + 3)
+            return "invalid coordinates";
+        return MapMenuController.showDetails(x, y);
     }
 
     private void moveMap() {
@@ -41,8 +65,8 @@ public class MapMenu extends Menu {
             xMove++;
         if (MapMenuCommands.getMatcher(input, MapMenuCommands.LEFT) != null)
             xMove--;
-        this.x = possibleX(this.x + number * xMove);
-        this.y = possibleY(this.y + number * yMove);
+        this.middleX = possibleX(this.middleX + number * xMove);
+        this.middleY = possibleY(this.middleY + number * yMove);
         printMap();
     }
 
@@ -56,7 +80,7 @@ public class MapMenu extends Menu {
                 if (j % 7 == 0)
                     System.out.print("|");
                 else {
-                    MapCell cell = map.getCells()[x - 8 + j / 7][y - 4 + i / 4];
+                    MapCell cell = map.getCells()[middleX - 8 + j / 7][middleY - 4 + i / 4];
                     System.out.print(cell.getTexture().getColor());
                     System.out.print(cell.getCellState());
                 }

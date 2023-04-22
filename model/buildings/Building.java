@@ -1,7 +1,7 @@
 package model.buildings;
 
 import model.Government;
-import model.Recourses;
+import model.Resources;
 
 import java.util.HashMap;
 
@@ -10,7 +10,7 @@ public abstract class Building {
     protected int HP;
     protected int populationEffect;
     protected int popularityEffect;
-    protected HashMap<Recourses, Integer> requiredRecourses;
+    protected HashMap<Resources, Integer> requiredResources;
     protected int workerCount;
     protected int rate;
     protected Building(Government government, int HP) {
@@ -38,8 +38,8 @@ public abstract class Building {
         return popularityEffect;
     }
 
-    public HashMap<Recourses, Integer> getRequiredRecourses() {
-        return requiredRecourses;
+    public HashMap<Resources, Integer> getRequiredResources() {
+        return requiredResources;
     }
 
     public int getWorkerCount() {
@@ -48,5 +48,19 @@ public abstract class Building {
 
     public int getRate() {
         return rate;
+    }
+
+    public String getBuildingType() {
+        if (this instanceof CastleBuilding)
+            return "Castle";
+        if (this instanceof CityStructure)
+            return "City Structure";
+        if (this instanceof Farm)
+            return "Farm";
+        if (this instanceof FoodProcessBuilding)
+            return "Food Processing";
+        if (this instanceof IndustrialBuilding)
+            return "Industrial";
+        return "Weapon";
     }
 }

@@ -8,4 +8,8 @@ public class CastleBuilding extends Building{
         super(government, HP);
         this.type = type;
     }
+
+    public CastleBuildingTypes getType() {
+        return type;
+    }
 }

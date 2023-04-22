@@ -8,4 +8,8 @@ public class FoodProcessBuilding extends Building{
         super(government, HP);
         this.type = type;
     }
+
+    public FoodProcessBuildingTypes getType() {
+        return type;
+    }
 }
