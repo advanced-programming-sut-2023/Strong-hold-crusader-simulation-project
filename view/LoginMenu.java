@@ -12,14 +12,18 @@ public class LoginMenu extends Menu {
     }
     @Override
     public void run() {
+        if(User.isStayLoggedIn()) {
+            MainMenu mainMenu = new MainMenu(scanner);
+            mainMenu.run();
+        }
         System.out.println("Login Menu");
         while (true) {
             input = scanner.nextLine();
 
-            if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.SIGNUP)) != null) {
+            if (LoginMenuCommands.getMatcher(input, LoginMenuCommands.SIGNUP) != null) {
                 SignupMenu signupMenu = new SignupMenu(scanner);
                 signupMenu.run();
-            } else if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.LOGIN)) != null) {
+            } else if (LoginMenuCommands.getMatcher(input, LoginMenuCommands.LOGIN) != null) {
                 String result = LoginMenuController.loginUser(input);
                 System.out.println(result);
                 if (result.equals("user logged in successfully!")) {

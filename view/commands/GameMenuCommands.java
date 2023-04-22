@@ -4,6 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
+    SHOW_MAP("show map (-x \\d+ -y \\d+|-y \\d+ -x \\d+"),
+    MAP_X(".* -x (?<mapX>\\d+).*"),
+    MAP_Y(".* -y (?<mapY>\\d+).*")
     ;
     private final String regex;
 

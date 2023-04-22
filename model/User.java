@@ -31,6 +31,10 @@ public class User {
 
     }
 
+    public static boolean isStayLoggedIn() {
+        return stayLoggedIn;
+    }
+
     public String getEmail() {
         return email;
     }
