@@ -12,6 +12,13 @@ public class LoginMenu extends Menu {
     }
     @Override
     public void run() {
+<<<<<<< HEAD
+=======
+        if(User.isStayLoggedIn()) {
+            MainMenu mainMenu = new MainMenu(scanner);
+            mainMenu.run();
+        }
+>>>>>>> parent of 790ce96 (map menu complete)
         System.out.println("Login Menu");
         while (true) {
             input = scanner.nextLine();
