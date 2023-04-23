@@ -4,7 +4,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MapMenuCommands {
+<<<<<<< HEAD
     ;
+=======
+    MOVE_MAP("map( up| down| right| left)+( (?<number>\\d+))?"),
+    UP(".+up.*"),
+    DOWN(".+down.*"),
+    RIGHT(".+right.*"),
+    LEFT(".+left.*");
+>>>>>>> parent of 790ce96 (map menu complete)
     private final String regex;
 
     MapMenuCommands(String regex) {
