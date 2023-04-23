@@ -15,6 +15,7 @@ public class ProfileMenu extends Menu {
     String input;
     @Override
     public void run() {
+        while (true){
         input=scanner.nextLine();
         if ((matcher= ProfileMenuCommands.getMatcher(input,ProfileMenuCommands.CHANGE_USERNAME))!=null){
             System.out.println(ProfileMenuController.changeUsername(matcher));
@@ -48,6 +49,7 @@ public class ProfileMenu extends Menu {
         }
         else {
             System.out.println(ProfileMenuResponds.INVALID.getText());
+        }
         }
     }
 }

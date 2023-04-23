@@ -8,8 +8,4 @@ public class IndustrialBuilding extends Building{
         super(government, HP);
         this.type = type;
     }
-
-    public IndustrialBuildingTypes getType() {
-        return type;
-    }
 }

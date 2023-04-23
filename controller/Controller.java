@@ -3,9 +3,6 @@ package controller;
 import model.User;
 
 public class Controller {
-    public static boolean stayLoggedInCheck() {
-        return User.isStayLoggedIn();
-    }
     public static String captcha() {
         return null;
     }

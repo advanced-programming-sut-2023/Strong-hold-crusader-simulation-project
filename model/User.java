@@ -31,10 +31,6 @@ public class User {
 
     }
 
-    public static boolean isStayLoggedIn() {
-        return stayLoggedIn;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -136,11 +132,11 @@ public class User {
                     return null;
                 }
                 else {
-                    return "this username" + ProfileMenuResponds.ALREADY_EXITS.getText();
+                    return "this username " + ProfileMenuResponds.ALREADY_EXITS.getText();
                 }
             }
             else {
-                return "username" + ProfileMenuResponds.INVALID_FORMAT.getText();
+                return "username " + ProfileMenuResponds.INVALID_FORMAT.getText();
             }
         }
         else {
@@ -152,25 +148,29 @@ public class User {
 
 
         if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SPACE)==null){
-            return "password" + ProfileMenuResponds.INVALID_FORMAT.getText();
+            return "password " + ProfileMenuResponds.INVALID_FORMAT.getText();
         }
-        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_NUMBER)==null){
-            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 8 characters";
-        }
-        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_CAPITAL)==null){
-            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 capital letter";
-        }
-        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SMALL)==null){
-            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 small letter";
-        }
-        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_DIGITS)==null){
-            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 digit";
-        }
-        else if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_OTHER)==null){
-            return ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 special character";
+        if (ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_TOTAL)==null){
+            String result="password errors:\n";
+            if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_NUMBER)==null){
+                result+=ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 8 characters\n";
+            }
+            if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_CAPITAL)==null){
+                result+= ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 capital letter\n";
+            }
+            if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SMALL)==null){
+                result+= ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 small letter\n";
+            }
+            if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_DIGITS)==null){
+                result+= ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 digit\n";
+            }
+            if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_OTHER)==null){
+                result+= ProfileMenuResponds.WEAK_PASSWORD.getText() + "enter at least 1 special character\n";
+            }
+            return result;
         }
         else if (User.getLoggedInUser().isPasswordCorrect(newPassword)){
-            return ProfileMenuResponds.SAME_PASSWORD.getText();
+            return ProfileMenuResponds.SAME.getText()+"password";
         }
         else{
             return null;

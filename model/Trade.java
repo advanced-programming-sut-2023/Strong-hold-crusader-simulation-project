@@ -7,7 +7,7 @@ public class Trade {
     private Government recipient;
     private Government requester;
     private int price;
-    private HashMap<Resources, Integer> resource;
+    private HashMap<Recourses, Integer> recourse;
     private String message;
 
     public int getId() {
@@ -26,8 +26,8 @@ public class Trade {
         return price;
     }
 
-    public HashMap<Resources, Integer> getResource() {
-        return resource;
+    public HashMap<Recourses, Integer> getRecourse() {
+        return recourse;
     }
 
     public String getMessage() {

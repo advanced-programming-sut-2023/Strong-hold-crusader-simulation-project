@@ -1,5 +1,7 @@
 package view;
 
+import model.User;
+
 import java.util.Scanner;
 
 public class StoreMenu extends Menu{

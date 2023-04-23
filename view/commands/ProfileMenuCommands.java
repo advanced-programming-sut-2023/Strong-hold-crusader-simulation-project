@@ -20,9 +20,10 @@ public enum ProfileMenuCommands {
     PASSWORD_CAPITAL(".*[A-Z].*"),
     PASSWORD_SMALL(".*[a-z].*"),
     PASSWORD_OTHER(".*[^\\w\\s].*"),
-    NICKNAME_Y("^\\S.+$"),
+    PASSWORD_TOTAL("^(?=.+[a-z]{1,})(?=.+[A-Z]{1,})(?=.+\\d{1,})(?=.+\\W{1,})[A-Za-z\\d\\W]{8,}$"),
+    NICKNAME_Y("^\\S+$"),
     ///////////////////"NO SPACE"
-    NICKNAME_N("^\".+\"$"),
+    NICKNAME_N("^\"(?<main>.+)\"$"),
     EMAIL_FORMAT("[\\w\\.]+@[\\w\\.]+\\.[\\w\\.]+")
     ;
     private final String regex;

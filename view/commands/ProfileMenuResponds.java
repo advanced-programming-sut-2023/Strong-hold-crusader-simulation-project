@@ -8,10 +8,9 @@ public enum ProfileMenuResponds {
     CHANGED("changed successfully"),
     WEAK_PASSWORD("your new password is weak!: "),
     INCORRECT_PASSWORD("Current password is incorrect!"),
-    SAME_PASSWORD("Please enter a new password!"),
+    SAME("Please enter a new "),
     ERROR_CONFIRM("error in confirm"),
     DUPLICATE_EMAIL("this email address already exits"),
-    SAME_SLOGAN("Please enter a new slogan!"),
     EMPTY_SLOGAN("slogan is empty!"),
     ;
 

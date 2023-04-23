@@ -8,8 +8,4 @@ public class Farm extends Building{
         super(government, HP);
         this.type = type;
     }
-
-    public FarmTypes getType() {
-        return type;
-    }
 }

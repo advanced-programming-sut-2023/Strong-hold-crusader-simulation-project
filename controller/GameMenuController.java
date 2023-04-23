@@ -1,12 +1,12 @@
 package controller;
 
 
-import model.Map;
-import view.commands.GameMenuCommands;
-
 import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
+    public static String showMap(Matcher matcher) {
+        return null;
+    }
     public static String showPopularityFactors() {
         return null;
     }

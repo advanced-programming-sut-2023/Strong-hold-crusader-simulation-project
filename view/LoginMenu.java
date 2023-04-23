@@ -1,6 +1,5 @@
 package view;
 
-import controller.Controller;
 import controller.LoginMenuController;
 import model.User;
 import view.commands.LoginMenuCommands;
@@ -13,18 +12,14 @@ public class LoginMenu extends Menu {
     }
     @Override
     public void run() {
-        if(Controller.stayLoggedInCheck()) {
-            MainMenu mainMenu = new MainMenu(scanner);
-            mainMenu.run();
-        }
         System.out.println("Login Menu");
         while (true) {
             input = scanner.nextLine();
 
-            if (LoginMenuCommands.getMatcher(input, LoginMenuCommands.SIGNUP) != null) {
+            if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.SIGNUP)) != null) {
                 SignupMenu signupMenu = new SignupMenu(scanner);
                 signupMenu.run();
-            } else if (LoginMenuCommands.getMatcher(input, LoginMenuCommands.LOGIN) != null) {
+            } else if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.LOGIN)) != null) {
                 String result = LoginMenuController.loginUser(input);
                 System.out.println(result);
                 if (result.equals("user logged in successfully!")) {
