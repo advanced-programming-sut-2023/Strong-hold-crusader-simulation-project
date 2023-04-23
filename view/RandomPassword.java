@@ -3,7 +3,6 @@ package view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
 public class RandomPassword {
     public static String generatePass() {
         Random random = new Random();

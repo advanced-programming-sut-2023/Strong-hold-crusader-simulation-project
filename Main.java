@@ -1,13 +1,14 @@
 import controller.Controller;
 import model.User;
 import view.LoginMenu;
+import view.SignupMenu;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        LoginMenu loginMenu = new LoginMenu(scanner);
-        loginMenu.run();
+        SignupMenu signupMenu = new SignupMenu(scanner);
+        signupMenu.run();
     }
 }
