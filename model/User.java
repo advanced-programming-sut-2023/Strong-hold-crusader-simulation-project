@@ -178,7 +178,7 @@ public class User {
     }
     public static boolean isEmailDuplicate(String email){
         for (int i=0; i < allUsers.size();i++){
-            if (Objects.equals(allUsers.get(i).getEmail(), email)){
+            if (Objects.equals(allUsers.get(i).getEmail().toLowerCase(), email)){
                 return true;
             }
         }

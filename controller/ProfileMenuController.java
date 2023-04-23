@@ -75,7 +75,7 @@ public class ProfileMenuController extends Controller {
             return check;
         }
         else {
-            User.getLoggedInUser().setEmail(matcher.group("email").toLowerCase());
+            User.getLoggedInUser().setEmail(matcher.group("email"));
             return "email "+ProfileMenuResponds.CHANGED;
         }
     }
