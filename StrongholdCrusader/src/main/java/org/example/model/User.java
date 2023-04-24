@@ -3,6 +3,8 @@ package org.example.model;
 import org.example.view.commands.ProfileMenuCommands;
 import org.example.view.commands.ProfileMenuResponds;
 
+import java.io.*;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,6 +28,46 @@ public class User {
     private String recoveryAnswer;
     public User() {
 
+    }
+    public static void readFile(){
+        try{
+            File f = new File("userData.ser");
+            if(!f.exists() || f.isDirectory()) {
+                saveFile();
+            }
+            FileInputStream readData = new FileInputStream("userData.ser");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+
+            allUsers = (ArrayList<User>) readStream.readObject();
+            readStream.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveFile(){
+        try{
+            FileOutputStream writeData = new FileOutputStream("userData.ser");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+
+            writeStream.writeObject(allUsers);
+            writeStream.flush();
+            writeStream.close();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        String result = "Users :\n";
+        result += ("name :" + this.getUsername() +"\n");
+        result += ("password :" + this.getPassword() +"\n");
+        result += ("nickname :" + this.getNickname() +"\n");
+        result += ("slogan :" + this.getSlogan() + "\n");
+        result += ("email :" + this.getEmail() + "\n");
+        return result;
     }
 
     public static boolean isStayLoggedIn() {
@@ -58,6 +100,11 @@ public class User {
     }
     public static String[] getSecurityQuestions(){
         return securityQuestions;
+    }
+    public static void printRecoveryQuestions(){
+        System.out.println("0: " + securityQuestions[0] + "\n"
+                + "1: " + securityQuestions[1] + "\n"
+                + "2: " +securityQuestions[2]);
     }
 
     public int getRecoveryQuestion() {
@@ -102,9 +149,13 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+    public void setSecurityQuestion(int i , String answer){
+        recoveryQuestion = i;
+        recoveryAnswer = answer;
+    }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = getSha256(password);
     }
 
     public void setNickname(String nickname) {
@@ -145,6 +196,32 @@ public class User {
         }
     }
 
+    public static String checkPassword(String password , String confirm){
+        if (!password.equals(confirm)){
+            return model.InputOut.Response.passwordDifferentWithConfirm.getResponse();
+        }
+        String error = "password errors :\n";
+        if (model.InputOut.Regex.password.getMatcher(password) != null){
+            return null;
+        }
+        else if (model.InputOut.Regex.passwordErrorNumber.getMatcher(password) == null){
+            error += model.InputOut.Response.noNumberPassword.getResponse() + "\n";
+        }
+        else if (model.InputOut.Regex.passwordInvalidLength.getMatcher(password) != null){
+            error += model.InputOut.Response.inValidLengthPassword.getResponse();
+            return error;
+        }
+        if (model.InputOut.Regex.passwordErrorSpecialCharacter.getMatcher(password) == null){
+            error += model.InputOut.Response.noSpecialCharacterPassword.getResponse() + "\n";
+        }
+        if (model.InputOut.Regex.passwordErrorUpperCaseLetter.getMatcher(password) == null){
+            error += model.InputOut.Response.noUpperCasePassword.getResponse() + "\n";
+        }
+        if (model.InputOut.Regex.passwordErrorLowerCase.getMatcher(password) == null){
+            error += model.InputOut.Response.noLowerCasePassword.getResponse() + "\n";
+        }
+        return error + "end of errors";
+    }
     public static String checkPasswordFormat(String newPassword) {
         if(ProfileMenuCommands.getMatcher(newPassword,ProfileMenuCommands.PASSWORD_SPACE)==null){
             return "password " + ProfileMenuResponds.INVALID_FORMAT.getText();
@@ -183,6 +260,17 @@ public class User {
         }
         return false;
     }
+    public static String checkEmail(String email){
+        if (model.InputOut.Regex.email.getMatcher(email) != null){
+            for (int i = 0 ; i < User.getAllUsers().size() ; i++){
+                if (User.getAllUsers().get(i).getEmail().toUpperCase().equals(email.toUpperCase())){
+                    return model.InputOut.Response.emailAlreadyExist.getResponse();
+                }
+            }
+            return null;
+        }
+        return model.InputOut.Response.invalidEmail.getResponse();
+    }
     public static String checkEmailFormat(String email) {
         if (email==null){
             return "email "+ProfileMenuResponds.EMPTY_FIELD.getText();
@@ -201,5 +289,19 @@ public class User {
     }
     public static User getLoggedInUser() {
         return loggedInUser;
+    }
+    public static String getSha256(String value) {
+        try{
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(value.getBytes());
+            return bytesToHex(md.digest());
+        } catch(Exception ex){
+            throw new RuntimeException(ex);
+        }
+    }
+    private static String bytesToHex(byte[] bytes) {
+        StringBuffer result = new StringBuffer();
+        for (byte b : bytes) result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+        return result.toString();
     }
 }
