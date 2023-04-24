@@ -1,6 +1,6 @@
-package org.example.controller;
+package StrongholdCrusader.src.main.java.org.example.controller;
 
-import org.example.model.User;
+import StrongholdCrusader.src.main.java.org.example.model.User;
 
 public class Controller {
     public static boolean stayLoggedInCheck() {

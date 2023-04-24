@@ -1,8 +1,8 @@
-package org.example.view;
+package StrongholdCrusader.src.main.java.org.example.view;
 
-import org.example.controller.ProfileMenuController;
-import org.example.view.commands.ProfileMenuCommands;
-import org.example.view.commands.ProfileMenuResponds;
+import StrongholdCrusader.src.main.java.org.example.controller.ProfileMenuController;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuResponds;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

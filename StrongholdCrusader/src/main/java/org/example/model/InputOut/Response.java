@@ -1,4 +1,4 @@
-package model.InputOut;
+package StrongholdCrusader.src.main.java.org.example.model.InputOut;
 
 public enum Response {
     emptyField,

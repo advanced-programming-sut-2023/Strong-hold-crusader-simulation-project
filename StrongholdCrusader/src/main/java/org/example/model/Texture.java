@@ -1,4 +1,4 @@
-package org.example.model;
+package StrongholdCrusader.src.main.java.org.example.model;
 
 public enum Texture {
     BASE_GROUND("Base Ground","\033[43m"),

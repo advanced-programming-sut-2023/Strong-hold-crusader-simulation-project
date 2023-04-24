@@ -1,8 +1,8 @@
-package org.example.controller;
+package StrongholdCrusader.src.main.java.org.example.controller;
 
-import org.example.model.User;
-import org.example.view.commands.ProfileMenuCommands;
-import org.example.view.commands.ProfileMenuResponds;
+import StrongholdCrusader.src.main.java.org.example.model.User;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuResponds;
 
 import java.util.Objects;
 import java.util.Scanner;

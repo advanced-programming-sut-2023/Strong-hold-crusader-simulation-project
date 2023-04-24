@@ -1,10 +1,10 @@
-package org.example.controller;
+package StrongholdCrusader.src.main.java.org.example.controller;
 
-import org.example.model.Map;
-import org.example.model.MapCell;
-import org.example.model.Resources;
-import org.example.model.buildings.*;
-import org.example.model.people.Unit;
+import StrongholdCrusader.src.main.java.org.example.model.Map;
+import StrongholdCrusader.src.main.java.org.example.model.MapCell;
+import StrongholdCrusader.src.main.java.org.example.model.Resources;
+import StrongholdCrusader.src.main.java.org.example.model.buildings.*;
+import StrongholdCrusader.src.main.java.org.example.model.people.Unit;
 
 public class MapMenuController extends Controller {
     private static Map map;

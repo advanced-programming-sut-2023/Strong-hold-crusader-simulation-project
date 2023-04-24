@@ -1,6 +1,6 @@
-package org.example.model.buildings;
+package StrongholdCrusader.src.main.java.org.example.model.buildings;
 
-import org.example.model.Government;
+import StrongholdCrusader.src.main.java.org.example.model.Government;
 
 public class IndustrialBuilding extends Building{
     private final IndustrialBuildingTypes type;

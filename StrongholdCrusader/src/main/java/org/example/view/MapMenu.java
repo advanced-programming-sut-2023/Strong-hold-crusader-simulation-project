@@ -1,10 +1,10 @@
-package org.example.view;
+package StrongholdCrusader.src.main.java.org.example.view;
 
-import org.example.controller.MapMenuController;
-import org.example.model.Map;
-import org.example.model.MapCell;
-import org.example.view.commands.GameMenuCommands;
-import org.example.view.commands.MapMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.controller.MapMenuController;
+import StrongholdCrusader.src.main.java.org.example.model.Map;
+import StrongholdCrusader.src.main.java.org.example.model.MapCell;
+import StrongholdCrusader.src.main.java.org.example.view.commands.GameMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.view.commands.MapMenuCommands;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

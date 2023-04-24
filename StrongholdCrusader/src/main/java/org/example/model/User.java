@@ -1,12 +1,16 @@
-package org.example.model;
+package StrongholdCrusader.src.main.java.org.example.model;
 
-import org.example.view.commands.ProfileMenuCommands;
-import org.example.view.commands.ProfileMenuResponds;
+import StrongholdCrusader.src.main.java.org.example.model.InputOut.Regex;
+import StrongholdCrusader.src.main.java.org.example.model.InputOut.Response;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuResponds;
 
 import java.io.*;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Random;
+import java.util.Scanner;
 
 public class User {
     private static final String[] securityQuestions = {
@@ -16,7 +20,7 @@ public class User {
     };
     private static User loggedInUser;
     private static boolean stayLoggedIn = false;
-    private static final ArrayList<User> allUsers = new ArrayList<>();
+    private static ArrayList<User> allUsers = new ArrayList<>();
     private String username;
     private String password;
     private String nickname;
@@ -26,8 +30,13 @@ public class User {
     private int rank;
     private int recoveryQuestion;
     private String recoveryAnswer;
-    public User() {
-
+    public User(String  username, String password, String email, String nickname, String slogan) {
+        this.username = username;
+        this.password = getSha256(password);
+        this.email = email;
+        this.nickname = nickname;
+        this.slogan = slogan;
+        allUsers.add(this);
     }
     public static void readFile(){
         try{
@@ -68,6 +77,37 @@ public class User {
         result += ("slogan :" + this.getSlogan() + "\n");
         result += ("email :" + this.getEmail() + "\n");
         return result;
+    }
+
+    private String getPassword() {
+        return this.password;
+    }
+    public static String UsernameCheck(String username , Scanner scanner){
+        String newUsername;
+        for (int i = 0 ; i < User.getAllUsers().size() ; i++){
+            if (User.getAllUsers().get(i).getUsername().equals(username)){
+                System.out.println(Response.usernameAlreadyExist.getResponse());
+                newUsername = randomUsername(username);
+                System.out.println("your new username is :" + newUsername);
+                System.out.println("if you agree enter an \"y\" to continue else enter any character to exist.");
+                if (!scanner.nextLine().equals("y")){
+                    return Response.youAreInSignupMenu.getResponse();
+                }
+                username = newUsername;
+            }
+        }
+        return username;
+    }
+    private static String randomUsername(String old){
+        Random random = new Random();
+        String newUsername = old;
+        newUsername += ((random.nextInt() % 1000) + 1000);
+        for (int i = 0 ; i < User.getAllUsers().size() ; i++){
+            if (User.getAllUsers().get(i).getUsername().equals(newUsername)){
+                return randomUsername(old);
+            }
+        }
+        return newUsername;
     }
 
     public static boolean isStayLoggedIn() {
@@ -127,12 +167,6 @@ public class User {
     }
     public static void stayLoggedIn(boolean stayLoggedIn) {
         User.stayLoggedIn = stayLoggedIn;
-    }
-    public static void readFile(){
-
-    }
-    public static void saveFile(){
-
     }
     public static ArrayList<User> getAllUsers() {
         return allUsers;
@@ -198,27 +232,27 @@ public class User {
 
     public static String checkPassword(String password , String confirm){
         if (!password.equals(confirm)){
-            return model.InputOut.Response.passwordDifferentWithConfirm.getResponse();
+            return Response.passwordDifferentWithConfirm.getResponse();
         }
         String error = "password errors :\n";
-        if (model.InputOut.Regex.password.getMatcher(password) != null){
+        if (Regex.password.getMatcher(password) != null){
             return null;
         }
-        else if (model.InputOut.Regex.passwordErrorNumber.getMatcher(password) == null){
-            error += model.InputOut.Response.noNumberPassword.getResponse() + "\n";
+        else if (Regex.passwordErrorNumber.getMatcher(password) == null){
+            error += Response.noNumberPassword.getResponse() + "\n";
         }
-        else if (model.InputOut.Regex.passwordInvalidLength.getMatcher(password) != null){
-            error += model.InputOut.Response.inValidLengthPassword.getResponse();
+        else if (Regex.passwordInvalidLength.getMatcher(password) != null){
+            error += Response.inValidLengthPassword.getResponse();
             return error;
         }
-        if (model.InputOut.Regex.passwordErrorSpecialCharacter.getMatcher(password) == null){
-            error += model.InputOut.Response.noSpecialCharacterPassword.getResponse() + "\n";
+        if (Regex.passwordErrorSpecialCharacter.getMatcher(password) == null){
+            error += Response.noSpecialCharacterPassword.getResponse() + "\n";
         }
-        if (model.InputOut.Regex.passwordErrorUpperCaseLetter.getMatcher(password) == null){
-            error += model.InputOut.Response.noUpperCasePassword.getResponse() + "\n";
+        if (Regex.passwordErrorUpperCaseLetter.getMatcher(password) == null){
+            error += Response.noUpperCasePassword.getResponse() + "\n";
         }
-        if (model.InputOut.Regex.passwordErrorLowerCase.getMatcher(password) == null){
-            error += model.InputOut.Response.noLowerCasePassword.getResponse() + "\n";
+        if (Regex.passwordErrorLowerCase.getMatcher(password) == null){
+            error += Response.noLowerCasePassword.getResponse() + "\n";
         }
         return error + "end of errors";
     }
@@ -261,15 +295,15 @@ public class User {
         return false;
     }
     public static String checkEmail(String email){
-        if (model.InputOut.Regex.email.getMatcher(email) != null){
+        if (Regex.email.getMatcher(email) != null){
             for (int i = 0 ; i < User.getAllUsers().size() ; i++){
-                if (User.getAllUsers().get(i).getEmail().toUpperCase().equals(email.toUpperCase())){
-                    return model.InputOut.Response.emailAlreadyExist.getResponse();
+                if (User.getAllUsers().get(i).getEmail().equalsIgnoreCase(email)){
+                    return Response.emailAlreadyExist.getResponse();
                 }
             }
             return null;
         }
-        return model.InputOut.Response.invalidEmail.getResponse();
+        return Response.invalidEmail.getResponse();
     }
     public static String checkEmailFormat(String email) {
         if (email==null){
@@ -284,7 +318,7 @@ public class User {
             }
         }
         else {
-            return "email "+ProfileMenuResponds.INVALID_FORMAT.getText();
+            return "email "+ ProfileMenuResponds.INVALID_FORMAT.getText();
         }
     }
     public static User getLoggedInUser() {

@@ -1,7 +1,7 @@
-package org.example.model.buildings;
+package StrongholdCrusader.src.main.java.org.example.model.buildings;
 
-import org.example.model.Government;
-import org.example.model.Resources;
+import StrongholdCrusader.src.main.java.org.example.model.Government;
+import StrongholdCrusader.src.main.java.org.example.model.Resources;
 
 import java.util.HashMap;
 

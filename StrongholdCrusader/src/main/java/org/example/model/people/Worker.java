@@ -1,6 +1,6 @@
-package org.example.model.people;
+package StrongholdCrusader.src.main.java.org.example.model.people;
 
-import org.example.model.buildings.Building;
+import StrongholdCrusader.src.main.java.org.example.model.buildings.Building;
 
 public class Worker extends People{
     public Worker(UselessPeople uselessPeople){

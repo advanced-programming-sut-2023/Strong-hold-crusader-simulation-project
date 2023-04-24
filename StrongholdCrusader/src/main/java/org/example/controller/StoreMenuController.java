@@ -1,4 +1,4 @@
-package org.example.controller;
+package StrongholdCrusader.src.main.java.org.example.controller;
 
 import java.util.regex.Matcher;
 

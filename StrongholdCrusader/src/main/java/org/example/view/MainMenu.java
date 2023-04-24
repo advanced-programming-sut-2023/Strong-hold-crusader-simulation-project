@@ -1,7 +1,7 @@
-package org.example.view;
+package StrongholdCrusader.src.main.java.org.example.view;
 
-import org.example.controller.MainMenuController;
-import org.example.view.commands.MainMenuCommands;
+import StrongholdCrusader.src.main.java.org.example.controller.MainMenuController;
+import StrongholdCrusader.src.main.java.org.example.view.commands.MainMenuCommands;
 
 import java.util.Scanner;
 

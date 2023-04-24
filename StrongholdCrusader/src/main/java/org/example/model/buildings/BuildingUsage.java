@@ -1,4 +1,4 @@
-package org.example.model.buildings;
+package StrongholdCrusader.src.main.java.org.example.model.buildings;
 
 public interface BuildingUsage {
     void usage();

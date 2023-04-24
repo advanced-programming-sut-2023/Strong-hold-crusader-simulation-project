@@ -1,4 +1,4 @@
-package org.example.model.buildings;
+package StrongholdCrusader.src.main.java.org.example.model.buildings;
 
 public enum FoodProcessBuildingTypes implements BuildingUsage {
     INN{

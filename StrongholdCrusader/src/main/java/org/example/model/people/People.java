@@ -1,4 +1,4 @@
-package org.example.model.people;
+package StrongholdCrusader.src.main.java.org.example.model.people;
 
 public class People {
     private int health;

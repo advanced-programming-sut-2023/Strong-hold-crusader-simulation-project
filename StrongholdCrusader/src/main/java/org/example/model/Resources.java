@@ -1,4 +1,4 @@
-package org.example.model;
+package StrongholdCrusader.src.main.java.org.example.model;
 
 public enum Resources {
     APPLE,

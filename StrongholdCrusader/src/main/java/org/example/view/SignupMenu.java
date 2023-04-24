@@ -1,12 +1,11 @@
-package view;
+package StrongholdCrusader.src.main.java.org.example.view;
 
-import controller.SignupMenuController;
-import model.InputOut.Regex;
-import model.User;
+import StrongholdCrusader.src.main.java.org.example.controller.SignupMenuController;
+import StrongholdCrusader.src.main.java.org.example.model.InputOut.Regex;
+import StrongholdCrusader.src.main.java.org.example.model.User;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SignupMenu extends Menu {
     public SignupMenu(Scanner scanner) {

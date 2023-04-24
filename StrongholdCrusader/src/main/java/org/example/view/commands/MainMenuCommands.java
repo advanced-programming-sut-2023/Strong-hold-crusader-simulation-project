@@ -1,4 +1,4 @@
-package org.example.view.commands;
+package StrongholdCrusader.src.main.java.org.example.view.commands;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
