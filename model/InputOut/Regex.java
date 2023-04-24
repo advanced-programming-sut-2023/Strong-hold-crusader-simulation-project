@@ -21,7 +21,8 @@ public enum Regex {
         Pattern pattern;
         switch (this){
             case createUser : {
-                if (Pattern.matches(createUserRegex , command) == false){
+                if (Pattern.matches(createUserRegex , command) == false ||
+                        checkValidation(createUserRegexes , command) == null){
                     return null;
                 }
                 pattern = Pattern.compile(createUserRegex);
@@ -91,7 +92,8 @@ public enum Regex {
                 return pattern.matcher(command);
             }
             case pickRecoveryQuestion : {
-                if (Pattern.matches(pickRecoveryQuestionRegex , command) == false){
+                if (Pattern.matches(pickRecoveryQuestionRegex , command) == false ||
+                checkValidation(pickRecoveryQuestionRegexes , command) == null){
                     return null;
                 }
                 pattern = Pattern.compile(pickRecoveryQuestionRegex);
@@ -114,7 +116,35 @@ public enum Regex {
         }
         return null;
     }
+    private String checkValidation(String[] regexes , String command ) {
+        int start;
+        int end;
+        Pattern pattern;
+        Matcher matcher;
+        for (int i = 0 ; i < regexes.length - 1 ; i++){
+            pattern = Pattern.compile(regexes[i]);
+            matcher = pattern.matcher(command);
+            if (matcher.find()) {
+                start = matcher.start();
+                end = matcher.end();
+                command = (command.substring(0, start) + command.substring(end, command.length()));
+            }
+        }
+        if (Pattern.matches(regexes[regexes.length-1] , command) == false){
+            return null;
+        }
+        return command;
+    }
 
+    private String[] createUserRegexes =
+            {
+                    "(-u (?<username>(\"[^\"]*\")|([\\S]*)))",
+                    "(-p (?<password>(\"[^\"]*\")|([\\S]*)) (?<confirm>(\"[^\"]+\")|([\\S]*)))",
+                    "(-email (?<email>(\"[^\"]*\")|([\\S]*)))",
+                    "(-n (?<nickname>(\"[^\"]*\")|([\\S]*)))",
+                    "(-s (?<slogan>(\"[^\"]*\")|([\\S]*)))",
+                    "user create\\s+"
+            };
     private String createUserRegex =
                     ("^(?=(.* +-u (?<username>(\"[^\"]*\")|([\\S]*))){1,})"
                     + "(?=(.* +-p (?<password>(\"[^\"]*\")|([\\S]*)) "
@@ -134,6 +164,12 @@ public enum Regex {
     private String pickRecoveryQuestionRegex = ("(?=(.* +-q (?<question>([0-9]+))){1,})"
                                                  +"(?=(.* +-a (?<answer>(\"[^\"]*\")|([\\S]*))){1,})"
                                                      +"(?=(.* +-c (?<confirm>(\"[^\"]*\")|([\\S]*))){1,})pick.+$");
+    private String[] pickRecoveryQuestionRegexes = {
+            "-q (?<question>([0-9]+))",
+            "-a (?<answer>(\"[^\"]*\")|([\\S]*))",
+            "-c (?<confirm>(\"[^\"]*\")|([\\S]*))",
+            "pick\\s+"
+    };
     private String saveRegex = "save";
     private String readRegex = "read";
 }

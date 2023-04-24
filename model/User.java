@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import model.InputOut.Regex;
 import model.InputOut.Response;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -86,11 +87,11 @@ public class User implements Serializable{
         return username;
     }
     public boolean isPasswordCorrect(String password) {
-        return password.equals(this.password);
+        return getSha256(password).equals(this.password);
     }
     public User(String  username , String password , String email , String nickname , String slogan) {
         this.username = username;
-        this.password = password;
+        this.password = getSha256(password);
         this.email = email;
         this.nickname = nickname;
         this.slogan = slogan;
@@ -203,7 +204,7 @@ public class User implements Serializable{
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = getSha256(password);
     }
 
     public void setNickname(String nickname) {
@@ -220,4 +221,19 @@ public class User implements Serializable{
     public static void setLoggedInUser(User loggedInUser) {
         User.loggedInUser = loggedInUser;
     }
+
+        public static String getSha256(String value) {
+            try{
+                MessageDigest md = MessageDigest.getInstance("SHA-256");
+                md.update(value.getBytes());
+                return bytesToHex(md.digest());
+            } catch(Exception ex){
+                throw new RuntimeException(ex);
+            }
+        }
+        private static String bytesToHex(byte[] bytes) {
+            StringBuffer result = new StringBuffer();
+            for (byte b : bytes) result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+            return result.toString();
+        }
 }
