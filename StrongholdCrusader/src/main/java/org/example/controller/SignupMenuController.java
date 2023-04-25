@@ -115,11 +115,19 @@ public class SignupMenuController extends Controller {
     public static String randomSlogan() {
         Random random = new Random();
         String[] randomSlogans = {
-                "in rahi ke taze pato gozashti toosh ma thesh ridim",
+                "I am not in danger skylar, I AM THE DANGER",
                 "I shall have my revenge, in this life or the next",
-                "zamin gerde manam ke kine e",
-                "hagho velesh adab fadash",
-                "oon moghe ke to be lahaf toshak migofti lash toshak man lam toshak bood"
+                "May the force be with me",
+                "My name is Inigo Montoya. You killed my father. Prepare to die",
+                "They may take our lives, but they'll never take our freedom",
+                "Ezekiel 25:17",
+                "I will look for you, I will find you, and I will kill you",
+                "Winter Is Coming",
+                "King Kong ain't got sh*t on me",
+                "today is a gift that's why it is called \"the present\"",
+                "keep your friends close, but your enemies closer",
+                "I am the warrior that built this town",
+                "are you ready, kids?"
         };
         return randomSlogans[((random.nextInt()%100)+100)%randomSlogans.length];
     }

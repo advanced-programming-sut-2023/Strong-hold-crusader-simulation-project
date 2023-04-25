@@ -9,7 +9,7 @@ public enum MapMenuCommands {
     DOWN(".+down.*"),
     RIGHT(".+right.*"),
     LEFT(".+left.*"),
-    SHOW_DETAILS("show details (-x \\d+ -y \\d+|-y \\d+ -x \\d+"),
+    SHOW_DETAILS("show details (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     MAP_X(".* -x (?<mapX>\\d+).*"),
     MAP_Y(".* -y (?<mapY>\\d+).*");
     private final String regex;
