@@ -23,17 +23,17 @@ public class ProfileMenuController extends Controller {
         }
     }
     public static String changePassword(Matcher matcher, Scanner scanner) {
-        if (matcher.group("newpassword")==null){
+        if (matcher.group("newpassword") == null) {
             return "new password" + ProfileMenuResponds.EMPTY_FIELD.getText();
         }
-        if (matcher.group("oldpassword")==null){
+        if (matcher.group("oldpassword") == null) {
             return "old password " + ProfileMenuResponds.EMPTY_FIELD.getText();
         }
         if (!User.getLoggedInUser().isPasswordCorrect(matcher.group("oldpassword"))){
             return ProfileMenuResponds.INCORRECT_PASSWORD.getText();
         }
-        String check=User.checkPasswordFormat(matcher.group("newpassword"));
-        if (check==null){
+        String check = User.checkPasswordFormat(matcher.group("newpassword"));
+        if (check == null) {
             System.out.println("enter new password again to confirm");
             String confirm = scanner.nextLine();
             if (Objects.equals(confirm, matcher.group("newpassword"))){

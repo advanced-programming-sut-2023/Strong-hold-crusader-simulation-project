@@ -32,4 +32,8 @@ public class LoginMenuController extends Controller {
         User.stayLoggedIn(stayLoggedIn);
         return "user logged in successfully!";
     }
+
+    public static void recoverPassword(String username, String newPassword) {
+        User.getUserByUsername(username).setPassword(newPassword);
+    }
 }

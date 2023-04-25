@@ -14,4 +14,13 @@ public class Controller {
             return string.substring(1,string.length() - 1);
         return string;
     }
+
+    public static boolean checkPasswordFormat(String password) {
+        return
+                password.length() >= 6
+                && password.matches(".*[A-Z].*")
+                && password.matches(".*[0-9]")
+                && password.matches(".*[a-z].*")
+                && password.matches(".*[^0-9A-Za-z].*");
+    }
 }

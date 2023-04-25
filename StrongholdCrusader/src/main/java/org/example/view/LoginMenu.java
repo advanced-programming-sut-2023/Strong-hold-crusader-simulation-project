@@ -32,26 +32,37 @@ public class LoginMenu extends Menu {
                     mainMenu.run();
                 }
             } else if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.FORGET_PASS)) != null)
-                forgetPassword();
+                System.out.println(forgetPassword());
             else if (input.equals("exit"))
                 return;
             else System.out.println("invalid command");
         }
     }
 
-    private void forgetPassword() {
+    private String forgetPassword() {
         String username = matcher.group("username");
         User user;
-        if ((user = User.getUserByUsername(username)) == null) {
-            System.out.println("username doesn't exist");
-            return;
-        }
+        if ((user = User.getUserByUsername(username)) == null)
+            return "username doesn't exist";
         System.out.println(User.getSecurityQuestions()[user.getRecoveryQuestion() - 1]);
         String answer = scanner.nextLine();
-        if (!user.isSecurityAnswerCorrect(answer)) {
-            System.out.println("wrong answer to the security question");
-            return;
+        if (!user.isSecurityAnswerCorrect(answer))
+            return "wrong answer to the security question";
+        System.out.println("enter your new password");
+        String newPassword = scanner.nextLine();
+        while (!Controller.checkPasswordFormat(newPassword)) {
+            System.out.println("Your password:\n must be at least 6 characters\n" +
+                    "must contain capital and small letters\n" +
+                    "must contain numbers\n" +
+                    "must contain characters not mentioned in above categories\n" +
+                    "please enter a new password that has all the conditions");
+            newPassword = scanner.nextLine();
         }
-        //TODO change password ke baad az inke amir signup menu ro zad zade mishe;
+        System.out.println("enter your new password again");
+        String confirmPassword = scanner.nextLine();
+        if(!newPassword.equals(confirmPassword))
+            return "entered password doesn't match";
+        LoginMenuController.recoverPassword(username, newPassword);
+        return "Password successfully changed";
     }
 }

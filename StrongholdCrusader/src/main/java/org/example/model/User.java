@@ -82,7 +82,7 @@ public class User {
     private String getPassword() {
         return this.password;
     }
-    public static String UsernameCheck(String username , Scanner scanner){
+    public static String usernameCheck(String username , Scanner scanner){
         String newUsername;
         for (int i = 0 ; i < User.getAllUsers().size() ; i++){
             if (User.getAllUsers().get(i).getUsername().equals(username)){
@@ -128,15 +128,6 @@ public class User {
 
     public String getNickname() {
         return nickname;
-    }
-
-    public static User findUserByUserName(String username){
-        for (User user : allUsers) {
-            if (Objects.equals(user.getUsername(), username)) {
-                return user;
-            }
-        }
-        return null;
     }
     public static String[] getSecurityQuestions(){
         return securityQuestions;
@@ -214,7 +205,7 @@ public class User {
     public static String checkUsernameFormat(String username) {
         if (username!=null){
             if (username.matches("[a-zA-Z0-9_]+")){
-                if (User.findUserByUserName(username)==null){
+                if (User.getUserByUsername(username)==null){
                     return null;
                 }
                 else {

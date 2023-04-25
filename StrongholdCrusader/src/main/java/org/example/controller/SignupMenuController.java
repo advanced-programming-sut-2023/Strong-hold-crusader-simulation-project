@@ -13,17 +13,17 @@ import java.util.regex.Matcher;
 public class SignupMenuController extends Controller {
     public static String createUser(Matcher matcher , Scanner scanner) {
         matcher.find();
-        String username = deleteQuot(matcher.group("username"));
-        String password = deleteQuot(matcher.group("password"));
-        String confirm = deleteQuot(matcher.group("confirm"));
-        String email = deleteQuot(matcher.group("email"));
+        String username = deleteQuote(matcher.group("username"));
+        String password = deleteQuote(matcher.group("password"));
+        String confirm = deleteQuote(matcher.group("confirm"));
+        String email = deleteQuote(matcher.group("email"));
         String nickname = null;
         String slogan = null;
         if (matcher.group("nickname") != null){
-            nickname = deleteQuot(matcher.group("nickname"));
+            nickname = deleteQuote(matcher.group("nickname"));
         }
         if (matcher.group("slogan") != null){
-            slogan = deleteQuot(matcher.group("slogan"));
+            slogan = deleteQuote(matcher.group("slogan"));
             if (slogan.equals("random")){
                 slogan = randomSlogan();
                 System.out.println("your random slogan is :\n" + slogan);
@@ -47,7 +47,7 @@ public class SignupMenuController extends Controller {
         if (SignupMenuCommands.username.getMatcher(username) == null){
             return SignupMenuResponds.invalidUsername.getResponse();
         }
-        username = User.UsernameCheck(username , scanner);
+        username = User.usernameCheck(username , scanner);
         if (username.equals(SignupMenuResponds.youAreInSignupMenu.getResponse())) {
             return username;
         }
@@ -66,34 +66,28 @@ public class SignupMenuController extends Controller {
                 System.out.println(SignupMenuResponds.pickQuestionFormat.getResponse());
                 continue;
             }
-            else {
-                matcher.find();
-                int x = Integer.parseInt(matcher.group("question"));
-                if (x > 2 || x < 0){
-                    System.out.println("question number must be 0, 1 or 2 ; please try again");
-                    continue;
-                }
-                else {
-                    if (matcher.group("answer").length() == 0){
-                        System.out.println(SignupMenuResponds.emptyField.getResponse());
-                        continue;
-                    }
-                    if (!matcher.group("answer").equals(matcher.group("confirm"))){
-                        System.out.println("answer and confirm doesn't match");
-                        continue;
-                    }
-                    else {
-                        User user = new User(username, password, email, nickname, slogan);
-                        user.setSecurityQuestion(x , matcher.group("answer"));
-                        break;
-                    }
-                }
+            matcher.find();
+            int x = Integer.parseInt(matcher.group("question"));
+            if (x > 2 || x < 0){
+                System.out.println("question number must be 0, 1 or 2 ; please try again");
+                continue;
             }
+            if (matcher.group("answer").length() == 0){
+                System.out.println(SignupMenuResponds.emptyField.getResponse());
+                continue;
+            }
+            if (!matcher.group("answer").equals(matcher.group("confirm"))){
+                System.out.println("answer and confirm doesn't match");
+                continue;
+            }
+            User user = new User(username, password, email, nickname, slogan);
+            user.setSecurityQuestion(x , matcher.group("answer"));
+            break;
         }
         return SignupMenuResponds.createUserSuccess.getResponse();
     }
 
-    private static String deleteQuot(String input){
+    private static String deleteQuote(String input){
         Matcher matcher = SignupMenuCommands.doubleQuot.getMatcher(input);
         if(matcher != null){
             matcher.find();
@@ -121,10 +115,10 @@ public class SignupMenuController extends Controller {
     public static String randomSlogan() {
         Random random = new Random();
         String[] randomSlogans = {
-                "in rahi ke taze pato gozashti toosh ma thesh ridim" ,
-                "zamin gerde manam ke kine e" ,
-                "to ke ba ma hal nemikoni , la aghal pahato bede bala ma bahat hal konim",
-                "hagho velesh adab fadash" ,
+                "in rahi ke taze pato gozashti toosh ma thesh ridim",
+                "I shall have my revenge, in this life or the next",
+                "zamin gerde manam ke kine e",
+                "hagho velesh adab fadash",
                 "oon moghe ke to be lahaf toshak migofti lash toshak man lam toshak bood"
         };
         return randomSlogans[((random.nextInt()%100)+100)%randomSlogans.length];
