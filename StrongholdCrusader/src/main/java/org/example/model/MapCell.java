@@ -1,7 +1,7 @@
-package StrongholdCrusader.src.main.java.org.example.model;
+package org.example.model;
 
-import StrongholdCrusader.src.main.java.org.example.model.buildings.Building;
-import StrongholdCrusader.src.main.java.org.example.model.people.Unit;
+import org.example.model.buildings.Building;
+import org.example.model.people.Unit;
 
 import java.util.ArrayList;
 import java.util.HashMap;

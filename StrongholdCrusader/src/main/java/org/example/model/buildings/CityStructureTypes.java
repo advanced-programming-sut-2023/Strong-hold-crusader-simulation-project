@@ -1,4 +1,4 @@
-package StrongholdCrusader.src.main.java.org.example.model.buildings;
+package org.example.model.buildings;
 
 public enum CityStructureTypes implements BuildingUsage {
     HOVEL{

@@ -1,6 +1,6 @@
-package StrongholdCrusader.src.main.java.org.example;
+package org.example;
 
-import StrongholdCrusader.src.main.java.org.example.view.LoginMenu;
+import org.example.view.LoginMenu;
 
 import java.util.Scanner;
 

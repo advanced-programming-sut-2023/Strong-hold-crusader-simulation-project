@@ -1,9 +1,9 @@
-package StrongholdCrusader.src.main.java.org.example.controller;
+package org.example.controller;
 
-import StrongholdCrusader.src.main.java.org.example.model.InputOut.Regex;
-import StrongholdCrusader.src.main.java.org.example.model.InputOut.Response;
-import StrongholdCrusader.src.main.java.org.example.model.User;
-import StrongholdCrusader.src.main.java.org.example.view.RandomPassword;
+import org.example.model.InputOut.Regex;
+import org.example.model.InputOut.Response;
+import org.example.model.User;
+import org.example.view.RandomPassword;
 
 import java.util.Random;
 import java.util.Scanner;

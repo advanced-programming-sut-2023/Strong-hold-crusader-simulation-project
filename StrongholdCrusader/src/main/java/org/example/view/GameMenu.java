@@ -1,7 +1,7 @@
-package StrongholdCrusader.src.main.java.org.example.view;
+package org.example.view;
 
-import StrongholdCrusader.src.main.java.org.example.model.Map;
-import StrongholdCrusader.src.main.java.org.example.view.commands.GameMenuCommands;
+import org.example.model.Map;
+import org.example.view.commands.GameMenuCommands;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;

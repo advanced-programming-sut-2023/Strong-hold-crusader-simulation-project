@@ -1,4 +1,4 @@
-package StrongholdCrusader.src.main.java.org.example.view;
+package org.example.view;
 
 import java.util.ArrayList;
 import java.util.Collections;

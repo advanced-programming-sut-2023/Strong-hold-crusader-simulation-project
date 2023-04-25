@@ -1,6 +1,6 @@
-package StrongholdCrusader.src.main.java.org.example.model.people;
+package org.example.model.people;
 
-import StrongholdCrusader.src.main.java.org.example.model.Weapon;
+import org.example.model.Weapon;
 
 import java.util.ArrayList;
 

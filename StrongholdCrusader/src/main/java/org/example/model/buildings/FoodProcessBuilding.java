@@ -1,6 +1,6 @@
-package StrongholdCrusader.src.main.java.org.example.model.buildings;
+package org.example.model.buildings;
 
-import StrongholdCrusader.src.main.java.org.example.model.Government;
+import org.example.model.Government;
 
 public class FoodProcessBuilding extends Building{
     private final FoodProcessBuildingTypes type;

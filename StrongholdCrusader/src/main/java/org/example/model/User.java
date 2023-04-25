@@ -1,9 +1,9 @@
-package StrongholdCrusader.src.main.java.org.example.model;
+package org.example.model;
 
-import StrongholdCrusader.src.main.java.org.example.model.InputOut.Regex;
-import StrongholdCrusader.src.main.java.org.example.model.InputOut.Response;
-import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuCommands;
-import StrongholdCrusader.src.main.java.org.example.view.commands.ProfileMenuResponds;
+import org.example.model.InputOut.Regex;
+import org.example.model.InputOut.Response;
+import org.example.view.commands.ProfileMenuCommands;
+import org.example.view.commands.ProfileMenuResponds;
 
 import java.io.*;
 import java.security.MessageDigest;

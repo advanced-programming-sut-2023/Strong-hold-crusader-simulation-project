@@ -1,7 +1,7 @@
-package StrongholdCrusader.src.main.java.org.example.controller;
+package org.example.controller;
 
-import StrongholdCrusader.src.main.java.org.example.model.User;
-import StrongholdCrusader.src.main.java.org.example.view.commands.LoginMenuCommands;
+import org.example.model.User;
+import org.example.view.commands.LoginMenuCommands;
 
 import java.util.regex.Matcher;
 

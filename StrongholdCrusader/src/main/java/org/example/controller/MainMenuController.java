@@ -1,6 +1,6 @@
-package StrongholdCrusader.src.main.java.org.example.controller;
+package org.example.controller;
 
-import StrongholdCrusader.src.main.java.org.example.model.User;
+import org.example.model.User;
 
 import java.util.regex.Matcher;
 

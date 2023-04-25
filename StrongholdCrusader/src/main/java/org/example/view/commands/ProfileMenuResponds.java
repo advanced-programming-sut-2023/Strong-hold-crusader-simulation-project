@@ -1,4 +1,4 @@
-package StrongholdCrusader.src.main.java.org.example.view.commands;
+package org.example.view.commands;
 
 public enum ProfileMenuResponds {
     INVALID("Invalid Command!"),

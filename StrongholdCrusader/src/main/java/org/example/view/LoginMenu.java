@@ -1,9 +1,9 @@
-package StrongholdCrusader.src.main.java.org.example.view;
+package org.example.view;
 
-import StrongholdCrusader.src.main.java.org.example.controller.Controller;
-import StrongholdCrusader.src.main.java.org.example.model.User;
-import StrongholdCrusader.src.main.java.org.example.view.commands.LoginMenuCommands;
-import StrongholdCrusader.src.main.java.org.example.controller.LoginMenuController;
+import org.example.controller.Controller;
+import org.example.model.User;
+import org.example.view.commands.LoginMenuCommands;
+import org.example.controller.LoginMenuController;
 
 import java.util.Scanner;
 

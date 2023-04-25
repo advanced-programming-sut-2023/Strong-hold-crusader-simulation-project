@@ -1,8 +1,8 @@
-package StrongholdCrusader.src.main.java.org.example.view;
+package org.example.view;
 
-import StrongholdCrusader.src.main.java.org.example.controller.SignupMenuController;
-import StrongholdCrusader.src.main.java.org.example.model.InputOut.Regex;
-import StrongholdCrusader.src.main.java.org.example.model.User;
+import org.example.controller.SignupMenuController;
+import org.example.model.InputOut.Regex;
+import org.example.model.User;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
