@@ -1,9 +1,8 @@
 package org.example.controller;
 
-import org.example.model.InputOut.Regex;
-import org.example.model.InputOut.Response;
+import org.example.view.commands.SignupMenuCommands;
+import org.example.view.commands.SignupMenuResponds;
 import org.example.model.User;
-import org.example.view.RandomPassword;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,12 +31,12 @@ public class SignupMenuController extends Controller {
         }
         if (password.equals("random")){
             password = confirm = randomPassword(password , scanner);
-            if (password.equals(Response.youAreInSignupMenu.getResponse())){
+            if (password.equals(SignupMenuResponds.youAreInSignupMenu.getResponse())){
                 return password;
             }
         }
         if (isThereEmptyField(username , password , email , slogan , slogan) != null){
-            return Response.emptyField.getResponse();
+            return SignupMenuResponds.emptyField.getResponse();
         }
         if (User.checkEmail(email) != null){
             return User.checkEmail(email);
@@ -45,11 +44,11 @@ public class SignupMenuController extends Controller {
         if (User.checkPassword(password , confirm) != null){
             return User.checkPassword(password , confirm);
         }
-        if (Regex.username.getMatcher(username) == null){
-            return Response.invalidUsername.getResponse();
+        if (SignupMenuCommands.username.getMatcher(username) == null){
+            return SignupMenuResponds.invalidUsername.getResponse();
         }
         username = User.UsernameCheck(username , scanner);
-        if (username.equals(Response.youAreInSignupMenu.getResponse())) {
+        if (username.equals(SignupMenuResponds.youAreInSignupMenu.getResponse())) {
             return username;
         }
         return makeUser(username , password , email , nickname , slogan , scanner);
@@ -57,14 +56,14 @@ public class SignupMenuController extends Controller {
     private static String makeUser
             (String username , String password , String email , String nickname , String slogan , Scanner scanner)
     {
-        System.out.println(Response.pickYourSecurityQuestion.getResponse());
+        System.out.println(SignupMenuResponds.pickYourSecurityQuestion.getResponse());
         User.printRecoveryQuestions();
         String command;
         while (true){
             command = scanner.nextLine();
-            Matcher matcher = Regex.pickRecoveryQuestion.getMatcher(command);
+            Matcher matcher = SignupMenuCommands.pickRecoveryQuestion.getMatcher(command);
             if (matcher == null){
-                System.out.println(Response.pickQuestionFormat.getResponse());
+                System.out.println(SignupMenuResponds.pickQuestionFormat.getResponse());
                 continue;
             }
             else {
@@ -76,7 +75,7 @@ public class SignupMenuController extends Controller {
                 }
                 else {
                     if (matcher.group("answer").length() == 0){
-                        System.out.println(Response.emptyField.getResponse());
+                        System.out.println(SignupMenuResponds.emptyField.getResponse());
                         continue;
                     }
                     if (!matcher.group("answer").equals(matcher.group("confirm"))){
@@ -91,11 +90,11 @@ public class SignupMenuController extends Controller {
                 }
             }
         }
-        return Response.createUserSuccess.getResponse();
+        return SignupMenuResponds.createUserSuccess.getResponse();
     }
 
     private static String deleteQuot(String input){
-        Matcher matcher = Regex.doubleQuot.getMatcher(input);
+        Matcher matcher = SignupMenuCommands.doubleQuot.getMatcher(input);
         if(matcher != null){
             matcher.find();
             input = matcher.group("data");
@@ -105,17 +104,17 @@ public class SignupMenuController extends Controller {
     public static String isThereEmptyField(String username , String password , String email , String nickname , String slogan) {
         if (password.length() == 0 || username.length() == 0 || email.length() == 0 ||
                 (nickname != null && nickname.length() == 0) || (slogan != null && slogan.length() == 0)){
-            return Response.emptyField.getResponse();
+            return SignupMenuResponds.emptyField.getResponse();
         }
         return null;
     }
     public static String randomPassword(String password , Scanner scanner) {
-        password = RandomPassword.generatePass();
+        password = SignupMenuController.generatePass();
         System.out.println("your random password is :" + password);
         System.out.println("please reEnter your password to confirm it!");
         if (!scanner.nextLine().equals(password)){
-            System.out.println(Response.passwordDifferentWithConfirm.getResponse());
-            return Response.youAreInSignupMenu.getResponse();
+            System.out.println(SignupMenuResponds.passwordDifferentWithConfirm.getResponse());
+            return SignupMenuResponds.youAreInSignupMenu.getResponse();
         }
         return password;
     }

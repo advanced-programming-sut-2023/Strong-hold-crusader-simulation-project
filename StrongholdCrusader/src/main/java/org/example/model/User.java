@@ -1,7 +1,7 @@
 package org.example.model;
 
-import org.example.model.InputOut.Regex;
-import org.example.model.InputOut.Response;
+import org.example.view.commands.SignupMenuCommands;
+import org.example.view.commands.SignupMenuResponds;
 import org.example.view.commands.ProfileMenuCommands;
 import org.example.view.commands.ProfileMenuResponds;
 
@@ -86,12 +86,12 @@ public class User {
         String newUsername;
         for (int i = 0 ; i < User.getAllUsers().size() ; i++){
             if (User.getAllUsers().get(i).getUsername().equals(username)){
-                System.out.println(Response.usernameAlreadyExist.getResponse());
+                System.out.println(SignupMenuResponds.usernameAlreadyExist.getResponse());
                 newUsername = randomUsername(username);
                 System.out.println("your new username is :" + newUsername);
                 System.out.println("if you agree enter an \"y\" to continue else enter any character to exist.");
                 if (!scanner.nextLine().equals("y")){
-                    return Response.youAreInSignupMenu.getResponse();
+                    return SignupMenuResponds.youAreInSignupMenu.getResponse();
                 }
                 username = newUsername;
             }
@@ -232,27 +232,27 @@ public class User {
 
     public static String checkPassword(String password , String confirm){
         if (!password.equals(confirm)){
-            return Response.passwordDifferentWithConfirm.getResponse();
+            return SignupMenuResponds.passwordDifferentWithConfirm.getResponse();
         }
         String error = "password errors :\n";
-        if (Regex.password.getMatcher(password) != null){
+        if (SignupMenuCommands.password.getMatcher(password) != null){
             return null;
         }
-        else if (Regex.passwordErrorNumber.getMatcher(password) == null){
-            error += Response.noNumberPassword.getResponse() + "\n";
+        else if (SignupMenuCommands.passwordErrorNumber.getMatcher(password) == null){
+            error += SignupMenuResponds.noNumberPassword.getResponse() + "\n";
         }
-        else if (Regex.passwordInvalidLength.getMatcher(password) != null){
-            error += Response.inValidLengthPassword.getResponse();
+        else if (SignupMenuCommands.passwordInvalidLength.getMatcher(password) != null){
+            error += SignupMenuResponds.inValidLengthPassword.getResponse();
             return error;
         }
-        if (Regex.passwordErrorSpecialCharacter.getMatcher(password) == null){
-            error += Response.noSpecialCharacterPassword.getResponse() + "\n";
+        if (SignupMenuCommands.passwordErrorSpecialCharacter.getMatcher(password) == null){
+            error += SignupMenuResponds.noSpecialCharacterPassword.getResponse() + "\n";
         }
-        if (Regex.passwordErrorUpperCaseLetter.getMatcher(password) == null){
-            error += Response.noUpperCasePassword.getResponse() + "\n";
+        if (SignupMenuCommands.passwordErrorUpperCaseLetter.getMatcher(password) == null){
+            error += SignupMenuResponds.noUpperCasePassword.getResponse() + "\n";
         }
-        if (Regex.passwordErrorLowerCase.getMatcher(password) == null){
-            error += Response.noLowerCasePassword.getResponse() + "\n";
+        if (SignupMenuCommands.passwordErrorLowerCase.getMatcher(password) == null){
+            error += SignupMenuResponds.noLowerCasePassword.getResponse() + "\n";
         }
         return error + "end of errors";
     }
@@ -295,15 +295,15 @@ public class User {
         return false;
     }
     public static String checkEmail(String email){
-        if (Regex.email.getMatcher(email) != null){
+        if (SignupMenuCommands.email.getMatcher(email) != null){
             for (int i = 0 ; i < User.getAllUsers().size() ; i++){
                 if (User.getAllUsers().get(i).getEmail().equalsIgnoreCase(email)){
-                    return Response.emailAlreadyExist.getResponse();
+                    return SignupMenuResponds.emailAlreadyExist.getResponse();
                 }
             }
             return null;
         }
-        return Response.invalidEmail.getResponse();
+        return SignupMenuResponds.invalidEmail.getResponse();
     }
     public static String checkEmailFormat(String email) {
         if (email==null){

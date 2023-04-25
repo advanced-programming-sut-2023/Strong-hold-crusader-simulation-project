@@ -1,6 +1,6 @@
-package org.example.model.InputOut;
+package org.example.view.commands;
 
-public enum Response {
+public enum SignupMenuResponds {
     emptyField,
     noNumberPassword,
     noLowerCasePassword,

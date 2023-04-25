@@ -1,7 +1,7 @@
 package org.example.view;
 
 import org.example.controller.SignupMenuController;
-import org.example.model.InputOut.Regex;
+import org.example.view.commands.SignupMenuCommands;
 import org.example.model.User;
 
 import java.util.Scanner;
@@ -17,13 +17,13 @@ public class SignupMenu extends Menu {
         String command;
         while (true) {
             command = scanner.nextLine();
-            if (Regex.createUser.getMatcher(command) != null) {
-                System.out.println(SignupMenuController.createUser(Regex.createUser.getMatcher(command), scanner));
-            } else if (Regex.save.getMatcher(command) != null) {
+            if (SignupMenuCommands.createUser.getMatcher(command) != null) {
+                System.out.println(SignupMenuController.createUser(SignupMenuCommands.createUser.getMatcher(command), scanner));
+            } else if (SignupMenuCommands.save.getMatcher(command) != null) {
                 User.saveFile();
-            } else if (Regex.read.getMatcher(command) != null) {
+            } else if (SignupMenuCommands.read.getMatcher(command) != null) {
                 User.readFile();
-            } else if (Regex.login.getMatcher(command) != null) {
+            } else if (SignupMenuCommands.login.getMatcher(command) != null) {
                 return;
             } else {
                 System.out.println("hey , you better watch your moves paul !!!");
