@@ -5,6 +5,8 @@ import org.example.model.InputOut.Response;
 import org.example.model.User;
 import org.example.view.RandomPassword;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -119,11 +121,34 @@ public class SignupMenuController extends Controller {
     }
     public static String randomSlogan() {
         Random random = new Random();
-        String[] randomSlogans = {"in rahi ke taze pato gozashti toosh ma thesh ridim" ,
+        String[] randomSlogans = {
+                "in rahi ke taze pato gozashti toosh ma thesh ridim" ,
                 "zamin gerde manam ke kine e" ,
                 "to ke ba ma hal nemikoni , la aghal pahato bede bala ma bahat hal konim",
                 "hagho velesh adab fadash" ,
-                "oon moghe ke to be lahaf toshak migofti lash toshak man lam toshak bood"};
+                "oon moghe ke to be lahaf toshak migofti lash toshak man lam toshak bood"
+        };
         return randomSlogans[((random.nextInt()%100)+100)%randomSlogans.length];
+    }
+    public static String generatePass() {
+        Random random = new Random();
+        String ss = "QWERTYUIOPASDFGHJKLZXCVBNM";
+        String ls = "qwertyuioplkjhgfdsazxcvbnm";
+        String sp = "!@#$%^&*";
+        String nm = "1234567890";
+        String fn = ss + ls + sp + nm;
+        ArrayList<Character> source = new ArrayList<>();
+        source.add(ss.charAt(Math.abs(random.nextInt()) % 26));
+        source.add(ls.charAt(Math.abs(random.nextInt()) % 26));
+        source.add(sp.charAt(Math.abs(random.nextInt()) % 7));
+        source.add(nm.charAt(Math.abs(random.nextInt()) % 10));
+        source.add(fn.charAt(Math.abs(random.nextInt()) % 69));
+        source.add(fn.charAt(Math.abs(random.nextInt()) / 2 % 69));
+        Collections.shuffle(source, random);
+        String result = "";
+        for (int i = 0; i < 6; i++) {
+            result += source.get(i);
+        }
+        return result;
     }
 }
