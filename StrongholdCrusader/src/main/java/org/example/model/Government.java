@@ -2,6 +2,8 @@ package org.example.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Government {
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
@@ -91,5 +93,26 @@ public class Government {
 
     public int getPopulation() {
         return population;
+    }
+    public HashMap<Resources,Integer> food(){
+        HashMap<Resources,Integer> foods=new HashMap<>();
+        for (HashMap.Entry<Resources, Integer> entry : resourceCount.entrySet()) {
+            if (Objects.equals(entry.getKey().getText(), "food")&&entry.getValue()>0){
+                foods.put(entry.getKey(),entry.getValue());
+            }
+        }
+        return foods;
+    }
+    public ArrayList<Integer> rateToPop(){
+        ArrayList<Integer> result=new ArrayList<>();
+        result.add(fearRate*4);
+        if (taxRate<=0){
+            result.add((taxRate*(-2))-1);
+        }
+        else {
+            result.add(taxRate*(2));
+        }
+        result.add(fearRate);
+        return result;
     }
 }

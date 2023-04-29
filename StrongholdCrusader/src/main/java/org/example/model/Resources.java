@@ -1,24 +1,31 @@
 package org.example.model;
 
 public enum Resources {
-    APPLE,
-    BREAD,
-    CHEESE,
-    MEAT,
-    STONE,
-    WOOD,
-    IRON,
-    GOLD,
-    ALE,
-    HOP,
-    WHEAT,
-    FLOUR,
-    PITCH,
-    LEATHER,
-    HORSE,
-    BOW,
-    SPEAR,
-    SWORD,
-    MACE,
-    ARMOUR;
+    APPLE("food"),
+    BREAD("food"),
+    CHEESE("food"),
+    MEAT("food"),
+    STONE(""),
+    WOOD(""),
+    IRON(""),
+    GOLD(""),
+    ALE(""),
+    HOP(""),
+    WHEAT("pre_food"),
+    FLOUR("pre_food"),
+    PITCH(""),
+    LEATHER(""),
+    HORSE(""),
+    BOW(""),
+    SPEAR(""),
+    SWORD(""),
+    MACE(""),
+    ARMOUR("");
+    private final String text;
+    public String getText() {
+        return text;
+    }
+    Resources(String regex) {
+        this.text = regex;
+    }
 }
