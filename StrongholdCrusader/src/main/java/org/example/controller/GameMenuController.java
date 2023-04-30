@@ -1,32 +1,20 @@
 package org.example.controller;
 
+import org.example.model.Map;
+import org.example.model.buildings.BuildingType;
+import org.example.view.commands.GameMenuCommands;
+
 import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
-    public static String showPopularityFactors() {
-        return null;
+    private static Map map;
+    public static Map getMap() {
+        return map;
     }
-    public static int showPopularity() {
-        return 0;
+    public static void setMap(Map map) {
+        GameMenuController.map = map;
     }
-    public static String showFoodList() {
-        return null;
-    }
-    public static String setFoodRate(Matcher matcher) {
-        return null;
-    }
-    public static String showFoodRate() {
-        return null;
-    }
-    public static String setTaxRate(Matcher matcher) {
-        return null;
-    }
-    public static String showTaxRate() {
-        return null;
-    }
-    public static String setFearRate(Matcher matcher) {
-        return null;
-    }
+
     public static String setTexture(Matcher matcher){
         return null;
     }
@@ -40,8 +28,24 @@ public class GameMenuController extends Controller {
     public static String dropTree(Matcher matcher){
         return null;
     }
-    public static String dropBuilding(Matcher matcher){
-        return null;
+    public static String dropBuilding(String input){
+        Matcher matcher;
+        if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_X))) == null)
+            return "Enter the coordinates!";
+        int x = Integer.parseInt(matcher.group("mapX"));
+        if (x > map.getSize() || x < 1)
+            return "Invalid x";
+        if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_Y))) == null)
+            return "Enter the coordinates!";
+        int y = Integer.parseInt(matcher.group("mapY"));
+        if (y > map.getSize() || y < 1)
+            return "Invalid y";
+        if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.TYPE))) == null)
+            return "Enter building type";
+        BuildingType type = BuildingType.getTypeByName(matcher.group("type"));
+        if (type == null)
+            return "Invalid building type!";
+        //TODO the fucking rest
     }
     public static String selectBuilding(Matcher matcher){
         return null;

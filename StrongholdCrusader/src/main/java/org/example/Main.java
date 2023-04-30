@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.view.LoginMenu;
+import org.example.view.commands.GameMenuCommands;
 
 import java.util.Scanner;
 

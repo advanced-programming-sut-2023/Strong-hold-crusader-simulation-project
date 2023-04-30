@@ -6,6 +6,7 @@ import org.example.model.Resources;
 import java.util.HashMap;
 
 public abstract class Building {
+    protected BuildingType type;
     protected Government government;
     protected int HP;
     protected int populationEffect;
@@ -16,6 +17,10 @@ public abstract class Building {
     protected Building(Government government, int HP) {
         this.government = government;
         this.HP = HP;
+    }
+
+    public BuildingType getType() {
+        return type;
     }
 
     public void changeHP(int damage) {
