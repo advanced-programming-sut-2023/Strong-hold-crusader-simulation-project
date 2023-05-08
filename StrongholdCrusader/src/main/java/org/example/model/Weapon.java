@@ -1,18 +1,23 @@
 package org.example.model;
 
-public class Weapon {
-    private String name;
+import org.example.model.people.MilitaryType;
+
+public enum WeaponType {
+    Swords(80 , 1),
+    Arch(60 , 10),
+    Hand(20 ,1),
+    Sling(20 , 4),
+    Club(40 , 1),
+    Pike(40 , 1),
+    Crossbow(100 , 8),
+    Skills(100 , 1),
+    FireBall(150 , 6);
     private int damage;
     private int range;
-
-    public String getName() {
-        return name;
+    WeaponType(int damage , int range){
+        this.damage = damage;
+        this.range = range;
     }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getDamage() {
         return damage;
     }
