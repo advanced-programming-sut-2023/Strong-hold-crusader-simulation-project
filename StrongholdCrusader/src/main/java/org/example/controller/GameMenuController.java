@@ -1,19 +1,13 @@
 package org.example.controller;
 
 import org.example.model.Map;
+import org.example.model.MapCell;
 import org.example.model.buildings.BuildingType;
 import org.example.view.commands.GameMenuCommands;
 
 import java.util.regex.Matcher;
 
 public class GameMenuController extends Controller {
-    private static Map map;
-    public static Map getMap() {
-        return map;
-    }
-    public static void setMap(Map map) {
-        GameMenuController.map = map;
-    }
 
     public static String setTexture(Matcher matcher){
         return null;
@@ -45,7 +39,9 @@ public class GameMenuController extends Controller {
         BuildingType type = BuildingType.getTypeByName(matcher.group("type"));
         if (type == null)
             return "Invalid building type!";
-        //TODO the fucking rest
+        MapCell cell = map.getCells()[x - 1][y - 1];
+        //TODO not finished
+        return null;
     }
     public static String selectBuilding(Matcher matcher){
         return null;

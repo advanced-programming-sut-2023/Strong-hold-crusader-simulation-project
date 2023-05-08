@@ -1,8 +1,16 @@
 package org.example.controller;
 
+import org.example.model.Map;
 import org.example.model.User;
 
 public class Controller {
+    protected static Map map;
+    public static Map getMap() {
+        return map;
+    }
+    public static void setMap(Map map) {
+        Controller.map = map;
+    }
     public static boolean stayLoggedInCheck() {
         return User.isStayLoggedIn();
     }

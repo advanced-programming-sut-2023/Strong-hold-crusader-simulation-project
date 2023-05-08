@@ -14,10 +14,6 @@ public abstract class Building {
     protected HashMap<Resources, Integer> requiredResources;
     protected int workerCount;
     protected int rate;
-    protected Building(Government government, int HP) {
-        this.government = government;
-        this.HP = HP;
-    }
 
     public BuildingType getType() {
         return type;
@@ -55,17 +51,4 @@ public abstract class Building {
         return rate;
     }
 
-    public String getBuildingType() {
-        if (this instanceof CastleBuilding)
-            return "Castle";
-        if (this instanceof CityStructure)
-            return "City Structure";
-        if (this instanceof Farm)
-            return "Farm";
-        if (this instanceof FoodProcessBuilding)
-            return "Food Processing";
-        if (this instanceof IndustrialBuilding)
-            return "Industrial";
-        return "Weapon";
-    }
 }

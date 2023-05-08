@@ -1,14 +1,13 @@
 package org.example.model.buildings;
 
-import org.example.model.Government;
-
 public class StoneGatehouse extends Building {
     private final int maximumResidents;
     private int currentResidents;
-    protected StoneGatehouse(Government government, int HP, int maximumResidents) {
-        super(government, HP);
+
+    public StoneGatehouse(int maximumResidents) {
         this.maximumResidents = maximumResidents;
     }
+
     public int getMaximumResidents() {
         return maximumResidents;
     }
