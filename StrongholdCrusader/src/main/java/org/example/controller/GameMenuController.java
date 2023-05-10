@@ -27,19 +27,19 @@ public class GameMenuController extends Controller {
         if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_X))) == null)
             return "Enter the coordinates!";
         int x = Integer.parseInt(matcher.group("mapX"));
-        if (x > map.getSize() || x < 1)
+        if (x > currentGame.getMap().getSize() || x < 1)
             return "Invalid x";
         if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_Y))) == null)
             return "Enter the coordinates!";
         int y = Integer.parseInt(matcher.group("mapY"));
-        if (y > map.getSize() || y < 1)
+        if (y > currentGame.getMap().getSize() || y < 1)
             return "Invalid y";
         if ((matcher = (GameMenuCommands.getMatcher(input, GameMenuCommands.TYPE))) == null)
             return "Enter building type";
         BuildingType type = BuildingType.getTypeByName(matcher.group("type"));
         if (type == null)
             return "Invalid building type!";
-        MapCell cell = map.getCells()[x - 1][y - 1];
+        MapCell cell = currentGame.getMap().getCells()[x - 1][y - 1];
         //TODO not finished
         return null;
     }
