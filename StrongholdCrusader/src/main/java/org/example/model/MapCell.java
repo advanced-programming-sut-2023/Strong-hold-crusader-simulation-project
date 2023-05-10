@@ -44,4 +44,24 @@ public class MapCell {
     public HashMap<Resources, Integer> getResources() {
         return resources;
     }
+
+    @Override
+    public String toString() {
+        //TODO inja havaset bashe esme resource o building o ... print koni
+        String result = "Texture: " + texture.getTextureName();
+        result += "\nResources:";
+        for (Resources resource : resources.keySet()) {
+            result += "\n" + resource + " count: " + resources.get(resource);
+        }
+        result += "\nTotal Unit Count: " + units.size();
+        result += "\nUnits:";
+        for (Unit unit : units) {
+            result += "\n" + unit.getType();
+        }
+        result += "\nBuildings:";
+        for (Building building : buildings) {
+            result += "\n" + building.getType();
+        }
+        return result;
+    }
 }
