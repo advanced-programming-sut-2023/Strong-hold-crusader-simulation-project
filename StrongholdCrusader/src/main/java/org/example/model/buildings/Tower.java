@@ -2,6 +2,6 @@ package org.example.model.buildings;
 
 import org.example.model.Government;
 
-public class CastleBuilding extends Building{
+public class Tower extends Building {
 
 }

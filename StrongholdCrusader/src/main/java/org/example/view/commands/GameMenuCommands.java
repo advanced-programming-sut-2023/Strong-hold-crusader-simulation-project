@@ -4,9 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum GameMenuCommands {
-    SHOW_MAP("show map (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     MAP_X(".* -x (?<mapX>\\d+).*"),
     MAP_Y(".* -y (?<mapY>\\d+).*"),
+    TYPE(".* -type (?<type>\\w+).*"),
+    SHOW_MAP("show map (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     DROP_BUILDING("drop building( -x| -y| -type| \\d+| \\w+)+"),
     SELECT_BUILDING("select building (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     SELECT_UNIT("select unit (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),

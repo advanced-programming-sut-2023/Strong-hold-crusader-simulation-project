@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.controller.GameMenuController;
 import org.example.model.Map;
 import org.example.view.commands.GameMenuCommands;
 
@@ -19,6 +20,8 @@ public class GameMenu extends Menu {
 
             if (GameMenuCommands.getMatcher(input, GameMenuCommands.SHOW_MAP) != null)
                 showMap();
+            else if ((matcher = GameMenuCommands.getMatcher(input, GameMenuCommands.DROP_BUILDING)) != null)
+                System.out.println(GameMenuController.dropBuilding(input));
         }
     }
     private void showMap() {
