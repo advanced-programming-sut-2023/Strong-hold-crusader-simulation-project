@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.model.people.MilitaryType;
+import org.example.model.people.Unit;
 import org.example.view.commands.SignupMenuCommands;
 import org.example.view.commands.SignupMenuResponds;
 import org.example.view.commands.ProfileMenuCommands;
@@ -12,7 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
-public class User {
+public class User implements Serializable{
     private static final String[] securityQuestions = {
             "What is my father's name?",
             "What was my first pet's name?",
@@ -21,6 +23,7 @@ public class User {
     private static User loggedInUser;
     private static boolean stayLoggedIn = false;
     private static ArrayList<User> allUsers = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<>();
     private String username;
     private String password;
     private String nickname;
@@ -46,8 +49,8 @@ public class User {
             }
             FileInputStream readData = new FileInputStream("userData.ser");
             ObjectInputStream readStream = new ObjectInputStream(readData);
-
             allUsers = (ArrayList<User>) readStream.readObject();
+            System.out.println(allUsers);
             readStream.close();
         }catch (Exception e) {
             e.printStackTrace();
@@ -58,7 +61,6 @@ public class User {
         try{
             FileOutputStream writeData = new FileOutputStream("userData.ser");
             ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-
             writeStream.writeObject(allUsers);
             writeStream.flush();
             writeStream.close();
@@ -329,4 +331,5 @@ public class User {
         for (byte b : bytes) result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         return result.toString();
     }
+
 }

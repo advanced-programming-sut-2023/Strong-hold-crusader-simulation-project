@@ -6,6 +6,7 @@ import org.example.model.Resources;
 import java.util.HashMap;
 
 public abstract class Building {
+    protected Boolean hasLadder;
     protected Government government;
     protected int HP;
     protected int populationEffect;
@@ -48,6 +49,14 @@ public abstract class Building {
 
     public int getRate() {
         return rate;
+    }
+
+    public Boolean getHasLadder() {
+        return hasLadder;
+    }
+
+    public void setHasLadder(Boolean hasLadder) {
+        this.hasLadder = hasLadder;
     }
 
     public String getBuildingType() {

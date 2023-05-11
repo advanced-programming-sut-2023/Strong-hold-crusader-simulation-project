@@ -1,3 +1,5 @@
+package org.example.controller.Dfs;
+
 import java.util.Scanner;
 
 public class Main {
@@ -20,8 +22,8 @@ public class Main {
             }
             System.out.println();
         }
-        BFS bfs = new BFS(map , x);
+        DFS dfs = new DFS(map , x);
         int i = scanner.nextInt() ; int j = scanner.nextInt() ; int ii = scanner.nextInt() ; int jj = scanner.nextInt();
-        System.out.println(bfs.bfs(i , j , ii , jj , new String("res : ")));
+        System.out.println(dfs.dfs(i , j , ii , jj , new String("res : ")));
     }
 }

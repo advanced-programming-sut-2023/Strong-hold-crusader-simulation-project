@@ -44,4 +44,29 @@ public class MapCell {
     public HashMap<Resources, Integer> getResources() {
         return resources;
     }
+    private Boolean hasTunnel;
+    private Boolean isBurning;
+
+    public Boolean getHasTunnel() {
+        return hasTunnel;
+    }
+
+    public void setHasTunnel(Boolean hasTunnel) {
+        this.hasTunnel = hasTunnel;
+    }
+
+    public Boolean getBurning() {
+        return isBurning;
+    }
+
+    public void setBurning(Boolean burning) {
+        isBurning = burning;
+    }
+
+    public boolean isBlocked(){
+        if (texture == Texture.ROCK || texture == Texture.IRON || buildings.size() != 0 || isBurning == true ){
+            return true;
+        }
+        return false;
+    }
 }

@@ -124,7 +124,7 @@ public enum SignupMenuCommands {
         }
         return null;
     }
-    private String checkValidation(String[] regexes , String command ) {
+    private static String checkValidation(String[] regexes , String command ) {
         int start;
         int end;
         Pattern pattern;

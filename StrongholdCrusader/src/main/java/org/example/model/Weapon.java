@@ -1,8 +1,6 @@
 package org.example.model;
 
-import org.example.model.people.MilitaryType;
-
-public enum WeaponType {
+public enum Weapon {
     Swords(80 , 1),
     Arch(60 , 10),
     Hand(20 ,1),
@@ -14,7 +12,7 @@ public enum WeaponType {
     FireBall(150 , 6);
     private int damage;
     private int range;
-    WeaponType(int damage , int range){
+    Weapon(int damage , int range){
         this.damage = damage;
         this.range = range;
     }
