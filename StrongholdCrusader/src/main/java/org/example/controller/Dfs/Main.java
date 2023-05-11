@@ -1,5 +1,3 @@
-package org.example.controller.Dfs;
-
 import java.util.Scanner;
 
 public class Main {
