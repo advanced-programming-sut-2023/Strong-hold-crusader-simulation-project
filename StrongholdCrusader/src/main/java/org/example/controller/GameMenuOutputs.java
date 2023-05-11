@@ -19,6 +19,7 @@ public enum GameMenuOutputs {
     invalidCoordinate("invalid coordinates!"),
     youHaveNoUnit("you have no unit in the selected cell dude!"),
     longDistance("oh no : the unit you selected can't go that far!"),
+    noWay("there is no way for this unit to go to that cell."),
     unitMoving("unit is moving now ..."),
     SelectedNull("pleas select a unit first :(");
     String output;

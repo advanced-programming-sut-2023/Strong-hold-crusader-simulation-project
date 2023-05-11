@@ -1,3 +1,5 @@
+package org.example.controller.Dfs;
+
 public class Node {
     public int i ;
     public int j ;

@@ -1,17 +1,22 @@
+package org.example.controller.Dfs;
+
+import org.example.controller.MapMenuController;
+import org.example.model.Map;
+
 import java.util.ArrayList;
 
-public class DFS {
-    private int[][] map ;
+public class A_Star {
+    Map map;
     private int x ;
     private boolean[][] validation;
-    public DFS(int[][] map, int x) {
+    public A_Star(Map map) {
         this.map = map;
-        this.x = x;
+        this.x = map.getSize();
         boolean[][] valid = new boolean[x][x];
         this.validation = valid;
     }
 
-    public String dfs(int i , int j , int ii , int jj , String res){
+    public String Astar(int i , int j , int ii , int jj , String res){
         ArrayList<Node> nodes = new ArrayList<>();
         validation[i][j] = true;
         if (i == ii && j == jj){
@@ -19,25 +24,25 @@ public class DFS {
         }
         if (i + 1 < x ){
             if (isBlocked(i+1 , j)){
-                Node temp = new Node(i+1 , j ,"D", Node.WeightGenerator(i+1 , j , ii , jj));
+                Node temp = new Node(i+1 , j ,"E", Node.WeightGenerator(i+1 , j , ii , jj));
                 nodes.add(temp);
             }
         }
         if (j - 1 >= 0 ){
             if (isBlocked(i , j-1)){
-                Node temp2 = new Node(i , j-1 ,"L" , Node.WeightGenerator(i , j-1 , ii , jj));
+                Node temp2 = new Node(i , j-1 ,"S" , Node.WeightGenerator(i , j-1 , ii , jj));
                 nodes.add(temp2);
             }
         }
         if (i - 1 >= 0 ){
             if (isBlocked(i-1 , j)){
-                Node temp3 = new Node(i-1 , j ,"U", Node.WeightGenerator(i-1 , j , ii ,jj));
+                Node temp3 = new Node(i-1 , j ,"W", Node.WeightGenerator(i-1 , j , ii ,jj));
                 nodes.add(temp3);
             }
         }
         if (j + 1 < x){
             if (isBlocked(i , j+1)){
-                Node temp4 = new Node(i , j+1 , "R" ,Node.WeightGenerator(i , j+1 , ii , jj));
+                Node temp4 = new Node(i , j+1 , "N" ,Node.WeightGenerator(i , j+1 , ii , jj));
                 nodes.add(temp4);
             }
         }
@@ -59,7 +64,7 @@ public class DFS {
     for (int k = 0 ; k < nodes.size() ; k++){
         res += nodes.get(k).getDirction();
         validation[nodes.get(k).getI()][nodes.get(k).getJ()] = true;
-        newRes = dfs(nodes.get(k).getI() , nodes.get(k).getJ() , ii , jj , res);
+        newRes = Astar(nodes.get(k).getI() , nodes.get(k).getJ() , ii , jj , res);
         if (!newRes.equals("fail")){
             return newRes;
         }
@@ -71,7 +76,7 @@ public class DFS {
     return "fail";
     }
     public Boolean isBlocked(int i , int j){
-        if (map[i][j] == -1 || validation[i][j] == true){
+        if (map.getCells()[i][j].isBlocked() || validation[i][j] == true){
             return false;
         }
         return true;

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.controller.Dfs.A_Star;
 import org.example.model.Map;
 import org.example.model.Move;
 import org.example.model.User;
@@ -106,19 +107,11 @@ public class GameMenuController extends Controller  {
                 y > MapMenuController.getMap().getSize()-1){
             return GameMenuOutputs.invalidCoordinate.getOutput();
         }
-        int oldX = selectedUnit.getPosX(); int oldY = selectedUnit.getPosY();
-        if (getDistance(x , y , oldX, oldY) > 1){
-            return GameMenuOutputs.longDistance.getOutput();
+        String result = Mover(x , y);
+        if (!result.equals("success")){
+            return result;
         }
-        if (!MapMenuController.getMap().getCells()[x][y].isBlocked()){
-            return GameMenuOutputs.blockedCell.getOutput();
-        }
-//        MapMenuController.getMap().getUnits(oldX , oldY).remove(selectedUnit);
-//        MapMenuController.getMap().getUnits(x , y).add(selectedUnit);
-//        selectedUnit.setPosX(x);selectedUnit.setPosY(y);
-        selectedUnit.setMoving(true);
-        selectedUnit.setMove(new Move(10 - selectedUnit.getSpeed() , x , y));
-        return GameMenuOutputs.unitMoving.getOutput();
+        return GameMenuOutputs.success.getOutput();
     }
     private static double getDistance(int x1 , int y1 , int x2 , int y2){
         double z = Math.sqrt(((x1 -x2)*(x1-x2)) + ((y1-y2)*(y1-y2)));
@@ -218,17 +211,13 @@ public class GameMenuController extends Controller  {
                 y > MapMenuController.getMap().getSize()-1){
             return GameMenuOutputs.invalidCoordinate.getOutput();
         }
-        if (Math.abs(x-selectedUnit.getPosX()) + Math.abs(y-selectedUnit.getPosY()) > 1 ){
-            return GameMenuOutputs.farEnemy.getOutput();
+        String result = Mover(x , y);
+        if (!result.equals("success")){
+            return result;
         }
         selectedUnit.setAttacking(true);
         selectedUnit.setPosAimX(x); selectedUnit.setPosAimY(y);
-        if (x != selectedUnit.getPosX() || y != selectedUnit.getPosY() ){
-            selectedUnit.setMoving(true);
-            selectedUnit.setMove(new Move(10 - selectedUnit.getSpeed() , x , y));
-            return GameMenuOutputs.movingToEnemy.getOutput();
-        }
-        return GameMenuOutputs.isAttacking.getOutput();
+       return GameMenuOutputs.isAttacking.getOutput();
     }
     public static String AttackByShoot(String input) {
         if (selectedUnit == null){
@@ -302,16 +291,28 @@ public class GameMenuController extends Controller  {
                 y > MapMenuController.getMap().getSize()-1){
             return GameMenuOutputs.invalidCoordinate.getOutput();
         }
-        if (Math.abs(x-selectedUnit.getPosX()) + Math.abs(y-selectedUnit.getPosY()) > 1 ){
+        String result = Mover(x , y);
+        if (!result.equals("success")){
+            return result;
+        }
+       selectedUnit.setDigging(true);
+       return GameMenuOutputs.isDigging.getOutput();
+    }
+    public static String Mover(int x , int y){
+        A_Star aStar = new A_Star(MapMenuController.getMap());
+        String res = aStar.Astar(selectedUnit.getPosX() , selectedUnit.getPosY() , x , y , "");
+        if (res.length() > selectedUnit.getSpeed()){
             return GameMenuOutputs.farEnemy.getOutput();
         }
-        selectedUnit.setDigging(true);
-        if (x != selectedUnit.getPosX() || y != selectedUnit.getPosY() ){
-            selectedUnit.setMoving(true);
-            selectedUnit.setMove(new Move(10 - selectedUnit.getSpeed() , x , y));
-            return GameMenuOutputs.movingToDig.getOutput();
+        if (res.equals("fail")){
+            GameMenuOutputs.noWay.getOutput();
         }
-        return GameMenuOutputs.isDigging.getOutput();
+        System.out.println("unit way: " + res);
+        int oldX = selectedUnit.getPosX(); int oldY = selectedUnit.getPosY();
+        selectedUnit.setPosX(x); selectedUnit.setPosY(y);
+        MapMenuController.getMap().getCells()[oldX][oldY].getUnits().remove(selectedUnit);
+        MapMenuController.getMap().getCells()[x][y].getUnits().add(selectedUnit);
+        return "success";
     }
     public static String  buildEquipment(Matcher matcher){
         return null;
