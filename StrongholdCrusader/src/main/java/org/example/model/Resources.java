@@ -1,5 +1,7 @@
 package org.example.model;
 
+import java.util.Objects;
+
 public enum Resources {
     APPLE("apple", 8, 4),
     BREAD("bread", 8, 4),
@@ -43,7 +45,14 @@ public enum Resources {
     public int getBuyPrice() {
         return buyPrice;
     }
-
+    public static Resources getByName(String string){
+        for (Resources resources: Resources.values()){
+            if (Objects.equals(resources.getName(), string)){
+                return resources;
+            }
+        }
+        return null;
+    }
     public int getSellPrice() {
         return sellPrice;
     }
