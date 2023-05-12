@@ -1,5 +1,7 @@
 package org.example.controller;
 
+import org.example.model.Captcha;
+import org.example.view.SignupMenu;
 import org.example.view.commands.SignupMenuCommands;
 import org.example.view.commands.SignupMenuResponds;
 import org.example.model.User;
@@ -84,7 +86,12 @@ public class SignupMenuController extends Controller {
             user.setSecurityQuestion(x , matcher.group("answer"));
             break;
         }
-        return SignupMenuResponds.createUserSuccess.getResponse();
+        if (Captcha.run(scanner)) {
+            return SignupMenuResponds.createUserSuccess.getResponse();
+        }
+        else {
+            return SignupMenuResponds.noCaptcha.getResponse();
+        }
     }
 
     private static String deleteQuote(String input){

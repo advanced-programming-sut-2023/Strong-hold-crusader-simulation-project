@@ -1,9 +1,11 @@
 package org.example.model;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Government {
+public class Government implements Serializable {
+    private static ArrayList<Government> goverments = new ArrayList<>();
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
     private HashMap<Resources, Integer> resourceCount;
@@ -33,10 +35,45 @@ public class Government {
     private ArrayList<Trade> tradeHistory;
     private ArrayList<Trade> tradeNotification;
 
-    public Government() {
-
+    public static void readFile(){
+        try{
+            File f = new File("GovernmentsData.ser");
+            if(!f.exists() || f.isDirectory()) {
+                saveFile();
+            }
+            FileInputStream readData = new FileInputStream("GovernmentsData.ser");
+            ObjectInputStream readStream = new ObjectInputStream(readData);
+            goverments = (ArrayList<Government>) readStream.readObject();
+            System.out.println(goverments);
+            readStream.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
+    public static void saveFile(){
+        try{
+            FileOutputStream writeData = new FileOutputStream("GovernmentsData.ser");
+            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
+            writeStream.writeObject(goverments);
+            writeStream.flush();
+            writeStream.close();
+
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public String toString() {
+        String result = "User :" + owner.getUsername() +"\n";
+        result += ("popularity  :" + this.popularity +"\n");
+        result += ("fear rate :" + this.fearRate +"\n");
+        result += ("population :" + this.population +"\n");
+        result += ("balance :" + this.balance + "\n");
+        result += ("food rate :" + this.foodRate + "\n");
+        return result;
+    }
     public static String[] getPopularityFactors(){
         return popularityFactors;
     }
@@ -92,4 +129,8 @@ public class Government {
     public int getPopulation() {
         return population;
     }
+    public static void main(String[] args) {
+
+    }
 }
+

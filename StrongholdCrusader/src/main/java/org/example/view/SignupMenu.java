@@ -3,10 +3,8 @@ package org.example.view;
 import org.example.controller.SignupMenuController;
 import org.example.view.commands.SignupMenuCommands;
 import org.example.model.User;
-
 import java.util.Scanner;
 import java.util.regex.Matcher;
-
 public class SignupMenu extends Menu {
     public SignupMenu(Scanner scanner) {
         super(scanner);
@@ -14,6 +12,7 @@ public class SignupMenu extends Menu {
 
     @Override
     public void run() {
+        System.out.println("Signup menu");
         String command;
         while (true) {
             command = scanner.nextLine();
@@ -39,5 +38,11 @@ public class SignupMenu extends Menu {
         System.out.println("slogan :" + matcher.group("slogan"));
         System.out.println("nickname :" + matcher.group("nickname"));
         System.out.println("email :" + matcher.group("email"));
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        SignupMenu signupMenu = new SignupMenu(scanner);
+        signupMenu.run();
     }
 }

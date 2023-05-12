@@ -1,6 +1,7 @@
 package org.example.view.commands;
 
 public enum SignupMenuResponds {
+    noCaptcha,
     emptyField,
     noNumberPassword,
     noLowerCasePassword,
@@ -66,6 +67,9 @@ public enum SignupMenuResponds {
             }
             case createUserSuccess : {
                 return "create user -> result : success";
+            }
+            case noCaptcha: {
+                return "sorry, you can't skip captcha.";
             }
         }
         return null;
