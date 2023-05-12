@@ -156,6 +156,17 @@ public class MapMenuController extends Controller {
 
         }
     }
+    public static boolean unitAndTexture(Texture texture){
+        if (texture==Texture.PLAIN||
+                texture==Texture.RIVER||
+                texture==Texture.BIG_POND||
+                texture==Texture.SMALL_POND||
+                texture==Texture.SEA){
+            System.out.println(MapMenuResponds.BAD_TEXTURE_UNIT);
+            return false;
+        }
+        return true;
+    }
     public static String dropUnit(int x,int y,String type,int count){
         x--;
         y--;
@@ -166,11 +177,16 @@ public class MapMenuController extends Controller {
         if (count>units.size()){
             return MapMenuResponds.OUT_OF_NUMBER.getRegex();
         }
+        String what=empty(x,y);
+        if (what==null|| what.equals("unit")){
+            return MapMenuResponds.ERROR.getRegex()+"/a "+what;
+        }
         for (MilitaryType militaryType: MilitaryType.values()){
             if (Objects.equals(militaryType.toString().toLowerCase(), type.toLowerCase())){
                 for (int i=0;i<count;i++){
                     if (units.get(i).getType().toString().equalsIgnoreCase(type))
-                        getGame().getMap().getCells()[x][y].addUnits(units.get(i));
+                        if (unitAndTexture(getGame().getMap().getCells()[x][y].getTexture()))
+                            getGame().getMap().getCells()[x][y].addUnits(units.get(i));
                 }
                 return MapMenuResponds.SET_UNIT.getRegex();
             }

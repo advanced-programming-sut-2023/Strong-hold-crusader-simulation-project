@@ -16,7 +16,8 @@ public enum MapMenuResponds {
     DONE("done"),
     SET_ERROR("The type of texture is not suitable for the "),
     ERROR("there is something here!!"),
-    OUT_OF_NUMBER("out of number");
+    OUT_OF_NUMBER("out of number"),
+    BAD_TEXTURE_UNIT("The texture is not suitable for the unit ...will sink");
     private final String regex;
     MapMenuResponds(String regex) {
             this.regex = regex;

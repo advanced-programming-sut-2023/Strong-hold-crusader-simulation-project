@@ -1,5 +1,7 @@
 package org.example.model;
 
+import org.example.model.buildings.Building;
+import org.example.model.buildings.BuildingType;
 import org.example.model.people.People;
 import org.example.model.people.Unit;
 
@@ -19,6 +21,15 @@ public class Government {
     private int foodRate;
     private int population;
     private int balance;
+    private ArrayList<Building> buildings;
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void addBuildings(Building building) {
+        this.buildings.add(building);
+    }
 
     public void changeBalance(int change) {
         this.balance += change;
@@ -135,7 +146,7 @@ public class Government {
 
     public ArrayList<Integer> rateToPop(){
         ArrayList<Integer> result=new ArrayList<>();
-        result.add(fearRate*4);
+        result.add(foodRate*4);
         if (taxRate<=0){
             result.add((taxRate*(-2))-1);
         }
@@ -143,6 +154,12 @@ public class Government {
             result.add(taxRate*(2));
         }
         result.add(fearRate);
+        for (int i=0;i<getBuildings().size() ; i++){
+            if (getBuildings().get(i).getType()== BuildingType.CHURCH){
+                result.add(20);
+            }
+        }
+        result.add(0);
         return result;
     }
 }

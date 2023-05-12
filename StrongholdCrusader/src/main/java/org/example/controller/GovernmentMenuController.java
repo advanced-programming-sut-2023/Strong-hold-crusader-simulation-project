@@ -9,20 +9,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 
-public class GovernmentMenuController {
-    private static Government currentGovernment;
-    public static void setCurrentGovernment(Government currentGovernment) {
-        GovernmentMenuController.currentGovernment = currentGovernment;
-    }
+public class GovernmentMenuController extends Controller{
 
     public static String showPopFactors() {
-        ArrayList<Integer> rates=currentGovernment.rateToPop();
+        ArrayList<Integer> rates=getGame().getCurrentTurn().rateToPop();
         return "Food: " + rates.get(0)+
                 "Tax: " + rates.get(1)+
-                "Fear: " + rates.get(2);
+                "Fear: " + rates.get(2)+
+                "religion" + rates.get(3);
     }
     public static String showPopularity() {
-        ArrayList<Integer> rates=currentGovernment.rateToPop();
+        ArrayList<Integer> rates=getGame().getCurrentTurn().rateToPop();
         int popularity=0;
         for (Integer rate : rates) {
             popularity += rate;
@@ -30,12 +27,12 @@ public class GovernmentMenuController {
         return "Popularity :"+ popularity;
     }
     public static HashMap<Resources,Integer> showFoodList() {
-        return currentGovernment.food();
+        return getGame().getCurrentTurn().food();
     }
     public static String foodRate(Matcher matcher) {
         int number=Integer.parseInt(matcher.group("rateNumber"));
         if (number<=2&&number>=-2){
-            currentGovernment.setFoodRate(number);
+            getGame().getCurrentTurn().setFoodRate(number);
             return "food rate"+ GovernmentMenuResponds.SET.getText();
         }
         else {
@@ -44,13 +41,13 @@ public class GovernmentMenuController {
     }
 
     public static String showFoodRate() {
-        return "food rate: "+currentGovernment.getFoodRate();
+        return "food rate: "+getGame().getCurrentTurn().getFoodRate();
     }
 
     public static String taxRate(Matcher matcher) {
         int number=Integer.parseInt(matcher.group("rateNumber"));
         if (number<=8&&number>=-3){
-            currentGovernment.setTaxRate(number);
+            getGame().getCurrentTurn().setTaxRate(number);
             return "tax rate"+ GovernmentMenuResponds.SET.getText();
         }
         else {
@@ -59,13 +56,13 @@ public class GovernmentMenuController {
     }
 
     public static String showTaxRate() {
-        return "tax rate: "+currentGovernment.getTaxRate();
+        return "tax rate: "+getGame().getCurrentTurn().getTaxRate();
     }
 
     public static String fearRate(Matcher matcher) {
         int number=Integer.parseInt(matcher.group("rateNumber"));
         if (number<=5&&number>=-5){
-            currentGovernment.setFearRate(number);
+            getGame().getCurrentTurn().setFearRate(number);
             return "fear rate"+ GovernmentMenuResponds.SET.getText();
         }
         else {
