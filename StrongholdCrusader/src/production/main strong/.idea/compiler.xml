@@ -9,5 +9,8 @@
         <module name="StrongholdCrusader" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="StrongholdCrusader" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>

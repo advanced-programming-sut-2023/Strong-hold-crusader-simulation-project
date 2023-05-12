@@ -231,12 +231,12 @@ public class User implements Serializable{
         if (SignupMenuCommands.password.getMatcher(password) != null){
             return null;
         }
-        else if (SignupMenuCommands.passwordErrorNumber.getMatcher(password) == null){
-            error += SignupMenuResponds.noNumberPassword.getResponse() + "\n";
-        }
         else if (SignupMenuCommands.passwordInvalidLength.getMatcher(password) != null){
             error += SignupMenuResponds.inValidLengthPassword.getResponse();
             return error;
+        }
+        else if (SignupMenuCommands.passwordErrorNumber.getMatcher(password) == null){
+            error += SignupMenuResponds.noNumberPassword.getResponse() + "\n";
         }
         if (SignupMenuCommands.passwordErrorSpecialCharacter.getMatcher(password) == null){
             error += SignupMenuResponds.noSpecialCharacterPassword.getResponse() + "\n";

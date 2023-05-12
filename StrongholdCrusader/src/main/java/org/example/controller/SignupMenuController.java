@@ -56,7 +56,7 @@ public class SignupMenuController extends Controller {
         return makeUser(username , password , email , nickname , slogan , scanner);
     }
     private static String makeUser
-            (String username , String password , String email , String nickname , String slogan , Scanner scanner)
+    (String username , String password , String email , String nickname , String slogan , Scanner scanner)
     {
         System.out.println(SignupMenuResponds.pickYourSecurityQuestion.getResponse());
         User.printRecoveryQuestions();
