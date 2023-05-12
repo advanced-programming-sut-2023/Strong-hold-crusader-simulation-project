@@ -9,11 +9,9 @@ public class Unit extends People{
     public Unit(MilitaryType militaryType){
 
     }
-
     public MilitaryType getType() {
         return type;
     }
-
     private MilitaryType type;
     private Weapon weapon;
     private UnitState unitState;

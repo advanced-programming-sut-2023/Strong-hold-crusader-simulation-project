@@ -19,4 +19,5 @@ public enum MilitaryType {
     HorseArchers,
     ArabianSwordsmen,
     FireThrowers;
+
 }

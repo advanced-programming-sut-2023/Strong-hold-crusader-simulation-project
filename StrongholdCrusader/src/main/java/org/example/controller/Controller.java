@@ -1,10 +1,15 @@
 package org.example.controller;
 
+import org.example.model.Game;
 import org.example.model.Map;
 import org.example.model.User;
 
 public class Controller {
     protected static Map map;
+    private static Game game;
+    public static Game getGame() {
+        return game;
+    }
     public static Map getMap() {
         return map;
     }

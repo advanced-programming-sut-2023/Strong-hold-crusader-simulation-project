@@ -9,9 +9,11 @@ import java.util.HashMap;
 public class MapCell {
     private Texture texture = Texture.BASE_GROUND;
 
-    private final ArrayList<Unit> units = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<>();
 
-    private final ArrayList<Building> buildings = new ArrayList<>();
+    private Building building ;
+    private Rock rock;
+    private Tree tree;
 
     private char cellState;
 
@@ -24,7 +26,25 @@ public class MapCell {
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
+    public Rock getRock() {
+        return rock;
+    }
 
+    public void setRock(Rock rock) {
+        this.rock = rock;
+    }
+
+    public Tree getTree() {
+        return tree;
+    }
+
+    public void setTree(Tree tree) {
+        this.tree = tree;
+    }
+
+    public void clearUnits() {
+        this.units = null;
+    }
     public void setCellState(char cellState) {
         this.cellState = cellState;
     }
@@ -37,12 +57,20 @@ public class MapCell {
         return units;
     }
 
-    public ArrayList<Building> getBuildings() {
-        return buildings;
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
     public HashMap<Resources, Integer> getResources() {
         return resources;
+    }
+
+    public void addUnits(Unit unit) {
+        this.units.add(unit);
     }
 
     @Override
@@ -59,9 +87,8 @@ public class MapCell {
             result += "\n" + unit.getType();
         }
         result += "\nBuildings:";
-        for (Building building : buildings) {
-            result += "\n" + building.getType();
-        }
+        result += "\n" + building.getType();
+
         return result;
     }
 }

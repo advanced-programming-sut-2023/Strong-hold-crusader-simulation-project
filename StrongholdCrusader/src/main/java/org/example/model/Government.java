@@ -1,5 +1,8 @@
 package org.example.model;
 
+import org.example.model.people.People;
+import org.example.model.people.Unit;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +12,7 @@ public class Government {
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
     private HashMap<Resources, Integer> resourceCount;
+    private ArrayList<People> people;
     private int popularity;
     private int taxRate;
     private int fearRate;
@@ -97,12 +101,38 @@ public class Government {
     public HashMap<Resources,Integer> food(){
         HashMap<Resources,Integer> foods=new HashMap<>();
         for (HashMap.Entry<Resources, Integer> entry : resourceCount.entrySet()) {
-            if (Objects.equals(entry.getKey().getText(), "food")&&entry.getValue()>0){
+            if ((Objects.equals(entry.getKey().getName(), "apple")||
+                    Objects.equals(entry.getKey().getName(), "meat")||
+                    Objects.equals(entry.getKey().getName(), "cheese")||
+                    Objects.equals(entry.getKey().getName(), "bread"))&&entry.getValue()>0){
                 foods.put(entry.getKey(),entry.getValue());
             }
         }
         return foods;
     }
+    public void addPeople(People people) {
+        this.people.add(people);
+    }
+
+    public ArrayList<Unit> units() {
+        ArrayList<Unit> units=new ArrayList<>();
+        for (int i=0;i<people.size();i++){
+            if (people.get(i) instanceof Unit){
+                units.add((Unit) people.get(i));
+            }
+        }
+        return units;
+    }
+    public ArrayList<Unit> getUnitByType(String type){
+        ArrayList<Unit> unitByType=new ArrayList<>();
+        for (int i=0 ; i< units().size(); i++){
+            if (units().get(i).getType().toString().equalsIgnoreCase(type)){
+                unitByType.add(units().get(i));
+            }
+        }
+        return unitByType;
+    }
+
     public ArrayList<Integer> rateToPop(){
         ArrayList<Integer> result=new ArrayList<>();
         result.add(fearRate*4);

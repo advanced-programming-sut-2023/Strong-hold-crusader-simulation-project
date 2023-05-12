@@ -1,6 +1,9 @@
 package org.example.model.buildings;
 
 import org.example.model.Resources;
+import org.example.model.Texture;
+
+import java.util.Objects;
 
 public enum BuildingType{
     //Castle Building Type
