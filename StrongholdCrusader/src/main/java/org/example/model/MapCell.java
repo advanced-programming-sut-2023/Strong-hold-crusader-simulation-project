@@ -1,6 +1,8 @@
 package org.example.model;
 
 import org.example.model.buildings.Building;
+import org.example.model.buildings.Tower;
+import org.example.model.buildings.Wall;
 import org.example.model.people.Unit;
 
 import java.util.ArrayList;
@@ -11,9 +13,7 @@ public class MapCell {
 
     private final ArrayList<Unit> units = new ArrayList<>();
 
-    private final ArrayList<Building> buildings = new ArrayList<>();
-
-    private char cellState;
+    private Building building = null;
 
     private final HashMap<Resources, Integer> resources = new HashMap<>();
 
@@ -25,20 +25,27 @@ public class MapCell {
         this.texture = texture;
     }
 
-    public void setCellState(char cellState) {
-        this.cellState = cellState;
-    }
-
     public char getCellState() {
-        return cellState;
+        if (units.size() > 0)
+            return 'S';
+        if (building != null) {
+            if (building instanceof Wall || building instanceof Tower)
+                return 'W';
+            return 'B';
+        }
+        return ' ';
     }
 
     public ArrayList<Unit> getUnits() {
         return units;
     }
 
-    public ArrayList<Building> getBuildings() {
-        return buildings;
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
     }
 
     public HashMap<Resources, Integer> getResources() {
@@ -51,17 +58,14 @@ public class MapCell {
         String result = "Texture: " + texture.getTextureName();
         result += "\nResources:";
         for (Resources resource : resources.keySet()) {
-            result += "\n" + resource + " count: " + resources.get(resource);
+            result += "\n" + resource.getName() + " count: " + resources.get(resource);
         }
         result += "\nTotal Unit Count: " + units.size();
         result += "\nUnits:";
         for (Unit unit : units) {
             result += "\n" + unit.getType();
         }
-        result += "\nBuildings:";
-        for (Building building : buildings) {
-            result += "\n" + building.getType();
-        }
+        result += "\nBuilding:" + "\n" + building.getType().getBuildingName();
         return result;
     }
 }

@@ -4,7 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum MainMenuCommands {
-    LOGOUT("user logout");
+    LOGOUT("user logout"),
+    EXIT("exit crusader"),
+    SETTINGS("settings"),
+    START_GAME("start game");
     private final String regex;
 
     MainMenuCommands(String regex) {

@@ -1,4 +1,4 @@
 package org.example.model.buildings;
 
-public class Church {
+public class Church extends Building {
 }

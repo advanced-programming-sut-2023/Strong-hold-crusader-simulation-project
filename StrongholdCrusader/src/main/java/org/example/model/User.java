@@ -20,6 +20,8 @@ public class User {
     };
     private static User loggedInUser;
     private static boolean stayLoggedIn = false;
+    private static boolean exiting = false;
+
     private static ArrayList<User> allUsers = new ArrayList<>();
     private String username;
     private String password;
@@ -38,6 +40,7 @@ public class User {
         this.slogan = slogan;
         allUsers.add(this);
     }
+
     public static void readFile(){
         try{
             File f = new File("userData.ser");
@@ -67,7 +70,6 @@ public class User {
             e.printStackTrace();
         }
     }
-
     @Override
     public String toString() {
         String result = "Users :\n";
@@ -78,7 +80,13 @@ public class User {
         result += ("email :" + this.getEmail() + "\n");
         return result;
     }
+    public static boolean isExiting() {
+        return exiting;
+    }
 
+    public static void setExiting(boolean exiting) {
+        User.exiting = exiting;
+    }
     private String getPassword() {
         return this.password;
     }

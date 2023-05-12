@@ -1,4 +1,4 @@
 package org.example.model.buildings;
 
-public class StorageBuilding {
+public class StorageBuilding extends Building {
 }

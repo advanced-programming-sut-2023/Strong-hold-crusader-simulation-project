@@ -2,10 +2,13 @@ package org.example.model.buildings;
 
 import org.example.model.Government;
 import org.example.model.Resources;
+import org.example.model.buildings.buildingTypes.BuildingType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class Building {
+    private static ArrayList<Building> allBuildings = new ArrayList<>();
     protected BuildingType type;
     protected Government government;
     protected int HP;
@@ -14,6 +17,10 @@ public abstract class Building {
     protected HashMap<Resources, Integer> requiredResources;
     protected int workerCount;
     protected int rate;
+
+    public static ArrayList<Building> getAllBuildings() {
+        return allBuildings;
+    }
 
     public BuildingType getType() {
         return type;
