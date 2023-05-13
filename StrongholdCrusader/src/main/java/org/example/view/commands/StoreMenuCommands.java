@@ -4,6 +4,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum StoreMenuCommands {
+    SHOW_PRICE_LIST("show price list"),
+    BUY("buy (-i \\w+( \\w+)? -a \\d+|-a \\d+ -i \\w+( \\w+)?)"),
+    SELL("sell (-i \\w+( \\w+)? -a \\d+|-a \\d+ -i \\w+( \\w+)?)"),
+    ITEM(".* -i (?<item>\\w+( \\w+)?).*"),
+    AMOUNT(".* -a (?<amount>\\d+).*")
     ;
     private final String regex;
 

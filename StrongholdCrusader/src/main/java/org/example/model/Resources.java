@@ -34,6 +34,13 @@ public enum Resources {
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
     }
+    public static Resources getResourceByName(String name) {
+        for (Resources resource : Resources.values()) {
+            if (resource.getName().equals(name))
+                return resource;
+        }
+        return null;
+    }
 
     public String getType() {
         return type;
