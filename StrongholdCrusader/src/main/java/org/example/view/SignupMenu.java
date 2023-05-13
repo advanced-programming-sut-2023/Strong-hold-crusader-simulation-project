@@ -24,6 +24,7 @@ public class SignupMenu extends Menu {
             } else if (SignupMenuCommands.read.getMatcher(command) != null) {
                 User.readFile();
             } else if (SignupMenuCommands.login.getMatcher(command) != null) {
+                System.out.println("Login Menu");
                 return;
             } else {
                 System.out.println("hey , you better watch your moves paul !!!");

@@ -1,7 +1,5 @@
 package org.example.model;
 
-import org.example.model.buildings.CastleBuilding;
-
 import java.util.ArrayList;
 
 
@@ -10,10 +8,9 @@ public class Animal {
     private int Health;
     private int damage;
     private AnimalType animalType;
-    private CastleBuilding castleBuilding;
     private int posX;
     private int poxY;
-    public Animal(AnimalType animalType , CastleBuilding castleBuilding){
+    public Animal(AnimalType animalType){
 
     }
 
@@ -47,14 +44,6 @@ public class Animal {
 
     public void setAnimalType(AnimalType animalType) {
         this.animalType = animalType;
-    }
-
-    public CastleBuilding getCastleBuilding() {
-        return castleBuilding;
-    }
-
-    public void setCastleBuilding(CastleBuilding castleBuilding) {
-        this.castleBuilding = castleBuilding;
     }
 
     public int getPosX() {

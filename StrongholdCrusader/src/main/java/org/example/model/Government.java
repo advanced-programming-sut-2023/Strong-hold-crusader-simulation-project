@@ -2,13 +2,13 @@ package org.example.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 public class Government {
+    private static final ArrayList<Government> governments = new ArrayList<>();
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
-    private HashMap<Resources, Integer> resourceCount;
+    private final HashMap<Resources, Integer> resourceCount;
     private int popularity;
     private int taxRate;
     private int fearRate;
@@ -35,8 +35,23 @@ public class Government {
     private ArrayList<Trade> tradeHistory;
     private ArrayList<Trade> tradeNotification;
 
-    public Government() {
+    public Government(User user) {
+        this.owner = user;
 
+        resourceCount = new HashMap<>();
+        for (Resources resource : Resources.values()) {
+            resourceCount.put(resource, 5);
+        }
+    }
+    public static ArrayList<Government> getGovernments(){
+        return governments;
+    }
+    public static Government getGovernmentByUser(User user) {
+        for (Government government : governments) {
+            if (government.owner.equals(user))
+                return government;
+        }
+        return null;
     }
 
     public static String[] getPopularityFactors(){
@@ -97,7 +112,7 @@ public class Government {
     public HashMap<Resources,Integer> food(){
         HashMap<Resources,Integer> foods=new HashMap<>();
         for (HashMap.Entry<Resources, Integer> entry : resourceCount.entrySet()) {
-            if (Objects.equals(entry.getKey().getText(), "food")&&entry.getValue()>0){
+            if (Objects.equals(entry.getKey().getType(), "food")&&entry.getValue()>0){
                 foods.put(entry.getKey(),entry.getValue());
             }
         }

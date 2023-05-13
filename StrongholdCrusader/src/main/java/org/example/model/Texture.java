@@ -2,13 +2,14 @@ package org.example.model;
 
 public enum Texture {
     BASE_GROUND("Base Ground","\033[43m"),
-    PEBBLE("Pebble","\033[40m"),
+    PEBBLE("Pebble","\033[47m"),
     ROCK("Rock","\033[45m"),
     STONE("Stone","\033[47m"),
     IRON("Iron","\033[41m"),
     GRASS("Grass","\033[42m"),
     OASIS("Oasis","\033[46m"),
-    DENSE_OASIS("Dense Oasis","\033[44m");
+    DENSE_OASIS("Dense Oasis","\033[44m"),
+    OIL("Oil", "\033[40m");
     private final String color;
     private final String textureName;
     Texture(String textureName ,String color) {

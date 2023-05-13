@@ -16,6 +16,10 @@ public class LoginMenu extends Menu {
         if(Controller.stayLoggedInCheck()) {
             MainMenu mainMenu = new MainMenu(scanner);
             mainMenu.run();
+            if (User.isExiting()) {
+                User.setExiting(false);
+                return;
+            }
         }
         System.out.println("Login Menu");
         while (true) {
@@ -30,6 +34,10 @@ public class LoginMenu extends Menu {
                 if (result.equals("user logged in successfully!")) {
                     MainMenu mainMenu = new MainMenu(scanner);
                     mainMenu.run();
+                    if (User.isExiting()) {
+                        User.setExiting(false);
+                        return;
+                    }
                 }
             } else if ((matcher = LoginMenuCommands.getMatcher(input, LoginMenuCommands.FORGET_PASS)) != null)
                 System.out.println(forgetPassword());

@@ -17,7 +17,11 @@ public class ProfileMenu extends Menu {
     public void run() {
         while (true){
             input=scanner.nextLine();
-            if ((matcher= ProfileMenuCommands.getMatcher(input,ProfileMenuCommands.CHANGE_USERNAME))!=null){
+            if (input.equals("back")) {
+                System.out.println("Main Menu");
+                return;
+            }
+            else if ((matcher= ProfileMenuCommands.getMatcher(input,ProfileMenuCommands.CHANGE_USERNAME))!=null){
                 System.out.println(ProfileMenuController.changeUsername(matcher));
             }
             else if ((matcher= ProfileMenuCommands.getMatcher(input,ProfileMenuCommands.CHANGE_PASSWORD))!=null){
