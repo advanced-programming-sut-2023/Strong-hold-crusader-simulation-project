@@ -11,9 +11,11 @@ import java.util.HashMap;
 public class MapCell {
     private Texture texture = Texture.BASE_GROUND;
 
-    private final ArrayList<Unit> units = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<>();
 
     private Building building = null;
+    private Rock rock = null;
+    private Tree tree = null;
 
     private final HashMap<Resources, Integer> resources = new HashMap<>();
 
@@ -24,6 +26,29 @@ public class MapCell {
     public void setTexture(Texture texture) {
         this.texture = texture;
     }
+    public Rock getRock() {
+        return rock;
+    }
+
+    public void setRock(Rock rock) {
+        this.rock = rock;
+    }
+
+    public Tree getTree() {
+        return tree;
+    }
+
+    public void setTree(Tree tree) {
+        this.tree = tree;
+    }
+
+    public void clearUnits() {
+        this.units = null;
+    }
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
 
     public char getCellState() {
         if (units.size() > 0)
@@ -35,11 +60,6 @@ public class MapCell {
         }
         return ' ';
     }
-
-    public ArrayList<Unit> getUnits() {
-        return units;
-    }
-
     public Building getBuilding() {
         return building;
     }
