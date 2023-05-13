@@ -1,6 +1,12 @@
 package org.example.model.buildings;
 
+import org.example.model.Government;
+import org.example.model.buildings.buildingTypes.BuildingType;
+
 public class StoneGatehouse extends Building {
+    public StoneGatehouse(BuildingType type, Government government) {
+        super(type, government);
+    }
 //    private final int maximumResidents;
 //    private int currentResidents;
 //

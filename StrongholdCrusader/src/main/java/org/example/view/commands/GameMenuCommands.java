@@ -14,9 +14,7 @@ public enum GameMenuCommands {
     SET_TEXTURE("set texture.+"),
     CLEAR("clear (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     DROP_ROCK("drop rock( -x| -y| -direction| \\d+| \\w)+"),
-    DROP_TREE("drop tree( -x| -y| -type| \\d+| \\w+)+")
-    //TODO not complete, not complete at all
-    ;
+    DROP_TREE("drop tree( -x| -y| -type| \\d+| \\w+)+");
     private final String regex;
 
     GameMenuCommands(String regex) {

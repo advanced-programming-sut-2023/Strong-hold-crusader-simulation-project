@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.controller.Controller;
 import org.example.controller.GameMenuController;
 import org.example.model.Map;
 import org.example.view.commands.GameMenuCommands;
@@ -14,6 +15,7 @@ public class GameMenu extends Menu {
     }
     @Override
     public void run() {
+        currentMap = Controller.getCurrentGame().getMap();
         System.out.println("Game Menu");
         while (true) {
             input = scanner.nextLine();
@@ -22,6 +24,21 @@ public class GameMenu extends Menu {
                 showMap();
             else if ((matcher = GameMenuCommands.getMatcher(input, GameMenuCommands.DROP_BUILDING)) != null)
                 System.out.println(GameMenuController.dropBuilding(input));
+            else if ((matcher = GameMenuCommands.getMatcher(input, GameMenuCommands.SELECT_BUILDING)) != null) {
+                String result = GameMenuController.selectBuilding(input);
+                System.out.println(result);
+                if (result.matches("you have.+")){
+                    if (result.equals("you have successfully selected the Market building")) {
+                        StoreMenu storeMenu = new StoreMenu(scanner);
+                        storeMenu.run();
+                        Controller.setSelectedBuilding(null);
+                    } else {
+                        BuildingMenu buildingMenu = new BuildingMenu(scanner);
+                        buildingMenu.run();
+                        Controller.setSelectedBuilding(null);
+                    }
+                }
+            } else System.out.println("invalid command");
         }
     }
     private void showMap() {

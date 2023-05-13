@@ -8,7 +8,7 @@ public class Government {
     private static final ArrayList<Government> governments = new ArrayList<>();
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
-    private HashMap<Resources, Integer> resourceCount;
+    private final HashMap<Resources, Integer> resourceCount;
     private int popularity;
     private int taxRate;
     private int fearRate;
@@ -37,6 +37,11 @@ public class Government {
 
     public Government(User user) {
         this.owner = user;
+
+        resourceCount = new HashMap<>();
+        for (Resources resource : Resources.values()) {
+            resourceCount.put(resource, 5);
+        }
     }
     public static ArrayList<Government> getGovernments(){
         return governments;

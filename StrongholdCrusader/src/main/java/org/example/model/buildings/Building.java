@@ -9,14 +9,18 @@ import java.util.HashMap;
 
 public abstract class Building {
     private static ArrayList<Building> allBuildings = new ArrayList<>();
-    protected BuildingType type;
-    protected Government government;
+    protected final BuildingType type;
+    protected final Government government;
     protected int HP;
-    protected int populationEffect;
-    protected int popularityEffect;
-    protected HashMap<Resources, Integer> requiredResources;
-    protected int workerCount;
+    protected final int workerCount;
     protected int rate;
+
+    protected Building(BuildingType type, Government government) {
+        this.type = type;
+        this.government = government;
+        this.workerCount = type.getWorkerCount();
+        this.HP = type.getHP();
+    }
 
     public static ArrayList<Building> getAllBuildings() {
         return allBuildings;
@@ -38,18 +42,6 @@ public abstract class Building {
         return HP;
     }
 
-    public int getPopulationEffect() {
-        return populationEffect;
-    }
-
-    public int getPopularityEffect() {
-        return popularityEffect;
-    }
-
-    public HashMap<Resources, Integer> getRequiredResources() {
-        return requiredResources;
-    }
-
     public int getWorkerCount() {
         return workerCount;
     }
@@ -58,4 +50,7 @@ public abstract class Building {
         return rate;
     }
 
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
 }

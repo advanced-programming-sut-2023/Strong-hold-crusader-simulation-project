@@ -1,9 +1,12 @@
 package org.example.controller;
 
 import org.example.model.MapCell;
+import org.example.model.User;
 import org.example.model.buildings.*;
 import org.example.model.buildings.buildingTypes.*;
+import org.example.view.MapMenu;
 import org.example.view.commands.GameMenuCommands;
+import org.example.view.commands.LoginMenuCommands;
 
 import java.util.regex.Matcher;
 
@@ -55,30 +58,48 @@ public class GameMenuController extends Controller {
     private static Building createBuilding(BuildingType type) {
         for (ChurchType exactType : ChurchType.values())
             if (exactType.getType().equals(type))
-                return new Church();
+                return new Church(type, currentGame.getCurrentTurn());
         for (ProductionBuildingType exactType : ProductionBuildingType.values())
             if (exactType.getType().equals(type))
-                return new ProductionBuilding();
+                return new ProductionBuilding(type, currentGame.getCurrentTurn());
         for (StoneGatehouseType exactType : StoneGatehouseType.values())
             if (exactType.getType().equals(type))
-                return new StoneGatehouse();
+                return new StoneGatehouse(type, currentGame.getCurrentTurn());
         for (StorageType exactType : StorageType.values())
             if (exactType.getType().equals(type))
-                return new StorageBuilding();
+                return new StorageBuilding(type, currentGame.getCurrentTurn());
         for (TowerType exactType : TowerType.values())
             if (exactType.getType().equals(type))
-                return new Tower();
+                return new Tower(type, currentGame.getCurrentTurn());
         for (WallType exactType : WallType.values())
             if (exactType.getType().equals(type))
-                return new Wall();
+                return new Wall(type, currentGame.getCurrentTurn());
         for (WorkerProduceType exactType : WorkerProduceType.values())
             if (exactType.getType().equals(type))
-                return new WorkerProduceBuilding();
+                return new WorkerProduceBuilding(type, currentGame.getCurrentTurn());
+        if (BuildingType.MARKET.equals(type))
+            return new Market(type, currentGame.getCurrentTurn());
         return null;
     }
 
-    public static String selectBuilding(Matcher matcher){
-        return null;
+    public static String selectBuilding(String input){
+        Matcher xMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_X);
+        Matcher yMatcher = GameMenuCommands.getMatcher(input, GameMenuCommands.MAP_Y);
+        assert xMatcher != null;
+        int x = Integer.parseInt(xMatcher.group("mapX"));
+        assert yMatcher != null;
+        int y = Integer.parseInt(yMatcher.group("mapY"));
+        if(x < 0 || x > currentGame.getMap().getSize() || y < 0 || y > currentGame.getMap().getSize())
+            return "invalid coordinates";
+        MapCell cell = currentGame.getMap().getCells()[x - 1][y - 1];
+        if (cell.getBuilding() == null)
+            return "There is no building in this place!";
+        if (!cell.getBuilding().getGovernment().equals(currentGame.getCurrentTurn()))
+            return "This building doesn't belong to you!";
+        setSelectedBuilding(cell.getBuilding());
+        if (selectedBuilding.getType().equals(BuildingType.MARKET))
+            return "you have successfully selected the Market building";
+        return "you have successfully selected the building";
     }
     public static String createUnit(Matcher matcher) {
         return null;
