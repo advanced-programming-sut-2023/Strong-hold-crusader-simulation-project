@@ -14,7 +14,21 @@ public enum GameMenuCommands {
     SET_TEXTURE("set texture.+"),
     CLEAR("clear (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     DROP_ROCK("drop rock( -x| -y| -direction| \\d+| \\w)+"),
-    DROP_TREE("drop tree( -x| -y| -type| \\d+| \\w+)+");
+    DROP_TREE("drop tree( -x| -y| -type| \\d+| \\w+)+"),
+    MOVE_UNIT("move unit to (-x -?\\d+ -y -?\\d+|-y -?\\d+ -x -?\\d+)"),
+    PATROL_UNIT("^(?=(.* +-x1 (?<x1>-?[\\d]+)){1,})"
+                        + "(?=(.* +-x2 (?<x2>-?[\\d]+)){1,}) "
+                        + "(?=(.* +-y1 (?<y1>-?[\\d]+)){1,})"
+                        +"(?=(.* +-y2 (?<y2>-?[\\d]+)){1,})"
+                        +"patrol unit.+$"),
+    DIG_TUNNEL("dig tunnel (-x -?\\d+ -y -?\\d+|-y -?\\d+ -x -?\\d+)"),
+    POUR_OIL("pour oil -d (?<dir>[swne])"),
+    CEASEFIRE("ceasefire selected unit"),
+    ATTACK_BYSHOOT("attack (-x -?\\d+ -y -?\\d+|-y -?\\d+ -x -?\\d+)"),
+    ATTACK_ENEMY("attack -e (?<x>-?\\d+) (?<y>-?\\d+)"),
+    SET_STATE("set state (-x -?\\d+ -y -?\\d+|-y -?\\d+ -x -?\\d+) (?<state>(standing|defensive|offensive))"),
+    STOP_PATROL("stop patrol"),
+    NEXT_TURN("next turn");
     private final String regex;
 
     GameMenuCommands(String regex) {
@@ -25,5 +39,14 @@ public enum GameMenuCommands {
         Matcher matcher = Pattern.compile(command.regex).matcher(input);
         if(matcher.matches()) return matcher;
         else return null;
+    }
+    private String[] patrolUnitRegexes = {"^(?=(.* +-x1 (?<x1>-?[\\d]+)){1,})"
+            , "(?=(.* +-x2 (?<x2>-?[\\d]+)){1,}) "
+            , "(?=(.* +-y1 (?<y1>-?[\\d]+)){1,})"
+            , "(?=(.* +-y2 (?<y2>-?[\\d]+)){1,})"
+            , "patrol unit.+$"};
+
+    public String[] getPatrolUnitRegexes() {
+        return patrolUnitRegexes;
     }
 }

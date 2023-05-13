@@ -35,6 +35,7 @@ public class MainMenu extends Menu {
                 if (result.equals("game successfully created")){
                     GameMenu gameMenu = new GameMenu(scanner);
                     gameMenu.run();
+                    System.out.println("Main Menu");
                 }
             }
             else System.out.println("invalid command");

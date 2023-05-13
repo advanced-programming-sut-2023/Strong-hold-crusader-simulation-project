@@ -22,6 +22,26 @@ public class GameMenu extends Menu {
 
             if (GameMenuCommands.getMatcher(input, GameMenuCommands.SHOW_MAP) != null)
                 showMap();
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.SELECT_UNIT) != null)
+                System.out.println(GameMenuController.selectUnit(Controller.getCurrentGame().getCurrentTurn().getOwner() , input));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.MOVE_UNIT) != null)
+                System.out.println(GameMenuController.moveUnitTo(input));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.PATROL_UNIT) != null)
+                System.out.println(GameMenuController.PatrolUnit(GameMenuCommands.getMatcher(input , GameMenuCommands.PATROL_UNIT)));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.STOP_PATROL) != null)
+                System.out.println(GameMenuController.StopPatrolUnit());
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.SET_STATE) != null)
+                System.out.println(GameMenuController.setUnitState(input));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.ATTACK_ENEMY) != null)
+                System.out.println(GameMenuController.Attack(GameMenuCommands.getMatcher(input , GameMenuCommands.ATTACK_ENEMY)));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.ATTACK_BYSHOOT) != null)
+                System.out.println(GameMenuController.AttackByShoot(input));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.CEASEFIRE) != null)
+                System.out.println(GameMenuController.ceasefire());
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.POUR_OIL) != null)
+                System.out.println(GameMenuController.pourOil(GameMenuCommands.getMatcher(input , GameMenuCommands.POUR_OIL)));
+            else if (GameMenuCommands.getMatcher(input , GameMenuCommands.DIG_TUNNEL) != null)
+                System.out.println(GameMenuController.digTunnel(input));
             else if ((matcher = GameMenuCommands.getMatcher(input, GameMenuCommands.DROP_BUILDING)) != null)
                 System.out.println(GameMenuController.dropBuilding(input));
             else if ((matcher = GameMenuCommands.getMatcher(input, GameMenuCommands.SELECT_BUILDING)) != null) {
@@ -38,6 +58,15 @@ public class GameMenu extends Menu {
                         Controller.setSelectedBuilding(null);
                     }
                 }
+            } else if (input.equals("enter government menu")) {
+                GovernmentMenu governmentMenu = new GovernmentMenu(scanner);
+                governmentMenu.run();
+                System.out.println("Game Menu");
+            } else if (GameMenuCommands.getMatcher(input, GameMenuCommands.NEXT_TURN) != null)
+                System.out.println(GameMenuController.nextTurn());
+            else if (input.equals("CHEAT CODE: WIN")) {
+                System.out.println(GameMenuController.endGame());
+                return;
             } else System.out.println("invalid command");
         }
     }

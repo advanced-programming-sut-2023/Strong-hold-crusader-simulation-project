@@ -31,6 +31,8 @@ public class GovernmentMenu extends Menu {
                 System.out.println(GovernmentMenuController.showTaxRate());
             else if ((matcher = GovernmentMenuCommands.getMatcher(input, GovernmentMenuCommands.FEAR_RATE)) != null)
                 System.out.println(GovernmentMenuController.fearRate(matcher));
+            else if (input.equals("back to Game Menu"))
+                return;
             else System.out.println("invalid command");
         }
     }

@@ -48,6 +48,31 @@ public class MapCell {
     public ArrayList<Unit> getUnits() {
         return units;
     }
+    private Boolean hasTunnel;
+    private Boolean isBurning;
+
+    public Boolean getHasTunnel() {
+        return hasTunnel;
+    }
+
+    public void setHasTunnel(Boolean hasTunnel) {
+        this.hasTunnel = hasTunnel;
+    }
+
+    public Boolean getBurning() {
+        return isBurning;
+    }
+
+    public void setBurning(Boolean burning) {
+        isBurning = burning;
+    }
+
+    public boolean isBlocked(){
+        if (texture == Texture.ROCK || texture == Texture.IRON || building != null || isBurning){
+            return true;
+        }
+        return false;
+    }
 
 
     public char getCellState() {
