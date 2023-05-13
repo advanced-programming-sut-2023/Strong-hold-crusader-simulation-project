@@ -3,35 +3,37 @@ package org.example.model.people;
 import org.example.model.Weapon;
 
 public enum MilitaryType {
-    Archer(100 , 9 , 15 , 12 , Weapon.Arch),
-    Crossbowman(100 , 7 , 15 , 16 , Weapon.Crossbow),
-    Spearman(100 , 8 , 20 , 8 , null),
-    Pikeman(150 , 7 , 20 , 20 , Weapon.Pike),
-    Maceman(100 , 8 , 25 , 16 , Weapon.Skills),
-    Swordsman(150 , 6 , 30 , 8 , Weapon.Swords),
-    Knight(100 , 10 , 30 , 20 , Weapon.Skills),
-    Tunneler(100 , 9 , 20 , 8 , null),
-    Ladderman(70 , 9 , 0 , 8 , null),
-    Engineer(100 , 8 , 0 , 8 , null),
-    BlackMonk(100 , 7 , 20 , 16 , Weapon.Club),
-    ArcherBow(100 , 9 , 15 , 12 , Weapon.Arch),
-    Slaves(100 , 9 , 10 , 4 , Weapon.Hand),
-    Slingers(100 , 9 , 15 , 8 , Weapon.Sling),
-    Assassins(100 , 8 , 20 , 16 , Weapon.Skills),
-    HorseArchers(100 , 10 , 15 , 16 , Weapon.Arch),
-    ArabianSwordsmen(125 , 10 , 25 , 20 , Weapon.Swords),
-    FireThrowers(100 , 10 , 25 , 12 , Weapon.FireBall);
+    Archer(100 , 9 , 15 , 12 , Weapon.Arch, "archer"),
+    Crossbowman(100 , 7 , 15 , 16 , Weapon.Crossbow, "crossbowman"),
+    Spearman(100 , 8 , 20 , 8 , null, "spearman"),
+    Pikeman(150 , 7 , 20 , 20 , Weapon.Pike, "pikeman"),
+    Maceman(100 , 8 , 25 , 16 , Weapon.Skills, "maceman"),
+    Swordsman(150 , 6 , 30 , 8 , Weapon.Swords, "swordman"),
+    Knight(100 , 10 , 30 , 20 , Weapon.Skills, "knight"),
+    Tunneler(100 , 9 , 20 , 8 , null, "tunneller"),
+    Ladderman(70 , 9 , 0 , 8 , null, "ladderman"),
+    Engineer(100 , 8 , 0 , 8 , null, "engineer"),
+    BlackMonk(100 , 7 , 20 , 16 , Weapon.Club, "black monk"),
+    ArcherBow(100 , 9 , 15 , 12 , Weapon.Arch, "archer bow"),
+    Slaves(100 , 9 , 10 , 4 , Weapon.Hand, "slave"),
+    Slingers(100 , 9 , 15 , 8 , Weapon.Sling, "slinger"),
+    Assassins(100 , 8 , 20 , 16 , Weapon.Skills, "assassin"),
+    HorseArchers(100 , 10 , 15 , 16 , Weapon.Arch, "horse archer"),
+    ArabianSwordsmen(125 , 10 , 25 , 20 , Weapon.Swords, "arabian swordman"),
+    FireThrowers(100 , 10 , 25 , 12 , Weapon.FireBall, "fire thrower");
     private int health;
     private int speed;
     private int attack;
     private int defence;
     private Weapon weapon;
-    MilitaryType(int health , int speed , int attack , int defence , Weapon weapon){
+    private final String name;
+    MilitaryType(int health , int speed , int attack , int defence , Weapon weapon, String name){
         this.health = health;
         this.speed = speed;
         this.attack = attack;
         this.defence = defence;
         this.weapon = weapon;
+        this.name = name;
     }
 
     public int getHealth() {
@@ -105,5 +107,9 @@ public enum MilitaryType {
             }
         }
         return false;
+    }
+
+    public String getName() {
+        return name;
     }
 }

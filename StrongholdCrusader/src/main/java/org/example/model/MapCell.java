@@ -99,7 +99,6 @@ public class MapCell {
 
     @Override
     public String toString() {
-        //TODO inja havaset bashe esme resource o building o ... print koni
         String result = "Texture: " + texture.getTextureName();
         result += "\nResources:";
         for (Resources resource : resources.keySet()) {
@@ -108,7 +107,7 @@ public class MapCell {
         result += "\nTotal Unit Count: " + units.size();
         result += "\nUnits:";
         for (Unit unit : units) {
-            result += "\n" + unit.getType();
+            result += "\n" + unit.getType().getName();
         }
         result += "\nBuilding:" + "\n" + building.getType().getBuildingName();
         return result;
