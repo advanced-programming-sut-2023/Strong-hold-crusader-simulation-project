@@ -20,7 +20,6 @@ public class MapMenu extends Menu {
     }
     @Override
     public void run() {
-        MapMenuController.setMap(map);
         System.out.println("Map Menu");
         printMap();
         while (true) {
@@ -30,10 +29,8 @@ public class MapMenu extends Menu {
                 moveMap();
             else if (MapMenuCommands.getMatcher(input, MapMenuCommands.SHOW_DETAILS) != null)
                 System.out.println(showDetails());
-            else if (input.equals("exit")) {
-                MapMenuController.setMap(null);
+            else if (input.equals("exit"))
                 return;
-            }
             else System.out.println("invalid command");
         }
     }
