@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.model.Captcha;
 import org.example.view.commands.SignupMenuCommands;
 import org.example.view.commands.SignupMenuResponds;
 import org.example.model.User;
@@ -80,9 +81,11 @@ public class SignupMenuController extends Controller {
                 System.out.println("answer and confirm doesn't match");
                 continue;
             }
-            User user = new User(username, password, email, nickname, slogan);
-            user.setSecurityQuestion(x , matcher.group("answer"));
-            break;
+            if (Captcha.run(scanner)){
+                User user = new User(username, password, email, nickname, slogan);
+                user.setSecurityQuestion(x , matcher.group("answer"));
+                break;
+            }
         }
         return SignupMenuResponds.createUserSuccess.getResponse();
     }

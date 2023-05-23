@@ -12,7 +12,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 
-public class User {
+public class User implements Serializable {
     private static final String[] securityQuestions = {
             "What is my father's name?",
             "What was my first pet's name?",
