@@ -14,6 +14,7 @@ public class SignupMenu extends Menu {
 
     @Override
     public void run() {
+        System.out.println("Signup Menu");
         String command;
         while (true) {
             command = scanner.nextLine();

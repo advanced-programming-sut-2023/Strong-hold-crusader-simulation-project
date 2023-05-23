@@ -5,7 +5,7 @@ public enum ProfileMenuResponds {
     EMPTY_FIELD("field is empty"),
     INVALID_FORMAT("format is invalid"),
     ALREADY_EXITS("already exits"),
-    CHANGED("changed successfully"),
+    CHANGED(" changed successfully"),
     WEAK_PASSWORD("your new password is weak!: "),
     INCORRECT_PASSWORD("Current password is incorrect!"),
     SAME("Please enter a new "),

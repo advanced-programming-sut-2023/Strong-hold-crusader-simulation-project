@@ -207,7 +207,7 @@ public class User {
         this.slogan = null;
     }
     public boolean isPasswordCorrect(String password) {
-        return password.equals(this.password);
+        return getSha256(password).equals(this.password);
     }
 
     public static String checkUsernameFormat(String username) {

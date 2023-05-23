@@ -15,6 +15,7 @@ public class ProfileMenu extends Menu {
     String input;
     @Override
     public void run() {
+        System.out.println("Settings");
         while (true){
             input=scanner.nextLine();
             if (input.equals("back")) {

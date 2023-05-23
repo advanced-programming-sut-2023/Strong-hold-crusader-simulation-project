@@ -45,7 +45,7 @@ public class MainMenu extends Menu {
     private String startGame() {
         System.out.println("choose how many opponents you want to play against" +
                 "\nminimum players in a game is 2\nmaximum players in a game is 8");
-        int playerCount = scanner.nextInt() + 1;
+        String playerCount = scanner.nextLine();
         String numberResult;
         if(!(numberResult = checkPlayerCount(playerCount)).equals("success"))
             return numberResult;
@@ -70,8 +70,15 @@ public class MainMenu extends Menu {
         }
         return MainMenuController.startGame(users, mapSize);
     }
-    private String checkPlayerCount(int number) {
-        if (number > 8 || number < 2)
+    private String checkPlayerCount(String number) {
+
+        int intNumber;
+        try {
+            intNumber = Integer.parseInt(number);
+        } catch (Exception e) {
+            return "invalid number of players";
+        }
+        if (int > 8 || number < 2)
             return "invalid number of players";
         if (number < User.getAllUsers().size())
             return "these many players doesn't exist!";
