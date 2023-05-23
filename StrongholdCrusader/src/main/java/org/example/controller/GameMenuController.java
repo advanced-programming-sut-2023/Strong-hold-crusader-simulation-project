@@ -371,7 +371,9 @@ public class GameMenuController extends Controller {
     }
 
     public static String endGame() {
-        String result = "Winner: " + currentGame.getCurrentTurn().getOwner().getUsername();
+        User winner = currentGame.getCurrentTurn().getOwner();
+        String result = "Winner: " + winner.getUsername();
+        winner.setHighScore(winner.getHighScore() + 10);
         currentGame = null;
         Government.getGovernments().clear();
         return result;

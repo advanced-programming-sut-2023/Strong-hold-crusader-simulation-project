@@ -97,7 +97,7 @@ public class ProfileMenuController extends Controller {
         return Integer.toString(User.getLoggedInUser().getHighScore());
     }
     public static String displayRank() {
-        return Integer.toString(User.getLoggedInUser().getRank());
+        return Integer.toString(User.getLoggedInUser().calculateRank());
     }
     public static String displaySlogan() {
         if (User.getLoggedInUser().getSlogan()==null){
@@ -110,7 +110,7 @@ public class ProfileMenuController extends Controller {
                 "\nuser name: "+User.getLoggedInUser().getUsername()+
                 "\nnick name: "+User.getLoggedInUser().getNickname()+
                 "\nhigh score: "+ Integer.toString(User.getLoggedInUser().getHighScore())+
-                "\nrank: "+ Integer.toString(User.getLoggedInUser().getRank())+
+                "\nrank: "+ Integer.toString(User.getLoggedInUser().calculateRank())+
                 "\nslogan: "+User.getLoggedInUser().getSlogan();
     }
 }

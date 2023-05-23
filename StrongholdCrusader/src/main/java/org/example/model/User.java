@@ -39,6 +39,7 @@ public class User implements Serializable {
         this.nickname = nickname;
         this.slogan = slogan;
         allUsers.add(this);
+        highScore = 0;
     }
 
     public static void readFile(){
@@ -70,6 +71,11 @@ public class User implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
     @Override
     public String toString() {
         String result = "Users :\n";
@@ -336,5 +342,22 @@ public class User implements Serializable {
         StringBuffer result = new StringBuffer();
         for (byte b : bytes) result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
         return result.toString();
+    }
+    public int calculateRank() {
+        for (int i = 0; i < allUsers.size() - 1; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < allUsers.size() - i - 1; j++) {
+                if (allUsers.get(i).getHighScore() > allUsers.get(j + 1).getHighScore())
+                {
+                    User temp = allUsers.get(j);
+                    allUsers.set(j, allUsers.get(j + 1));
+                    allUsers.set(j + 1, temp);
+                    swapped = true;
+                }
+            }
+            if (!swapped)
+                break;
+        }
+        return allUsers.indexOf(this);
     }
 }
