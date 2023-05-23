@@ -109,7 +109,8 @@ public class MapCell {
         for (Unit unit : units) {
             result += "\n" + unit.getType().getName();
         }
-        result += "\nBuilding:" + "\n" + building.getType().getBuildingName();
+        if (building != null)
+            result += "\nBuilding:" + "\n" + building.getType().getBuildingName();
         return result;
     }
 }

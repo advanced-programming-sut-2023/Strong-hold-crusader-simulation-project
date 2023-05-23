@@ -4,6 +4,7 @@ import org.example.model.Game;
 import org.example.model.Map;
 import org.example.model.User;
 import org.example.model.buildings.Building;
+import org.example.view.commands.SignupMenuCommands;
 
 public class Controller {
     protected static Game currentGame;
@@ -37,11 +38,6 @@ public class Controller {
     }
 
     public static boolean checkPasswordFormat(String password) {
-        return
-                password.length() >= 6
-                && password.matches(".*[A-Z].*")
-                && password.matches(".*[0-9]")
-                && password.matches(".*[a-z].*")
-                && password.matches(".*[^0-9A-Za-z].*");
+        return SignupMenuCommands.password.getMatcher(password) != null;
     }
 }

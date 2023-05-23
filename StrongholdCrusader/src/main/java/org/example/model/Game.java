@@ -10,6 +10,7 @@ public class Game {
 
     public Game(Map map) {
         this.map = map;
+        players = new ArrayList<>();
     }
 
     public ArrayList<User> getPlayers() {

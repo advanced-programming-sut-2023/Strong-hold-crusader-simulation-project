@@ -52,7 +52,7 @@ public class MainMenu extends Menu {
         System.out.println("enter the username of people you want to play with:");
         ArrayList<User> users = new ArrayList<>();
         users.add(User.getLoggedInUser());
-        for (int i = 0; i < playerCount - 1; i++) {
+        for (int i = 0; i < Integer.parseInt(playerCount) - 1; i++) {
             String username = scanner.nextLine();
             User user;
             if ((user = User.getUserByUsername(username)) == null){
@@ -63,12 +63,19 @@ public class MainMenu extends Menu {
             users.add(user);
         }
         System.out.println("choose size of the map you want to play in:\n1. 200\n2. 400");
-        int mapSize = scanner.nextInt();
-        while (mapSize != 200 && mapSize != 400) {
-            System.out.println("map size must either be 200 or 400\nplease enter your preferred size again:");
-            mapSize = scanner.nextInt();
+        String mapSize = scanner.nextLine();
+        int intSize;
+        try {
+            intSize = Integer.parseInt(mapSize);
+        } catch (Exception e) {
+            return "map size has to be a number";
         }
-        return MainMenuController.startGame(users, mapSize);
+        while (intSize != 200 && intSize != 400) {
+            System.out.println("map size must either be 200 or 400\nplease enter your preferred size again:");
+            mapSize = scanner.nextLine();
+            intSize = Integer.parseInt(mapSize);
+        }
+        return MainMenuController.startGame(users, intSize);
     }
     private String checkPlayerCount(String number) {
 
@@ -78,9 +85,9 @@ public class MainMenu extends Menu {
         } catch (Exception e) {
             return "invalid number of players";
         }
-        if (int > 8 || number < 2)
+        if (intNumber > 8 || intNumber < 2)
             return "invalid number of players";
-        if (number < User.getAllUsers().size())
+        if (intNumber < User.getAllUsers().size())
             return "these many players doesn't exist!";
         else return "success";
     }

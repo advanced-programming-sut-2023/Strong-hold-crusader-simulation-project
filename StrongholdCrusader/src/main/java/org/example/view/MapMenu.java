@@ -14,9 +14,9 @@ public class MapMenu extends Menu {
     private final Map map;
     public MapMenu(Scanner scanner, int middleX, int middleY, Map map) {
         super(scanner);
+        this.map = map;
         this.middleX = possibleX(middleX);
         this.middleY = possibleY(middleY);
-        this.map = map;
     }
     @Override
     public void run() {

@@ -11,7 +11,7 @@ public class StoreMenuController extends Controller {
         for (Resources resource : currentGame.getCurrentTurn().getResourceCount().keySet()) {
             list += resource.getName() + ":\n\tbuying price: " + resource.getBuyPrice()
                     + "\n\tselling price: " + resource.getSellPrice() + "\n\tinventory: "
-                    + currentGame.getCurrentTurn().getResourceCount().get(resource);
+                    + currentGame.getCurrentTurn().getResourceCount().get(resource) + "\n";
         }
         return list;
     }

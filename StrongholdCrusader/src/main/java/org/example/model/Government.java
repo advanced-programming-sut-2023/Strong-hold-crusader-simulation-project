@@ -21,9 +21,6 @@ public class Government {
     private int foodRate;
     private int population;
     private int balance;
-
-
-
     private ArrayList<Building> buildings;
     public ArrayList<Building> getBuildings() {
         return buildings;
@@ -31,9 +28,6 @@ public class Government {
     public void addBuildings(Building building) {
         this.buildings.add(building);
     }
-
-
-
     public void changeBalance(int change) {
         this.balance += change;
     }

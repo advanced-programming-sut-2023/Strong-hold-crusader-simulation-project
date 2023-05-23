@@ -20,8 +20,6 @@ public class MainMenuController extends Controller {
     }
     public static String startGame(ArrayList<User> users, int mapSize) {
         currentGame = new Game(new Map(mapSize));
-        currentGame.getPlayers().add(User.getLoggedInUser());
-        Government.getGovernments().add(new Government(User.getLoggedInUser()));
         for (User user : users) {
             currentGame.getPlayers().add(user);
             Government.getGovernments().add(new Government(user));

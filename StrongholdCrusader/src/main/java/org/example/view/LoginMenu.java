@@ -52,14 +52,14 @@ public class LoginMenu extends Menu {
         User user;
         if ((user = User.getUserByUsername(username)) == null)
             return "username doesn't exist";
-        System.out.println(User.getSecurityQuestions()[user.getRecoveryQuestion() - 1]);
+        System.out.println(User.getSecurityQuestions()[user.getRecoveryQuestion()]);
         String answer = scanner.nextLine();
         if (!user.isSecurityAnswerCorrect(answer))
             return "wrong answer to the security question";
         System.out.println("enter your new password");
         String newPassword = scanner.nextLine();
         while (!Controller.checkPasswordFormat(newPassword)) {
-            System.out.println("Your password:\n must be at least 6 characters\n" +
+            System.out.println("Your password:\nmust be at least 6 characters\n" +
                     "must contain capital and small letters\n" +
                     "must contain numbers\n" +
                     "must contain characters not mentioned in above categories\n" +
