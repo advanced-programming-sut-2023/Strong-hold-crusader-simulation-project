@@ -65,25 +65,25 @@ public class GameMenuController extends Controller {
     private static Building createBuilding(BuildingType type) {
         for (ChurchType exactType : ChurchType.values())
             if (exactType.getType().equals(type))
-                return new Church(type, currentGame.getCurrentTurn());
+                return new Church(type, currentGame.getCurrentTurn(),exactType);
         for (ProductionBuildingType exactType : ProductionBuildingType.values())
             if (exactType.getType().equals(type))
-                return new ProductionBuilding(type, currentGame.getCurrentTurn());
+                return new ProductionBuilding(type, currentGame.getCurrentTurn(), exactType);
         for (StoneGatehouseType exactType : StoneGatehouseType.values())
             if (exactType.getType().equals(type))
-                return new StoneGatehouse(type, currentGame.getCurrentTurn());
+                return new StoneGatehouse(type, currentGame.getCurrentTurn(),exactType);
         for (StorageType exactType : StorageType.values())
             if (exactType.getType().equals(type))
-                return new StorageBuilding(type, currentGame.getCurrentTurn());
+                return new StorageBuilding(type, currentGame.getCurrentTurn(),exactType);
         for (TowerType exactType : TowerType.values())
             if (exactType.getType().equals(type))
-                return new Tower(type, currentGame.getCurrentTurn());
+                return new Tower(type, currentGame.getCurrentTurn(),exactType);
         for (WallType exactType : WallType.values())
             if (exactType.getType().equals(type))
-                return new Wall(type, currentGame.getCurrentTurn());
+                return new Wall(type, currentGame.getCurrentTurn(),exactType);
         for (WorkerProduceType exactType : WorkerProduceType.values())
             if (exactType.getType().equals(type))
-                return new WorkerProduceBuilding(type, currentGame.getCurrentTurn());
+                return new WorkerProduceBuilding(type, currentGame.getCurrentTurn(),exactType);
         if (BuildingType.MARKET.equals(type))
             return new Market(type, currentGame.getCurrentTurn());
         return null;
@@ -367,7 +367,9 @@ public class GameMenuController extends Controller {
     }
 
     private static void nextRound() {
-
+        for (Building building : Building.getAllBuildings()) {
+            building.work();
+        }
     }
 
     public static String endGame() {
@@ -375,6 +377,7 @@ public class GameMenuController extends Controller {
         String result = "Winner: " + winner.getUsername();
         winner.setHighScore(winner.getHighScore() + 10);
         currentGame = null;
+        Building.getAllBuildings().clear();
         Government.getGovernments().clear();
         return result;
     }

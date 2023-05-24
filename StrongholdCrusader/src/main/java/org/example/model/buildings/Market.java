@@ -7,4 +7,9 @@ public class Market extends Building{
     public Market(BuildingType type, Government government) {
         super(type, government);
     }
+
+    @Override
+    public void work() {
+
+    }
 }

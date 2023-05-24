@@ -22,6 +22,7 @@ public abstract class Building {
         this.HP = type.getHP();
     }
 
+    public abstract void work();
     public static ArrayList<Building> getAllBuildings() {
         return allBuildings;
     }
