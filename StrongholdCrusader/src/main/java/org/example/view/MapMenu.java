@@ -29,6 +29,29 @@ public class MapMenu extends Menu {
                 moveMap();
             else if (MapMenuCommands.getMatcher(input, MapMenuCommands.SHOW_DETAILS) != null)
                 System.out.println(showDetails());
+            else if ((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.SET_TEXTURE1)) != null){
+                System.out.println(MapMenuController.setTexture(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),
+                        Integer.parseInt("x"),Integer.parseInt("y"),matcher.group("type")));
+            }
+            else if((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.SET_TEXTURE2)) != null){
+                System.out.println(MapMenuController.setTexture(Integer.parseInt(matcher.group("x1")),Integer.parseInt(matcher.group("y1")),
+                        Integer.parseInt("x2"),Integer.parseInt("y2"),matcher.group("type")));
+            }
+            else if((matcher = MapMenuCommands.getMatcher(input,MapMenuCommands.CLEAR))!= null){
+                System.out.println(MapMenuController.clear(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y"))));
+            }
+            else if((matcher = MapMenuCommands.getMatcher(input,MapMenuCommands.DROP_ROCK))!= null){
+                System.out.println(MapMenuController.dropRock(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),
+                        matcher.group("dir")));
+            }
+            else if((matcher = MapMenuCommands.getMatcher(input,MapMenuCommands.DROP_TREE))!= null){
+                System.out.println(MapMenuController.dropTree(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),
+                        matcher.group("type")));
+            }
+            else if((matcher = MapMenuCommands.getMatcher(input,MapMenuCommands.DROP_UNIT))!= null){
+                System.out.println(MapMenuController.dropUnit(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),
+                        matcher.group("type"),Integer.parseInt(matcher.group("count"))));
+            }
             else if (input.equals("exit"))
                 return;
             else System.out.println("invalid command");
