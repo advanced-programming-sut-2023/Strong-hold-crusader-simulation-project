@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum TradeMenuCommands {
-    TRADE("")
+    TRADE("trade -t (?<resource>\\w+( \\w+)?) -a (?<amount>\\d+) -p (?<price>\\d+) -u (?<username>\\w+)" +
+            " -m (?<message>.*)"),
+    TRADE_ACCEPT("trade accept -i (?<id>\\d+) -m (?<message>.*)")
     ;
     private final String regex;
 

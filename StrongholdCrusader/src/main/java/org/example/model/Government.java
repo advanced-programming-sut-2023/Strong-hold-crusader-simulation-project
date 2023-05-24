@@ -22,6 +22,8 @@ public class Government {
     private int population;
     private int balance;
     private ArrayList<Building> buildings;
+    private ArrayList<Trade> tradeNotification;
+
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
@@ -36,17 +38,9 @@ public class Government {
         return balance;
     }
 
-    public ArrayList<Trade> getTradeHistory() {
-        return tradeHistory;
-    }
-
     public ArrayList<Trade> getTradeNotification() {
         return tradeNotification;
     }
-
-    private ArrayList<Trade> tradeHistory;
-    private ArrayList<Trade> tradeNotification;
-
     public Government(User user) {
         this.owner = user;
 

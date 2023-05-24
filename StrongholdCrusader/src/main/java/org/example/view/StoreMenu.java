@@ -13,6 +13,7 @@ public class StoreMenu extends Menu{
     }
     @Override
     public void run() {
+        System.out.println("Market");
         while (true){
             input = scanner.nextLine();
 

@@ -3,6 +3,7 @@ package org.example.view;
 import org.example.controller.Controller;
 import org.example.controller.GameMenuController;
 import org.example.model.Map;
+import org.example.model.Trade;
 import org.example.view.commands.GameMenuCommands;
 
 import java.util.Scanner;
@@ -61,6 +62,10 @@ public class GameMenu extends Menu {
             } else if (input.equals("enter government menu")) {
                 GovernmentMenu governmentMenu = new GovernmentMenu(scanner);
                 governmentMenu.run();
+                System.out.println("Game Menu");
+            } else if (input.equals("enter Trade menu")) {
+                TradeMenu tradeMenu = new TradeMenu(scanner);
+                tradeMenu.run();
                 System.out.println("Game Menu");
             } else if (GameMenuCommands.getMatcher(input, GameMenuCommands.NEXT_TURN) != null)
                 System.out.println(GameMenuController.nextTurn());
