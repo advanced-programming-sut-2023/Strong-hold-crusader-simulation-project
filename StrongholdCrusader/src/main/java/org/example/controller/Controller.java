@@ -11,7 +11,7 @@ public class Controller {
     protected static Building selectedBuilding = null;
 
     public static Map getMap() {
-        return map;
+        return currentGame.getMap();
     }
 
     public static Building getSelectedBuilding() {

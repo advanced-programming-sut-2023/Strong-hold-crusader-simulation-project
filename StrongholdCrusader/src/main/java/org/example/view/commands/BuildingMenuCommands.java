@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public enum BuildingMenuCommands {
-    CREATE_UNIT("create unit -t (?<type>\\w+( \\w+)?) -c (?<count>\\d+))");
+    CREATE_UNIT("create unit -t (?<type>\\w+( \\w+)?) -c (?<count>\\d+)");
     private final String regex;
 
     BuildingMenuCommands(String regex) {

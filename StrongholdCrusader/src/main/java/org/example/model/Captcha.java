@@ -120,28 +120,28 @@ public class Captcha {
         }
     }
     public static boolean run(Scanner scanner){
-        System.out.println("please confirm you are not a robot with entering this captcha .");
-        while (true){
-            int z = makeCaptcha(scanner);
-            while (true) {
-                String input = scanner.nextLine();
-                if (Pattern.matches("(recaptcha|exit|\\d+)" , input)) {
-                    if (input.equals("recaptcha")) {
-                        break;
-                    }
-                    if (input.equals("exit")) {
-                        return false;
-                    } else if (Integer.parseInt(input) == z) {
-                        System.out.println("congrats");
-                        return true;
-                    } else {
-                        System.out.println("wrong answer!!!");
-                    }
-                }
-                else
-                    System.out.println("you can either enter \"recaptcha\" , \"exit\" , or the captcha number.");
-            }
-        }
-
+//        System.out.println("please confirm you are not a robot with entering this captcha .");
+//        while (true){
+//            int z = makeCaptcha(scanner);
+//            while (true) {
+//                String input = scanner.nextLine();
+//                if (Pattern.matches("(recaptcha|exit|\\d+)" , input)) {
+//                    if (input.equals("recaptcha")) {
+//                        break;
+//                    }
+//                    if (input.equals("exit")) {
+//                        return false;
+//                    } else if (Integer.parseInt(input) == z) {
+//                        System.out.println("congrats");
+//                        return true;
+//                    } else {
+//                        System.out.println("wrong answer!!!");
+//                    }
+//                }
+//                else
+//                    System.out.println("you can either enter \"recaptcha\" , \"exit\" , or the captcha number.");
+//            }
+//        }
+        return true;
     }
 }

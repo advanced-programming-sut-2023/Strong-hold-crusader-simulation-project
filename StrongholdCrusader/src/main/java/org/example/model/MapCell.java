@@ -43,7 +43,7 @@ public class MapCell {
     }
 
     public void clearUnits() {
-        this.units = null;
+        units.clear();
     }
     public ArrayList<Unit> getUnits() {
         return units;
@@ -83,6 +83,10 @@ public class MapCell {
                 return 'W';
             return 'B';
         }
+        if (tree != null)
+            return 'T';
+        if (rock != null)
+            return 'R';
         return ' ';
     }
     public Building getBuilding() {

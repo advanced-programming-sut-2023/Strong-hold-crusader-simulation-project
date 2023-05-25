@@ -148,7 +148,7 @@ public class MapMenuController extends Controller {
             return MapMenuResponds.OUT_OF_NUMBER.getRegex();
         }
         String what=empty(x,y);
-        if (what==null|| what.equals("unit")){
+        if (what!=null){
             return MapMenuResponds.ERROR.getRegex()+"/a "+what;
         }
         for (MilitaryType militaryType: MilitaryType.values()){
