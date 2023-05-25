@@ -10,6 +10,10 @@ public class Controller {
     protected static Game currentGame;
     protected static Building selectedBuilding = null;
 
+    public static Map getMap() {
+        return map;
+    }
+
     public static Building getSelectedBuilding() {
         return selectedBuilding;
     }

@@ -14,30 +14,29 @@ public class MapMenuController extends Controller {
         return currentGame.getMap().getCells()[x - 1][y - 1].toString();
     }
     public static String empty(int x, int y){
-        MapCell cell = currentGame.getMap().getCells()[x][y];
-        if (cell.getRock()!=null)
+
+        if (getMap().getCells()[x][y].getRock()!=null)
             return "rock";
-        if(cell.getBuilding()!=null)
+        if(getMap().getCells()[x][y].getBuilding()!=null)
             return "building";
-        if(cell.getTree()!=null)
+        if(getMap().getCells()[x][y].getTree()!=null)
             return "tree";
-        if (cell.getUnits()!=null)
+        if(getMap().getCells()[x][y].getUnits().size()>=1)
             return "unit";
+
         return null;
     }
     public static boolean setTexture(int x1,int y1,String type,boolean a){
         if (Texture.findTexture(type)!=null){
             String what;
             if ((what = empty(x1,y1))!=null){
-                if (!a){
-                    System.out.println(MapMenuResponds.CANT_BE_CHANGED+what);
-                }
+                System.out.println(MapMenuResponds.CANT_BE_CHANGED.getRegex()+what);
                 return false;
             }
             else {
-                currentGame.getMap().getCells()[x1][y1].setTexture(Texture.findTexture(type));
+                getMap().getCells()[x1][y1].setTexture(Texture.findTexture(type));
                 if (!a){
-                    System.out.println(MapMenuResponds.TEXTURE_CHANGED);
+                    System.out.println(MapMenuResponds.TEXTURE_CHANGED.getRegex());
                 }
                 return true;
             }
@@ -50,27 +49,30 @@ public class MapMenuController extends Controller {
         y1--;
         x2--;
         y2--;
-        if ((x1>x2)||(y1>y2)||(x1>= currentGame.getMap().getSize())||(y1>= currentGame.getMap().getSize())||
-                (x2>= currentGame.getMap().getSize())||(y2>= currentGame.getMap().getSize())){
+        if ((x1>x2)||(y1>y2)||(x1>= getMap().getSize())||(y1>= getMap().getSize())||
+                (x2>= getMap().getSize())||(y2>= getMap().getSize())){
             return MapMenuResponds.INVALID_POSITION.getRegex();
         }
-        for ( int i=x1;i<=x2-x1+1;i++){
-            for ( int j=y1;j<=y2-y1+1;j++){
+        for ( int i=x1;i<=x2;i++){
+            for ( int j=y1;j<=y2;j++){
                 setTexture(i,j,type,!(x2-x1==0));
             }
         }
+
         return MapMenuResponds.DONE.getRegex();
     }
     public static String clear(int x,int y){
         x--;
         y--;
-        if ((x>= currentGame.getMap().getSize())||(y>= currentGame.getMap().getSize())){
+        int size=getMap().getSize();
+        if ((x>= size)||(y>= size)){
             return MapMenuResponds.INVALID_POSITION.getRegex();
         }
         if (empty(x,y)==null|| Objects.equals(empty(x, y), "unit")){
-            currentGame.getMap().getCells()[x][y].clearUnits();
-            currentGame.getMap().getCells()[x][y].setTexture(Texture.BASE_GROUND);
+            getMap().getCells()[x][y].clearUnits();
+            getMap().getCells()[x][y].setTexture(Texture.BASE_GROUND);
             return MapMenuResponds.CLEAR.getRegex();
+
         }
         else {
             return MapMenuResponds.CANT_BE_CLEARED.getRegex()+empty(x,y);
@@ -85,7 +87,7 @@ public class MapMenuController extends Controller {
     public static String dropRock(int x,int y,String direction){
         x--;
         y--;
-        if (!((x>= currentGame.getMap().getSize())||(y>= currentGame.getMap().getSize()))){
+        if (!((x>= getMap().getSize())||(y>= getMap().getSize()))){
             if (Objects.equals(direction, "r") || Objects.equals(direction, "w") || Objects.equals(direction, "s") || Objects.equals(direction, "n") || Objects.equals(direction, "e")){
                 String what;
                 if ((what=empty(x,y))!=null){
@@ -94,7 +96,7 @@ public class MapMenuController extends Controller {
                 if (Objects.equals(direction, "r")){
                     direction=String.valueOf(random("wens"));
                 }
-                currentGame.getMap().getCells()[x][y].setRock(Rock.findDir(direction));
+                getMap().getCells()[x][y].setRock(Rock.E);
                 return MapMenuResponds.SET_Rock.getRegex();
             }
             return MapMenuResponds.INVALID.getRegex()+" (for direction)";
@@ -104,15 +106,15 @@ public class MapMenuController extends Controller {
     public static String dropTree(int x,int y,String type){
         x--;
         y--;
-        if (!((x>= currentGame.getMap().getSize())||(y>= currentGame.getMap().getSize()))){
+        if (!((x>= getMap().getSize())||(y>= getMap().getSize()))){
             if (Tree.findType(type)!=null){
                 String what;
                 if ((what=empty(x,y))!=null){
                     return MapMenuResponds.ERROR.getRegex()+"/a "+what;
                 }
-                if (currentGame.getMap().getCells()[x][y].getTexture()==Texture.GRASS||
-                        currentGame.getMap().getCells()[x][y].getTexture()==Texture.DENSE_OASIS){
-                    currentGame.getMap().getCells()[x][y].setTree(Tree.findType(type));
+                if (getMap().getCells()[x][y].getTexture()==Texture.GRASS||
+                        getMap().getCells()[x][y].getTexture()==Texture.DENSE_OASIS){
+                    getMap().getCells()[x][y].setTree(Tree.findType(type));
                     return MapMenuResponds.SET_TREE.getRegex();
                 }
                 else {
@@ -135,6 +137,7 @@ public class MapMenuController extends Controller {
         return true;
     }
     public static String dropUnit(int x,int y,String type,int count){
+        //todo amir
         x--;
         y--;
         ArrayList<Unit> units= currentGame.getCurrentTurn().getUnitByType(type);
