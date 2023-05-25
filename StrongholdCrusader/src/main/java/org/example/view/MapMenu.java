@@ -31,11 +31,11 @@ public class MapMenu extends Menu {
                 System.out.println(showDetails());
             else if ((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.SET_TEXTURE1)) != null){
                 System.out.println(MapMenuController.setTexture(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),
-                        Integer.parseInt("x"),Integer.parseInt("y"),matcher.group("type")));
+                        Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y")),matcher.group("type")));
             }
             else if((matcher = MapMenuCommands.getMatcher(input, MapMenuCommands.SET_TEXTURE2)) != null){
                 System.out.println(MapMenuController.setTexture(Integer.parseInt(matcher.group("x1")),Integer.parseInt(matcher.group("y1")),
-                        Integer.parseInt("x2"),Integer.parseInt("y2"),matcher.group("type")));
+                        Integer.parseInt(matcher.group("x2")),Integer.parseInt(matcher.group("y2")),matcher.group("type")));
             }
             else if((matcher = MapMenuCommands.getMatcher(input,MapMenuCommands.CLEAR))!= null){
                 System.out.println(MapMenuController.clear(Integer.parseInt(matcher.group("x")),Integer.parseInt(matcher.group("y"))));

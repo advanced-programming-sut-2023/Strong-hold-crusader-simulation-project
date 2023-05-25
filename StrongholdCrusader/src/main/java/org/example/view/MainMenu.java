@@ -87,7 +87,7 @@ public class MainMenu extends Menu {
         }
         if (intNumber > 8 || intNumber < 2)
             return "invalid number of players";
-        if (intNumber < User.getAllUsers().size())
+        if (intNumber > User.getAllUsers().size())
             return "these many players doesn't exist!";
         else return "success";
     }

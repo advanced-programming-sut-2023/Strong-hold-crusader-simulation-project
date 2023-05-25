@@ -45,10 +45,18 @@ public class Government {
         this.owner = user;
 
         resourceCount = new HashMap<>();
+        tradeNotification = new ArrayList<>();
+        buildings = new ArrayList<>();
+        people = new ArrayList<>();
         for (Resources resource : Resources.values()) {
             resourceCount.put(resource, 5);
         }
     }
+
+    public ArrayList<People> getPeople() {
+        return people;
+    }
+
     public static ArrayList<Government> getGovernments(){
         return governments;
     }

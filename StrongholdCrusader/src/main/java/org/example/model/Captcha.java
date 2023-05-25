@@ -142,5 +142,6 @@ public class Captcha {
                     System.out.println("you can either enter \"recaptcha\" , \"exit\" , or the captcha number.");
             }
         }
+
     }
 }

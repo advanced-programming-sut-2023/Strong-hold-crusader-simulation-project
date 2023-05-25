@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public enum GameMenuCommands {
     MAP_X(".* -x (?<mapX>\\d+).*"),
     MAP_Y(".* -y (?<mapY>\\d+).*"),
-    TYPE(".* -type (?<type>\\w+).*"),
+    TYPE(".* -type (?<type>\\w+( \\w+)?).*"),
     SHOW_MAP("show map (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),
     DROP_BUILDING("drop building( -x| -y| -type| \\d+| \\w+)+"),
     SELECT_BUILDING("select building (-x \\d+ -y \\d+|-y \\d+ -x \\d+)"),

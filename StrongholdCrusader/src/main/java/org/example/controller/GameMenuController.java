@@ -57,8 +57,11 @@ public class GameMenuController extends Controller {
 
         Building building = createBuilding(type);
         cell.setBuilding(building);
-        if (building != null)
+        if (building != null) {
             Building.getAllBuildings().add(building);
+            building.setX(x);
+            building.setY(y);
+        }
         return "You have successfully dropped a building!";
     }
 

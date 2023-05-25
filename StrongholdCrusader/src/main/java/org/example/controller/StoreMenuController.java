@@ -23,7 +23,7 @@ public class StoreMenuController extends Controller {
         if (amount < 1)
             return "invalid amount";
         Government buyer = currentGame.getCurrentTurn();
-        if (resource.getBuyPrice() * amount < buyer.getBalance())
+        if (resource.getBuyPrice() * amount > buyer.getBalance())
             return "you don't have enough gold to buy this item!";
         buyer.getResourceCount().replace(resource, buyer.getResourceCount().get(resource) + amount);
         buyer.changeBalance(-amount * resource.getBuyPrice());

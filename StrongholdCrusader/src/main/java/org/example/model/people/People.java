@@ -20,4 +20,12 @@ public class People implements Serializable {
     public void setHealth(int health) {
         this.health = health;
     }
+
+    public String getOwnerUsername() {
+        return ownerUsername;
+    }
+
+    public void setOwnerUsername(String ownerUsername) {
+        this.ownerUsername = ownerUsername;
+    }
 }

@@ -112,4 +112,11 @@ public enum MilitaryType {
     public String getName() {
         return name;
     }
+    public static MilitaryType getUnitByName(String name) {
+        for (MilitaryType type : MilitaryType.values()) {
+            if (type.getName().equals(name))
+                return type;
+        }
+        return null;
+    }
 }

@@ -14,12 +14,30 @@ public abstract class Building {
     protected int HP;
     protected final int workerCount;
     protected int rate;
-
+    protected int x;
+    protected int y;
     protected Building(BuildingType type, Government government) {
         this.type = type;
         this.government = government;
         this.workerCount = type.getWorkerCount();
         this.HP = type.getHP();
+        government.getBuildings().add(this);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
     public abstract void work();

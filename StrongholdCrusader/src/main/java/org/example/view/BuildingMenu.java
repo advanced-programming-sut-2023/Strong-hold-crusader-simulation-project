@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.BuildingMenuController;
+import org.example.view.commands.BuildingMenuCommands;
 
 import java.util.Scanner;
 
@@ -18,6 +19,9 @@ public class BuildingMenu extends Menu {
                 return;
             else if (input.equals("repair"))
                 System.out.println(BuildingMenuController.repair());
+            else if ((matcher = (BuildingMenuCommands.getMatcher(input, BuildingMenuCommands.CREATE_UNIT))) != null)
+                System.out.println(BuildingMenuController.createUnit(matcher));
+            else System.out.println("invalid command");
         }
     }
 }
