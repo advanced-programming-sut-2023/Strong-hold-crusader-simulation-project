@@ -1,15 +1,13 @@
 package org.example.View;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -19,23 +17,31 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.example.Controller.LoginController;
 import org.example.Controller.SignupController;
 import org.example.Model.User;
 import org.example.View.Responds.SignupMenuCommands;
+import org.example.View.Responds.SignupMenuResponds;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Signup extends Application {
     public static Stage stage;
     public static Pane pane;
-    private static ArrayList<Background> backgrounds = new ArrayList<>();
     public static HBox capcha;
     private static String CaptchaNumber;
     private TextField username;
     private PasswordField password , confirm;
+    public static Background gray = new Background(new BackgroundFill(Color.GRAY , null , null));
+    public static Background red = new Background(new BackgroundFill(Color.DARKRED , null , null));
+    public static Background green = new Background(new BackgroundFill(Color.GREEN , null , null));
+    private static VBox errors ;
+    private ArrayList<FadeTransition> fadeTransitions = new ArrayList<>();
+
+
 
     public static boolean isValidCapthca(String text) {
         if (text.equals(CaptchaNumber)){
@@ -49,47 +55,37 @@ public class Signup extends Application {
         this.stage = stage;
         Pane pane = FXMLLoader.load(Signup.class.getResource("/FXML/Signup.fxml")); this.pane = pane;
         BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false , false, true, false);
-        Image image = new Image(Signup.class.getResource("/Images/SignupBackground2.jpg").toExternalForm());
-        Background background = new Background(new BackgroundImage(image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                bSize));
-        Image image1 = new Image(Signup.class.getResource("/Images/SignupBackground.jpg").toExternalForm());
-        Background background2 =  new Background(new BackgroundImage(image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.CENTER,
-                bSize));
-        backgrounds.add(background); backgrounds.add(background2);
-        pane.setBackground(new Background(new BackgroundFill(Color.YELLOWGREEN , null , null)));
+        Image image = new Image(Signup.class.getResource("/Images/SignupBackground1.jpg").toExternalForm());
+        Background background = BackgroundMaker(image);
         pane.setBackground(background);
         Scene scene = new Scene(pane);
         stage.setScene(scene);
-        TextField username = new TextField(); username.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        username.setFont(Font.font(14)); Label Username = new Label("username : "); Username.setTextFill(Color.BEIGE); Username.setFont(Font.font(20));
-        PasswordField password = new PasswordField(); password.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        password.setFont(Font.font(14)); Label Password = new Label("password : "); Password.setTextFill(Color.BEIGE); Password.setFont(Font.font(20));
-        PasswordField confirm = new PasswordField(); confirm.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        confirm.setFont(Font.font(14)); Label Confirm = new Label("confirm password : "); Confirm.setTextFill(Color.BEIGE); Confirm.setFont(Font.font(20));
-        TextField email = new TextField(); email.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        email.setFont(Font.font(14)); Label Email = new Label("email : "); Email.setTextFill(Color.BEIGE); Email.setFont(Font.font(20));
-        TextField slogan = new TextField(); slogan.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        slogan.setFont(Font.font(14)); Label Slogan = new Label("Slogan : "); Slogan.setTextFill(Color.BEIGE); Slogan.setFont(Font.font(20));
-        TextField nickname = new TextField(); nickname.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        nickname.setFont(Font.font(14)); Label Nickname = new Label("nickname : "); Nickname.setTextFill(Color.BEIGE); Nickname.setFont(Font.font(20));
-        Label captcher = new Label("captcha : "); captcher.setTextFill(Color.BEIGE); captcher.setFont(Font.font(20));
-        HBox hBox0 = new HBox(); capcha = hBox0; capchaMake();
-        TextField Captcha = new TextField(); Captcha.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-        ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(User.securityQuestions)); choiceBox.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null))); choiceBox.setMaxWidth(500);
-        Label recoveryQ = new Label("recovery question : "); recoveryQ.setFont(Font.font(20)); recoveryQ.setTextFill(Color.BEIGE);
-        Label recoveryA = new Label("recovery answer : "); recoveryA.setFont(Font.font(20)); recoveryA.setTextFill(Color.BEIGE);
-        TextField RecoveryAnswer = new TextField(); RecoveryAnswer.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+        TextField username = new TextField(); username.setBackground(gray);
+        PasswordField password = new PasswordField(); password.setBackground(gray);
+        PasswordField confirm = new PasswordField(); confirm.setBackground(gray);
+        TextField email = new TextField(); email.setBackground(gray);
+        TextField slogan = new TextField(); slogan.setBackground(gray);
+        TextField nickname = new TextField(); nickname.setBackground(gray);
+        TextField Captcha = new TextField(); Captcha.setBackground(gray);
+        TextField RecoveryAnswer = new TextField(); RecoveryAnswer.setBackground(gray);
+        ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList(User.securityQuestions));
+        choiceBox.setBackground(gray); choiceBox.setMaxWidth(500);
+        Label captcher = LabelMaker("captcha : " , 20 , Color.BEIGE);
+        username.setFont(Font.font(14)); Label Username = LabelMaker("username : " , 20 , Color.BEIGE);
+        password.setFont(Font.font(14)); Label Password = LabelMaker("password : " , 20 , Color.BEIGE);
+        confirm.setFont(Font.font(14)); Label Confirm = LabelMaker("confirm password : " , 20 , Color.BEIGE);
+        email.setFont(Font.font(14)); Label Email = LabelMaker("email : " , 20 , Color.BEIGE);
+        slogan.setFont(Font.font(14)); Label Slogan = LabelMaker("slogan : " , 20 , Color.BEIGE);
+        nickname.setFont(Font.font(14)); Label Nickname = LabelMaker("nickname : " , 20 , Color.BEIGE);
+        Label recoveryQ = LabelMaker("recovery question : " , 20 , Color.BEIGE);
+        Label recoveryA = LabelMaker("recovery answer : " , 20 , Color.BEIGE);
+        this.username = username; this.password = password; this.confirm = confirm;
+        HBox hBox0 = new HBox(); capcha = hBox0;
+        capchaMake();
         VBox vBox = new VBox(); vBox.getChildren().addAll(username , password , confirm , email , slogan , nickname ,choiceBox, RecoveryAnswer , hBox0 , Captcha);
         VBox vBox1 = new VBox(); vBox1.getChildren().addAll(Username , Password , Confirm , Email , Slogan , Nickname , recoveryQ , recoveryA , captcher); vBox.setSpacing(18); vBox1.setSpacing(18);
-        Label userError = new Label(""); userError.setFont(Font.font(20)); Label passError = new Label(""); passError.setFont(Font.font(20));
-        this.username = username; this.password = password; this.confirm = confirm;
-        HBox hBox = new HBox( ); hBox.getChildren().addAll(vBox1 , vBox ); hBox.setSpacing(7); hBox.setLayoutX(70); hBox.setLayoutY(90);
+        VBox vBox2 = new VBox(); vBox2.getChildren().addAll(LabelMaker("" , 14 , Color.RED) , LabelMaker("" , 14 , Color.RED) , LabelMaker("" , 14 , Color.RED)); vBox2.setLayoutX(240); vBox2.setLayoutY(72); vBox2.setSpacing(25);
+        HBox hBox = new HBox( ); hBox.getChildren().addAll(vBox1 , vBox  ); hBox.setSpacing(7); hBox.setLayoutX(70); hBox.setLayoutY(90); errors = vBox2; pane.getChildren().add(vBox2);
         textHandle();
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -101,13 +97,24 @@ public class Signup extends Application {
                         User user = new User(username.getText() , password.getText() , email.getText()  , nickname.getText(), slogan.getText());
                         user.setSecurityQuestion(User.getQuestionNumber((String)choiceBox.getValue()) , RecoveryAnswer.getText());
                         username.clear(); password.clear(); confirm.clear(); email.clear(); slogan.clear(); nickname.clear(); Captcha.clear(); choiceBox.getSelectionModel().clearSelection(); RecoveryAnswer.clear();
-                        System.out.println(user);
+                        Label label1 = (Label) errors.getChildren().get(0); label1.setText("");
+                        Label label2 = (Label) errors.getChildren().get(1); label2.setText("");
+                        Label label3 = (Label) errors.getChildren().get(2); label3.setText("");
+                        User.saveFile();
                         capchaMake();
+                    }
+                }
+                else if (name.equals("Esc")){
+                    Login login = new Login();
+                    try {
+                        login.start(Signup.stage);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
                 }
             }
         });
-        pane.getChildren().add(hBox);
+        pane.getChildren().addAll(hBox);
         stage.setMaximized(true);
         stage.show();
     }
@@ -119,56 +126,84 @@ public class Signup extends Application {
         username.textProperty().addListener((observable, oldText, newText)->{
             if (User.doesUsernameExist(newText)){
                 userValid.set(false);
-                username.setBackground(new Background(new BackgroundFill(Color.RED , null , null)));
+                username.setBackground(red);
+                Label label = (Label) errors.getChildren().get(0);
+                label.setText(SignupMenuResponds.usernameAlreadyExist.getResponse());
+                label.setTextFill(Color.RED);
+                label.setOpacity(100);
             }
             else {
                 userValid.set(true);
-                username.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                username.setBackground(gray);
             }
-            if (User.usernameCheck(new TextField(newText)).equals("fail")){
+            if (User.usernameCheck(new TextField(newText)).equals("fail")) {
                 userValid.set(false);
-                username.setBackground(new Background(new BackgroundFill(Color.RED , null , null)));
+                username.setBackground(red);
+                Label label = (Label) errors.getChildren().get(0);
+                label.setText(SignupMenuResponds.invalidUsername.getResponse());
+                label.setTextFill(Color.RED);
+                label.setOpacity(100);
             }
             else {
                 userValid.set(true);
-                username.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                username.setBackground(gray);
+                Label label = (Label) errors.getChildren().get(0);
+                label.setText("username is ok now.");
+                label.setTextFill(Color.GREEN);
+                label.setOpacity(100);
             }
             if (username.getText().length() == 0){
                 userValid.set(true);
-                username.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                username.setBackground(gray);
             }
         });
         password.textProperty().addListener((observable, oldText, newText)->{
             password.setText(newText);
             if (!isStrong(password)){
                 passValid.set(false);
-                password.setBackground(new Background(new BackgroundFill(Color.RED , null , null)));
+                password.setBackground(red);
+                Label label = (Label) errors.getChildren().get(1);
+                label.setText("password is weak");
+                label.setTextFill(Color.RED);
+                label.setOpacity(100);
             }
             else {
                 passValid.set(true);
-                password.setBackground(new Background(new BackgroundFill(Color.GREEN , null , null)));
+                password.setBackground(green);
+                Label label = (Label) errors.getChildren().get(1);
+                label.setText("password is ok now");
+                label.setTextFill(Color.GREEN);
+                label.setOpacity(100);
             }
             if (password.getText().length() == 0){
                 passValid.set(true);
-                password.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                password.setBackground(gray);
             }
             if (password.getText().length() == 0 || (confirmValid.get() && passValid.get())){
-                confirm.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-                password.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                confirm.setBackground(gray);
+                password.setBackground(gray);
             }
         });
         confirm.textProperty().addListener((observable, oldText, newText)->{
             if (!password.getText().equals(confirm.getText())){
                 confirmValid.set(false);
-                confirm.setBackground(new Background(new BackgroundFill(Color.RED , null , null)));
+                confirm.setBackground(red);
+                Label label = (Label) errors.getChildren().get(2);
+                label.setText("confirm must be equal to password.");
+                label.setTextFill(Color.RED);
+                label.setOpacity(100);
             }
             else {
                 confirmValid.set(true);
-                confirm.setBackground(new Background(new BackgroundFill(Color.GREEN , null , null)));
+                confirm.setBackground(green);
+                Label label = (Label) errors.getChildren().get(2);
+                label.setText("confirm is ok now.");
+                label.setTextFill(Color.GREEN);
+                label.setOpacity(100);
             }
             if (confirm.getText().length() == 0 || (confirmValid.get() && passValid.get())){
-                confirm.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
-                password.setBackground(new Background(new BackgroundFill(Color.BURLYWOOD , null , null)));
+                confirm.setBackground(gray);
+                password.setBackground(gray);
             }
 
         });
@@ -226,5 +261,20 @@ public class Signup extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+    public static Label LabelMaker(String header , int font , Color color){
+        Label label = new Label(header);
+        label.setFont(Font.font(font));
+        label.setTextFill(color);
+        return label;
+    }
+    public static Background BackgroundMaker(Image image){
+        BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false , false, true, false);
+        Background background = new Background(new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                bSize));
+        return background;
     }
 }

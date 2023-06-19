@@ -1,2 +1,4 @@
-package org.example.Controller;public class ProfileController {
+package org.example.Controller;
+
+public class ProfileController {
 }

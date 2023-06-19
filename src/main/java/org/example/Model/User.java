@@ -2,6 +2,7 @@ package org.example.Model;
 
 
 import java.io.*;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -10,8 +11,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import org.example.View.Responds.*;
+import org.example.View.Signup;
 
 public class User implements Serializable {
     public static final String[] securityQuestions = {
@@ -22,6 +25,7 @@ public class User implements Serializable {
     private static User loggedInUser;
     private static boolean stayLoggedIn = false;
     private static boolean exiting = false;
+    private URL profilePicture = null;
 
     private static ArrayList<User> allUsers = new ArrayList<>();
     private String username;
@@ -37,8 +41,14 @@ public class User implements Serializable {
         this.username = username;
         this.password = getSha256(password);
         this.email = email;
-        this.nickname = nickname; if (nickname.length() == 0) nickname = null;
-        this.slogan = slogan; if (slogan.length() == 0) slogan = null;
+        this.nickname = nickname;
+        if (nickname.length() == 0){
+            this.nickname = null;
+        }
+        this.slogan = slogan;
+        if (slogan.length() == 0 ){
+            this.slogan = null;
+        }
         allUsers.add(this);
         highScore = 0;
     }
@@ -71,6 +81,15 @@ public class User implements Serializable {
         }catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getQuestion(String username) {
+        for (int i = 0 ; i < allUsers.size() ; i++){
+            if (allUsers.get(i).getUsername().equals(username)){
+                return securityQuestions[allUsers.get(i).getRecoveryQuestion()];
+            }
+        }
+        return "fail";
     }
 
     public void setHighScore(int highScore) {
@@ -184,7 +203,12 @@ public class User implements Serializable {
     }
 
     public String getSlogan() {
+        if (slogan.length() != 0){
         return slogan;
+        }
+        else {
+            return null;
+        }
     }
 
     public void setUsername(String username) {
@@ -193,10 +217,12 @@ public class User implements Serializable {
     public void setSecurityQuestion(int i , String answer){
         recoveryQuestion = i;
         recoveryAnswer = answer;
+        User.saveFile();
     }
 
     public void setPassword(String password) {
         this.password = getSha256(password);
+        User.saveFile();
     }
 
     public void setNickname(String nickname) {
@@ -205,19 +231,35 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+        User.saveFile();
     }
 
     public void setSlogan(String slogan) {
         this.slogan = slogan;
+        User.saveFile();
     }
 
     public void removeSlogan() {
         this.slogan = null;
+        User.saveFile();
     }
     public boolean isPasswordCorrect(String password) {
         return getSha256(password).equals(this.password);
     }
 
+    public URL getProfilePicture() {
+        if (this.profilePicture != null) {
+            return this.profilePicture;
+        }
+        else {
+            return (Signup.class.getResource("/Images/avatar0.png"));
+        }
+    }
+
+    public void setProfilePicture(URL image){
+        this.profilePicture = image;
+        saveFile();
+    }
     public static String checkUsernameFormat(String username) {
         if (username!=null){
             if (username.matches("[a-zA-Z0-9_]+")){

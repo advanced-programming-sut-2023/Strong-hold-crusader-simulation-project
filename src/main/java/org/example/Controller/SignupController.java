@@ -2,7 +2,6 @@ package org.example.Controller;
 
 import javafx.scene.control.*;
 import org.example.Model.User;
-import org.example.View.Responds.SignupMenuCommands;
 import org.example.View.Responds.SignupMenuResponds;
 import org.example.View.Signup;
 
@@ -57,7 +56,6 @@ public class SignupController {
         if (slogan.getText().equals("random")){
             String randomSlogan = randomSlogan();
             Alert errorAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            String newPassword = generatePass();
             errorAlert.setHeaderText("your random slogan is : " + randomSlogan);
             errorAlert.setContentText("if you agree enter click ok to continue with this password else click cancel.");
             Optional<ButtonType> result = errorAlert.showAndWait();
