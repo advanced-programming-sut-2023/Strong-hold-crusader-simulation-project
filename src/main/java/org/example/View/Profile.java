@@ -61,6 +61,7 @@ public class Profile extends Application {
         TextField Email = new TextField("email :"); Email.setEditable(false); Email.setBackground(yellow); Email.setFont(Font.font(20));
         TextField Nickname = new TextField("nickname :"); Nickname.setEditable(false); Nickname.setBackground(yellow); Nickname.setFont(Font.font(20));
         TextField Slogan = new TextField("slogan :"); Slogan.setEditable(false); Slogan.setBackground(yellow); Slogan.setFont(Font.font(20));
+        Username.setFocusTraversable(false); Email.setFocusTraversable(false); Nickname.setFocusTraversable(false); Slogan.setFocusTraversable(false);
         Username.setMaxWidth(130); Email.setMaxWidth(130); Nickname.setMaxWidth(130); Slogan.setMaxWidth(130);
         VBox labels = new VBox(); labels.getChildren().addAll(Username ,Email , Nickname , Slogan);
         VBox data = new VBox();
@@ -128,6 +129,7 @@ public class Profile extends Application {
                  });
                   }
               });
+        username.setFocusTraversable(false); email.setFocusTraversable(false); nickname.setFocusTraversable(false); slogan.setFocusTraversable(false);
         Button changePassword = new Button("change password"); changePassword.setBackground(Signup.gray);
         changePassword.setFont(Font.font(20)); changePassword.setEffect(effect); changePassword.setMaxWidth(500);
         changePassword.setOnAction(new EventHandler<ActionEvent>() {

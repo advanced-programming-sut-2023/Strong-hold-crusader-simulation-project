@@ -5,25 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccbb8996-88e3-4b7d-8169-c33e498a853f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/ScoreboardController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Scoreboard.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/Scoreboard.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/LabelBackground1.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Controller/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Profile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Profile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Signup.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/Login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/FXML/Signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/FXML/Signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/MainBackgroung1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/SignupBackground.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/SignupBackground2.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Scoreboard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/userData.ser" beforeDir="false" afterPath="$PROJECT_DIR$/userData.ser" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

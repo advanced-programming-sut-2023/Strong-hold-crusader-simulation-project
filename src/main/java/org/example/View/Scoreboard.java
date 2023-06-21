@@ -5,10 +5,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,6 +21,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.Controller.ScoreboardController;
 import org.example.Model.User;
+
+import java.util.Optional;
 
 public class Scoreboard extends Application {
     private static Stage stage;
@@ -45,33 +44,44 @@ public class Scoreboard extends Application {
         pane.setBackground(Signup.BackgroundMaker(new Image(Scoreboard.class.getResource("/Images/LoginBackground1.jpg").toExternalForm())));
         VBox vBox = new VBox(); vBox.setSpacing(15);
         vBox.setLayoutX(600); vBox.setLayoutY(150);
-        scrollPane.setPrefHeight(350); scrollPane.setPrefWidth(400);
-        scrollPane.setLayoutX(550); scrollPane.setLayoutY(70);
+        scrollPane.setPrefHeight(350); scrollPane.setPrefWidth(600);
+        scrollPane.setLayoutX( 450); scrollPane.setLayoutY(40);
         for (int i = 0 ; i < User.getAllUsers().size() ; i++){
             HBox hBox = new HBox(); hBox.setSpacing(10);
             VBox profile = new VBox(); profile.setAlignment(Pos.CENTER);
             VBox username = new VBox(); username.setAlignment(Pos.CENTER);
             Circle circle = new Circle(30);
             circle.setFill(new ImagePattern(new Image(User.getAllUsers().get(i).getProfilePicture().toExternalForm())));
+            int finalI = i;
+            circle.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    Alert errorAlert = new Alert(Alert.AlertType.CONFIRMATION);
+                    errorAlert.setHeaderText("changing profile.");
+                    errorAlert.setContentText("if you want to set this avatar as your profile picture click ok.");
+                    Optional<ButtonType> result = errorAlert.showAndWait();
+                    if (result.isPresent() && result.get() == ButtonType.OK){
+                        currentUser.setProfilePicture(User.getAllUsers().get(finalI).getProfilePicture());
+                    }
+                }
+            });
             profile.getChildren().add(circle);
-            Label label = Signup.LabelMaker("username : " + User.getAllUsers().get(i).getUsername() + "   rank : " + getRank(i)  , 20 , Color.BLUE);
             Font font = Font.font("Brush Script MT", FontWeight.BOLD, FontPosture.REGULAR, 25);
-            label.setFont(font);
             StackPane stackPane = new StackPane();
-            Text text = new Text("username : " + User.getAllUsers().get(i).getUsername() + "   rank : " + getRank(i));
-            text.setFont(Font.font(20)); text.setFill(Color.BROWN);
+            Text text = new Text("username : " + User.getAllUsers().get(i).getUsername() +
+                    "   high score : " + User.getAllUsers().get(i).getHighScore() +  "   rank : " + getRank(i) );
+            text.setFont(Font.font(20)); text.setFill(Color.BROWN); text.setFont(font);
             ImageView iv = new ImageView(Scoreboard.class.getResource("/Images/LabelBackground1.jpg").toExternalForm());
-            iv.setFitHeight(30); iv.setFitWidth(290);
+            iv.setFitHeight(30); iv.setFitWidth(500);
             stackPane.getChildren().add(iv); stackPane.getChildren().add(text); stackPane.setAlignment(Pos.CENTER);
             if (User.getAllUsers().get(i).getUsername().equals(currentUser.getUsername())){
                 text.setFill(Color.GOLD);
             }
-            username.getChildren().add(label);
             hBox.getChildren().addAll(profile , stackPane);
             vBox.getChildren().add(hBox);
         }
         scrollPane.setContent(vBox);
-        Button back = new Button("back"); back.setBackground(Signup.gray); back.setMaxWidth(500);
+        Button back = new Button("back"); back.setBackground(Signup.gray); back.setMaxWidth(700);
         VBox whole = new VBox(); whole.getChildren().addAll(scrollPane , back); whole.setSpacing(5);
         whole.setLayoutX(600); whole.setLayoutY(150);
         whole.setOnKeyPressed(new EventHandler<KeyEvent>() {

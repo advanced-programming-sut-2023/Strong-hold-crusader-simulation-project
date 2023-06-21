@@ -42,8 +42,8 @@ public class Main extends Application {
         pane.setBackground(background);
         timer();
         VBox Buttons = new VBox(); Buttons.setLayoutX(700); Buttons.setLayoutY(120); Buttons.setSpacing(15);
-        Button profileMenu = new Button("profile menu"); profileMenu.setBackground(Signup.gray); profileMenu.setMaxWidth(1000);
-        Button scoreboard = new Button("score board"); scoreboard.setBackground(Signup.gray); scoreboard.setMaxWidth(1000);
+        Button profileMenu = new Button("profile menu"); profileMenu.setBackground(Signup.gray); profileMenu.setPrefWidth(300);
+        Button scoreboard = new Button("score board"); scoreboard.setBackground(Signup.gray); scoreboard.setPrefWidth(300);
         profileMenu.setFont(Font.font(20));
         scoreboard.setFont(Font.font(20));
         noBalls.setLayoutX(240); noBalls.setLayoutY(90); noBalls.setVisible(false);
