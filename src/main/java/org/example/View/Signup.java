@@ -55,7 +55,7 @@ public class Signup extends Application {
         this.stage = stage;
         Pane pane = FXMLLoader.load(Signup.class.getResource("/FXML/Signup.fxml")); this.pane = pane;
         BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false , false, true, false);
-        Image image = new Image(Signup.class.getResource("/Images/SignupBackground1.jpg").toExternalForm());
+        Image image = new Image(Signup.class.getResource("/Images/SignupBackground2.jpg").toExternalForm());
         Background background = BackgroundMaker(image);
         pane.setBackground(background);
         Scene scene = new Scene(pane);

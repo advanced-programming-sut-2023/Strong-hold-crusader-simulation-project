@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccbb8996-88e3-4b7d-8169-c33e498a853f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Controller/TradeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Trade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/FXML/Trade.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Images/SignupBackground2.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Scoreboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Scoreboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userData.ser" beforeDir="false" afterPath="$PROJECT_DIR$/userData.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/View/Signup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/View/Signup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/10.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/10.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/11.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/11.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/12.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/12.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/20.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/20.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/21.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/21.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/Captcha/22.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/Captcha/22.jpeg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LoginBackground1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/LoginBackground1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/LoginBackground2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/LoginBackground2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/MainBackground1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/MainBackground1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/ProfileBackground1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/ProfileBackground1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Images/SignupBackground1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Images/SignupBackground1.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
