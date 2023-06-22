@@ -26,7 +26,7 @@ public class Main extends Application {
     public static Pane pane;
     private static Timer timer;
     private long lastTrueTime;
-    private Label noBalls = Signup.LabelMaker("don't you dare touch my balls kid." , 20 , Color.RED);
+    private Label noBalls = Signup.LabelMaker("don't you dear touch my balls kid." , 20 , Color.RED);
     public Main(User currentUser){
         this.currentUser = currentUser;
     }
@@ -47,7 +47,7 @@ public class Main extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 if (mouseEvent.getScreenX() >= 280 && mouseEvent.getSceneX() <= 380 &&
-                mouseEvent.getScreenY() >= 740 && mouseEvent.getScreenY() <= 820){
+                        mouseEvent.getScreenY() >= 740 && mouseEvent.getScreenY() <= 820){
                     long now= System.currentTimeMillis();
                     noBalls.setVisible(true);
                     lastTrueTime=now;

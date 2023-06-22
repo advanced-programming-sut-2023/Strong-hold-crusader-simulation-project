@@ -201,7 +201,7 @@ public class User implements Serializable {
 
     public String getSlogan() {
         if (slogan.length() != 0){
-        return slogan;
+            return slogan;
         }
         else {
             return null;

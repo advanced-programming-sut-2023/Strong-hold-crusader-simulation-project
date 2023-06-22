@@ -102,26 +102,26 @@ public class Profile extends Application {
 
                 newWindow.show();
                 contentPane.setOnDragOver(new EventHandler<DragEvent>() {
-                @Override
-                public void handle(final DragEvent event) {
-                    mouseDragOver(event);
-                }
+                    @Override
+                    public void handle(final DragEvent event) {
+                        mouseDragOver(event);
+                    }
                 });
                 contentPane.setOnDragDropped(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(final DragEvent event) {
-                    mouseDragDropped(event);
-                   }
-               });
+                        mouseDragDropped(event);
+                    }
+                });
 
                 contentPane.setOnDragExited(new EventHandler<DragEvent>() {
-                  @Override
-                  public void handle(final DragEvent event) {
-                contentPane.setStyle("-fx-border-color: #C6C6C6;");
-                  }
-                 });
-                  }
-              });
+                    @Override
+                    public void handle(final DragEvent event) {
+                        contentPane.setStyle("-fx-border-color: #C6C6C6;");
+                    }
+                });
+            }
+        });
         username.setFocusTraversable(false); email.setFocusTraversable(false); nickname.setFocusTraversable(false); slogan.setFocusTraversable(false);
         Button changePassword = new Button("change password"); changePassword.setBackground(Signup.gray);
         changePassword.setFont(Font.font(20)); changePassword.setEffect(effect); changePassword.setMaxWidth(500);
