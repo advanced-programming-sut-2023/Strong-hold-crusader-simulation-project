@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/StrongholdCrusader/StrongholdCrusader.iml" filepath="$PROJECT_DIR$/StrongholdCrusader/StrongholdCrusader.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/main strong.iml" filepath="$PROJECT_DIR$/.idea/main strong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Phase2/phase2.iml" filepath="$PROJECT_DIR$/Phase2/phase2.iml" />
     </modules>
   </component>
 </project>

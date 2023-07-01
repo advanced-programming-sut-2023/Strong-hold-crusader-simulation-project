@@ -1,6 +1,15 @@
 package org.example.view;
 
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import org.example.controller.Controller;
 import org.example.controller.TradeMenuController;
+import org.example.model.Trade;
 import org.example.view.commands.TradeMenuCommands;
 
 import java.util.Scanner;
@@ -29,4 +38,5 @@ public class TradeMenu extends Menu {
             } else System.out.println("invalid command");
         }
     }
+//
 }

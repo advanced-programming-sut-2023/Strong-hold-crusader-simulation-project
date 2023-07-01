@@ -44,4 +44,5 @@ public class Controller {
     public static boolean checkPasswordFormat(String password) {
         return SignupMenuCommands.password.getMatcher(password) != null;
     }
+
 }

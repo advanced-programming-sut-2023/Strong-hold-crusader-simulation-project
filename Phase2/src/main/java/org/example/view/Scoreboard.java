@@ -38,12 +38,14 @@ public class Scoreboard extends Application {
         Pane pane = FXMLLoader.load(Scoreboard.class.getResource("/FXML/Scoreboard.fxml"));
         this.pane = pane;
         this.scrollPane = new ScrollPane();
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setStyle("-fx-background: transparent; -fx-background-color: transparent; ");
         scrollPane.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT , null , null)));
         pane.setBackground(Signup.BackgroundMaker(new Image(Scoreboard.class.getResource("/Images/LoginBackground1.jpg").toExternalForm())));
         VBox vBox = new VBox(); vBox.setSpacing(15);
         vBox.setLayoutX(600); vBox.setLayoutY(150);
-        scrollPane.setPrefHeight(350); scrollPane.setPrefWidth(600);
+        scrollPane.setPrefHeight(350); scrollPane.setPrefWidth(572);
         scrollPane.setLayoutX( 450); scrollPane.setLayoutY(40);
         for (int i = 0 ; i < User.getAllUsers().size() ; i++){
             HBox hBox = new HBox(); hBox.setSpacing(10);
@@ -65,14 +67,13 @@ public class Scoreboard extends Application {
                 }
             });
             profile.getChildren().add(circle);
-            Font font = Font.font("Brush Script MT", FontWeight.BOLD, FontPosture.REGULAR, 25);
             StackPane stackPane = new StackPane();
             Text text = new Text("username : " + User.getAllUsers().get(i).getUsername() +
                     "   high score : " + User.getAllUsers().get(i).getHighScore() +  "   rank : " + getRank(i) );
-            text.setFont(Font.font(20)); text.setFill(Color.BROWN); text.setFont(font);
+            text.setFont(Font.font(20)); text.setFill(Color.BROWN);
             ImageView iv = new ImageView(Scoreboard.class.getResource("/Images/LabelBackground1.jpg").toExternalForm());
             iv.setFitHeight(30); iv.setFitWidth(500);
-            stackPane.getChildren().add(iv); stackPane.getChildren().add(text); stackPane.setAlignment(Pos.CENTER);
+            stackPane.getChildren().add(iv); stackPane.getChildren().add(text);
             if (User.getAllUsers().get(i).getUsername().equals(currentUser.getUsername())){
                 text.setFill(Color.GOLD);
             }
@@ -116,7 +117,7 @@ public class Scoreboard extends Application {
 
     }
 
-    private String getRank(int i) {
+    public static String getRank(int i) {
         switch (i){
             case 0:{
                 return "1st";

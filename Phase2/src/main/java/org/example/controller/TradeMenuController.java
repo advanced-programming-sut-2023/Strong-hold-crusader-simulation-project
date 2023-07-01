@@ -4,21 +4,30 @@ import org.example.model.Government;
 import org.example.model.Resources;
 import org.example.model.Trade;
 import org.example.model.User;
+import org.example.view.TradeMain;
 
 import java.util.regex.Matcher;
 
 public class TradeMenuController extends Controller {
     public static String tradeNotification() {
-        String trades = "";
+
         for (Trade trade : currentGame.getCurrentTurn().getTradeNotification()) {
-            trades += "\n" + "trade id: " + trade.getId() + "\n" +
-                    "sender: " + trade.getRequester().getOwner().getUsername() + "\n" +
+            String trades = "";
+            trades += "sender: " + trade.getRequester().getOwner().getUsername() + "\n" +
                     "resource: " + trade.getResource().getName() + "\n" +
                     "amount: " + trade.getAmount() + "\n" +
                     "message: " + trade.getRequestMessage() + "\n";
+            if (TradeMain.errorMaker("trade notification" , trades , true)){
+                currentGame.getCurrentTurn().changeBalance(trade.getPrice());
+                trade.getRequester().changeBalance(-trade.getPrice());
+                currentGame.getCurrentTurn().getResourceCount().replace(trade.getResource() ,
+                        currentGame.getCurrentTurn().getResourceCount().get(trade.getResource()) - trade.getAmount() );
+                trade.getRequester().getResourceCount().replace(trade.getResource() ,
+                        trade.getRequester().getResourceCount().get(trade.getResource()) + trade.getAmount());
+            }
         }
         currentGame.getCurrentTurn().getTradeNotification().clear();
-        return trades;
+        return "done";
     }
 
     public static String tradeList(){

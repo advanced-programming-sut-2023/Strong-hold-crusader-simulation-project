@@ -14,7 +14,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import org.example.controller.TradeMenuController;
 import org.example.model.User;
 
 import java.util.Timer;
@@ -40,8 +43,10 @@ public class Main extends Application {
         VBox Buttons = new VBox(); Buttons.setLayoutX(700); Buttons.setLayoutY(120); Buttons.setSpacing(15);
         Button profileMenu = new Button("profile menu"); profileMenu.setBackground(Signup.gray); profileMenu.setPrefWidth(300);
         Button scoreboard = new Button("score board"); scoreboard.setBackground(Signup.gray); scoreboard.setPrefWidth(300);
+        Button trade = new Button("trade"); trade.setBackground(Signup.gray); trade.setPrefWidth(300);
         profileMenu.setFont(Font.font(20));
         scoreboard.setFont(Font.font(20));
+        trade.setFont(Font.font(20));
         noBalls.setLayoutX(240); noBalls.setLayoutY(90); noBalls.setVisible(false);
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -76,7 +81,19 @@ public class Main extends Application {
                 }
             }
         });
-        Buttons.getChildren().addAll(profileMenu , scoreboard);
+        trade.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TradeMenuController.tradeNotification();
+                TradeMain tradeMain = new TradeMain(currentUser);
+                try {
+                    tradeMain.start(stage);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        Buttons.getChildren().addAll(profileMenu , scoreboard , trade);
         pane.getChildren().addAll(Buttons  , noBalls);
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
