@@ -141,7 +141,7 @@ public class GameMenu extends Application {
 
 
 
-        group.getChildren().addAll(pane1,pane);
+        group.getChildren().addAll(pane1,pane,getMiniMap(scrollPane));
         scrollPane.setPrefSize(1537, 865);
         scrollPane.requestFocus();
         Scene scene = new Scene(group);
@@ -166,6 +166,18 @@ public class GameMenu extends Application {
         stage.show();
     }
 
+    private ImageView getMiniMap(ScrollPane scrollPane) {
+        ImageView miniMap = new ImageView(new Image(getClass().getResource("/Images/textures/baseGround.jpg").toExternalForm(), 142, 142, false, false));
+        miniMap.setOnMouseClicked(mouseEvent -> {
+            double xRatio = mouseEvent.getX() / miniMap.getBoundsInLocal().getWidth();
+            double yRatio = mouseEvent.getY() / miniMap.getBoundsInLocal().getHeight();
+            scrollPane.setVvalue(xRatio);
+            scrollPane.setHvalue(yRatio);
+        });
+        miniMap.setX(1300);
+        miniMap.setY(700);
+        return miniMap;
+    }
     private void initializeGridPane(GridPane gridPane) {
         gridPane.setGridLinesVisible(true);
         final int mapSize = currentMap.getSize();
