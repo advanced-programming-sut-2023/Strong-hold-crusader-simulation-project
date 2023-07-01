@@ -110,6 +110,7 @@ public class Signup extends Application {
                         throw new RuntimeException(e);
                     }
                 }
+                return ;
             }
         });
         pane.getChildren().addAll(hBox);
@@ -243,6 +244,7 @@ public class Signup extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 capchaMake();
+                return ;
             }
         });
     }

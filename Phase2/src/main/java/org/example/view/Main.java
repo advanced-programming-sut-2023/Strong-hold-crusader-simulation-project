@@ -52,6 +52,7 @@ public class Main extends Application {
                     noBalls.setVisible(true);
                     lastTrueTime=now;
                 }
+                return ;
             }
         });
         scoreboard.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -63,6 +64,7 @@ public class Main extends Application {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                return ;
             }
         });
         profileMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -74,6 +76,7 @@ public class Main extends Application {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                return ;
             }
         });
         Buttons.getChildren().addAll(profileMenu , scoreboard);
@@ -90,6 +93,7 @@ public class Main extends Application {
                         throw new RuntimeException(e);
                     }
                 }
+                return ;
             }
         });
         Scene scene = new Scene(pane);

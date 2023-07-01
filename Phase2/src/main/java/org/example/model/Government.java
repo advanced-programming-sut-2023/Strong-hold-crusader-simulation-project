@@ -20,7 +20,7 @@ public class Government {
     private int fearRate;
     private int foodRate;
     private int population;
-    private int balance;
+    private int balance=100;
     private ArrayList<Building> buildings;
     private ArrayList<Trade> tradeNotification;
 

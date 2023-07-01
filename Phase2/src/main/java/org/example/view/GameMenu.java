@@ -1,20 +1,42 @@
 package org.example.view;
 
+import javafx.animation.Animation;
+import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.input.KeyCombination;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.example.Main;
 import org.example.model.Map;
 
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
+
 public class GameMenu extends Application {
-    private Map currentMap = new Map(100);
+    int jjjj=0;
+    public static Map currentMap = new Map(100);
 //    public GameMenu(Scanner scanner) {
 //        super(scanner);
 //    }
@@ -79,17 +101,66 @@ public class GameMenu extends Application {
 //            } else System.out.println("invalid command");
 //        }
 //    }
+    Stage stage;
+    GridPane gridPanew=new GridPane();
 
-
+    GridPane gridPane;
     @Override
     public void start(Stage stage) throws Exception {
-        GridPane gridPane = new GridPane();
+        this.stage=stage;
+        gridPane = new GridPane();
+        Pane pane1=new Pane();
+
+        BorderPane borderPane=new BorderPane(gridPane);
+
+
+
         initializeGridPane(gridPane);
-        ScrollPane scrollPane = new ScrollPane(gridPane);
+  //      Undo.newMap(gridPane);
+        ScrollPane scrollPane = new ScrollPane(borderPane);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setPannable(true);
-        Scene scene = new Scene(scrollPane);
+
+
+        Image image = new Image(getClass().getResource("/Images/Others/menu/menu2.png").toExternalForm());
+        ImageView imageView = new ImageView(image);
+
+        imageView.setFitWidth(1537);
+        imageView.setFitHeight(250);
+        imageView.setY(600);
+
+        Group group=new Group();
+
+        pane1.getChildren().add(scrollPane);
+        pane1.getChildren().add(imageView);
+
+        Pane pane=Under.asleKar(gridPane,scrollPane);
+        pane.setPrefWidth(200);
+        pane.setLayoutY(700);
+
+
+
+        group.getChildren().addAll(pane1,pane);
+        scrollPane.setPrefSize(1537, 865);
+        scrollPane.requestFocus();
+        Scene scene = new Scene(group);
+
+
+        KeyCombination keyComb = KeyCombination.keyCombination("Ctrl+Z");
+        scene.getAccelerators().put(keyComb, () -> {
+            gridPane.getChildren().remove(gridPane.getChildren().size()-1);
+
+        });
+
+        KeyCombination keyComb1 = KeyCombination.keyCombination("Ctrl+D");
+        scene.getAccelerators().put(keyComb1, () -> {
+            if (Under.selectedThing!=null){
+                gridPane.getChildren().remove(Under.selectedThing);
+            }
+        });
+
+
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
@@ -109,9 +180,13 @@ public class GameMenu extends Application {
             gridPane.getRowConstraints().add(rowConst);
         }
         Image image = new Image(getClass().getResource("/Images/textures/baseGround.jpg").toExternalForm());
+        System.out.println(mapSize);
         for (int i = 0; i < mapSize; i += 1) {
+
             for (int j = 0; j < mapSize; j += 1) {
                 ImageView imageView = new ImageView(image);
+                //System.out.println(imageView.getImage().getUrl().toString().equals(getClass().getResource("/Images/textures/baseGround.jpg").toString()));
+                imageView.getOnMouseClicked();
                 imageView.setOpacity(0.8);
                 imageView.setFitWidth(100);
                 imageView.setFitHeight(100);

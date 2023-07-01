@@ -73,12 +73,14 @@ public class Profile extends Application {
             public void handle(MouseEvent mouseEvent) {
                 System.out.println(mouseEvent.getScreenX());
 
+                return ;
             }
         });
         setSloganButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 sloganHandel(slogan);
+                return ;
             }
         });
         setSlogan.getChildren().addAll(slogan , setSloganButton);
@@ -105,12 +107,14 @@ public class Profile extends Application {
                     @Override
                     public void handle(final DragEvent event) {
                         mouseDragOver(event);
+                        return ;
                     }
                 });
                 contentPane.setOnDragDropped(new EventHandler<DragEvent>() {
                     @Override
                     public void handle(final DragEvent event) {
                         mouseDragDropped(event);
+                        return ;
                     }
                 });
 
@@ -118,8 +122,10 @@ public class Profile extends Application {
                     @Override
                     public void handle(final DragEvent event) {
                         contentPane.setStyle("-fx-border-color: #C6C6C6;");
+                        return ;
                     }
                 });
+                return ;
             }
         });
         username.setFocusTraversable(false); email.setFocusTraversable(false); nickname.setFocusTraversable(false); slogan.setFocusTraversable(false);
@@ -148,6 +154,7 @@ public class Profile extends Application {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         passwordChanger(newPassword , newPasswordConf);
+                        return ;
                     }
                 });
                 // New window (Stage)
@@ -161,6 +168,7 @@ public class Profile extends Application {
                 newWindow.setY(stage.getY() + 100);
 
                 newWindow.show();
+                return ;
             }
         });
         if (currentUser.getSlogan() != null){
@@ -186,6 +194,7 @@ public class Profile extends Application {
                         throw new RuntimeException(e);
                     }
                 }
+                return ;
             }
         });
         Scene scene = new Scene(pane);

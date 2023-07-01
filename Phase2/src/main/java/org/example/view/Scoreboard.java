@@ -62,6 +62,7 @@ public class Scoreboard extends Application {
                     if (result.isPresent() && result.get() == ButtonType.OK){
                         currentUser.setProfilePicture(User.getAllUsers().get(finalI).getProfilePicture());
                     }
+                    return ;
                 }
             });
             profile.getChildren().add(circle);
@@ -95,6 +96,7 @@ public class Scoreboard extends Application {
                         throw new RuntimeException(e);
                     }
                 }
+                return ;
             }
         });
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -106,6 +108,7 @@ public class Scoreboard extends Application {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                return ;
             }
         });
         pane.getChildren().add(whole);

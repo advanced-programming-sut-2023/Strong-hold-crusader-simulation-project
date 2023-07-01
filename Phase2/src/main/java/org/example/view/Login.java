@@ -91,12 +91,14 @@ public class Login extends Application {
                 else if (name.equals("Esc")){
                     System.exit(33);
                 }
+                return ;
             }
         });
         forgotPassword.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 recover();
+                return ;
             }
         });
         dontHaveAccount.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -108,6 +110,7 @@ public class Login extends Application {
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
+                return;
             }
         });
         pane.getChildren().add(hBox);
@@ -158,9 +161,11 @@ public class Login extends Application {
                         @Override
                         public void handle(MouseEvent mouseEvent) {
                             recoverDoer();
+                            return ;
                         }
                     });
                 }
+                return ;
             }
         });
     }
@@ -236,6 +241,7 @@ public class Login extends Application {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 capchaMake();
+                return ;
             }
         });
     }
