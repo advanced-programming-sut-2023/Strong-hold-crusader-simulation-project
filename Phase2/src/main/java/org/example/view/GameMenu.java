@@ -4,6 +4,9 @@ import javafx.animation.Animation;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.scene.control.*;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCombination;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -15,9 +18,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,8 +30,10 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.example.Main;
 import org.example.model.Map;
+import org.example.model.Reports;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 public class GameMenu extends Application {
@@ -104,6 +106,9 @@ public class GameMenu extends Application {
     Stage stage;
     GridPane gridPanew=new GridPane();
 
+    Clipboard clipboard = Clipboard.getSystemClipboard();
+    ClipboardContent content = new ClipboardContent();
+
     GridPane gridPane;
     @Override
     public void start(Stage stage) throws Exception {
@@ -139,9 +144,14 @@ public class GameMenu extends Application {
         pane.setPrefWidth(200);
         pane.setLayoutY(700);
 
+        Pane rep= Reports.reports();
+        rep.setPrefWidth(200);
+        rep.setLayoutY(700);
+        pane.setVisible(true);
+        rep.setVisible(false);
 
 
-        group.getChildren().addAll(pane1,pane,getMiniMap(scrollPane));
+        group.getChildren().addAll(pane1,pane,rep,getMiniMap(scrollPane));
         scrollPane.setPrefSize(1537, 865);
         scrollPane.requestFocus();
         Scene scene = new Scene(group);
@@ -160,11 +170,69 @@ public class GameMenu extends Application {
             }
         });
 
+        KeyCombination keyComb2 = KeyCombination.keyCombination("Ctrl+A");
+        scene.getAccelerators().put(keyComb2, () -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Options");
+            alert.setHeaderText("Quit the mission");
+            alert.setResizable(false);
+            alert.setContentText("Do you want to continue the mission?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            ButtonType button = result.orElse(ButtonType.CANCEL);
+
+            if (button == ButtonType.CANCEL) {
+                stage.close();
+            }
+        });
+
+        KeyCombination keyComb3 = KeyCombination.keyCombination("Ctrl+B");
+        scene.getAccelerators().put(keyComb3, () -> {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Briefing");
+            alert.setHeaderText("Briefing");
+            alert.setResizable(true);
+            alert.setContentText("Do you want to restart the mission?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            ButtonType button = result.orElse(ButtonType.CANCEL);
+
+            if (button == ButtonType.OK) {
+                borderPane.getChildren().clear();
+                for (int i=currentMap.getSize()*currentMap.getSize();i<gridPane.getChildren().size(); i++){
+                    gridPane.getChildren().remove(i);
+                }
+            }
+        });
+
+        KeyCombination report = KeyCombination.keyCombination("Ctrl+Q");
+        scene.getAccelerators().put(report, () -> {
+            pane.setVisible(!pane.isVisible());
+            rep.setVisible(!rep.isVisible());
+        });
+
+        KeyCombination copy = KeyCombination.keyCombination("Ctrl+C");
+        scene.getAccelerators().put(copy, () -> {
+            if (Under.selectedThing!=null){
+                Image image1=((ImageView) Under.selectedThing).getImage();
+                content.putImage(image1);
+                clipboard.setContent(content);
+
+            }
+        });
+
+        KeyCombination paste = KeyCombination.keyCombination("Ctrl+V");
+        scene.getAccelerators().put(paste, () -> {
+
+        });
+
+
 
         stage.setScene(scene);
         stage.setFullScreen(true);
         stage.show();
     }
+
 
     private ImageView getMiniMap(ScrollPane scrollPane) {
         ImageView miniMap = new ImageView(new Image(getClass().getResource("/Images/textures/baseGround.jpg").toExternalForm(), 142, 142, false, false));
@@ -192,7 +260,6 @@ public class GameMenu extends Application {
             gridPane.getRowConstraints().add(rowConst);
         }
         Image image = new Image(getClass().getResource("/Images/textures/baseGround.jpg").toExternalForm());
-        System.out.println(mapSize);
         for (int i = 0; i < mapSize; i += 1) {
 
             for (int j = 0; j < mapSize; j += 1) {

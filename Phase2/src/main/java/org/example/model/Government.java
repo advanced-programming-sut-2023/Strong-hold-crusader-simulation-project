@@ -14,13 +14,13 @@ public class Government {
     private static final String[] popularityFactors = {"Food", "Tax", "Religion", "Fear Factor"};
     private User owner;
     private final HashMap<Resources, Integer> resourceCount;
-    private ArrayList<People> people;
+    private static ArrayList<People> people;
     private int popularity;
-    private int taxRate;
-    private int fearRate;
-    private int foodRate;
+    private static int taxRate;
+    private static int fearRate;
+    private static int foodRate;
     private int population;
-    private int balance=100;
+    private static int balance=100;
     private ArrayList<Building> buildings;
     private ArrayList<Trade> tradeNotification;
 
@@ -34,7 +34,7 @@ public class Government {
         this.balance += change;
     }
 
-    public int getBalance() {
+    public static int getBalance() {
         return balance;
     }
 
@@ -53,7 +53,7 @@ public class Government {
         }
     }
 
-    public ArrayList<People> getPeople() {
+    public static ArrayList<People> getPeople() {
         return people;
     }
 
@@ -84,16 +84,16 @@ public class Government {
         this.popularity += change;
     }
 
-    public void setTaxRate(int taxRate) {
-        this.taxRate = taxRate;
+    public static void setTaxRate(int taxRate0) {
+        taxRate = taxRate0;
     }
 
-    public void setFearRate(int fearRate) {
-        this.fearRate = fearRate;
+    public static void setFearRate(int fearRate0) {
+        fearRate = fearRate0;
     }
 
-    public void setFoodRate(int foodRate) {
-        this.foodRate = foodRate;
+    public static void setFoodRate(int foodRate0) {
+        foodRate = foodRate0;
     }
 
     public void changePopulation(int change) {
@@ -108,15 +108,15 @@ public class Government {
         return popularity;
     }
 
-    public int getTaxRate() {
+    public static int getTaxRate() {
         return taxRate;
     }
 
-    public int getFearRate() {
+    public static int getFearRate() {
         return fearRate;
     }
 
-    public int getFoodRate() {
+    public static int getFoodRate() {
         return foodRate;
     }
 
