@@ -1,40 +1,21 @@
 package org.example.view;
 
-import javafx.animation.Animation;
-import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.control.*;
 import javafx.scene.input.Clipboard;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.KeyCombination;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
-import org.example.Main;
 import org.example.model.Map;
-import org.example.model.Reports;
 
-import java.net.URL;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 public class GameMenu extends Application {
     int jjjj=0;
@@ -156,7 +137,6 @@ public class GameMenu extends Application {
         scrollPane.requestFocus();
         Scene scene = new Scene(group);
 
-
         KeyCombination keyComb = KeyCombination.keyCombination("Ctrl+Z");
         scene.getAccelerators().put(keyComb, () -> {
             gridPane.getChildren().remove(gridPane.getChildren().size()-1);
@@ -225,8 +205,6 @@ public class GameMenu extends Application {
         scene.getAccelerators().put(paste, () -> {
 
         });
-
-
 
         stage.setScene(scene);
         stage.setFullScreen(true);
