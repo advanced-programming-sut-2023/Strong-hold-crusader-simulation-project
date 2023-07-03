@@ -7,9 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="StrongholdCrusader" />
+        <module name="main strong" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="main strong" target="11" />
       <module name="StrongholdCrusader" target="11" />
     </bytecodeTargetLevel>
   </component>

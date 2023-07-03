@@ -3,17 +3,11 @@ package org.example.view;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.geometry.Bounds;
-import javafx.geometry.HPos;
-import javafx.geometry.Point2D;
-import javafx.geometry.VPos;
+import javafx.geometry.*;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
@@ -24,9 +18,12 @@ import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.example.controller.Controller;
+import org.example.controller.GameMenuController;
+import org.example.controller.TradeMenuController;
 import org.example.model.Map;
 import org.example.model.MapCell;
 import org.example.model.Texture;
+import org.example.model.User;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -159,17 +156,14 @@ public class GameMenu extends Application {
 
         KeyCombination keyComb2 = KeyCombination.keyCombination("Ctrl+A");
         scene.getAccelerators().put(keyComb2, () -> {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Options");
-            alert.setHeaderText("Quit the mission");
-            alert.setResizable(false);
-            alert.setContentText("Do you want to continue the mission?");
-
-            Optional<ButtonType> result = alert.showAndWait();
-            ButtonType button = result.orElse(ButtonType.CANCEL);
-
-            if (button == ButtonType.CANCEL) {
+            Alert errorAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            errorAlert.setHeaderText("Quit the mission");
+            errorAlert.setContentText("Do you want to continue the mission?");
+            Optional<ButtonType> result = errorAlert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
                 stage.close();
+            }
+            else {
             }
         });
 
@@ -212,9 +206,34 @@ public class GameMenu extends Application {
         scene.getAccelerators().put(paste, () -> {
 
         });
-
+        VBox buttons = new VBox(); buttons.setSpacing(10); buttons.setLayoutX(100); buttons.setLayoutY(100);
+        buttons.setPrefWidth(120); buttons.setAlignment(Pos.CENTER);
+        Button nextTurn = new Button("next turn"); nextTurn.setBackground(Signup.gray);
+        Button tradeMenu = new Button("trade menu"); tradeMenu.setBackground(Signup.gray);
+        nextTurn.setPrefWidth(100); tradeMenu.setPrefWidth(100);
+        nextTurn.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameMenuController.nextTurn();
+                System.out.println(GameMenuController.getCurrentGame().getCurrentTurn().getOwner().getUsername());
+            }
+        });
+        tradeMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TradeMenuController.tradeNotification();
+                TradeMain tradeMain = new TradeMain(GameMenuController.getCurrentGame().getCurrentTurn().getOwner());
+                try {
+                    tradeMain.start(stage);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        buttons.getChildren().addAll(nextTurn , tradeMenu);
+        borderPane.getChildren().addAll(buttons);
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
         stage.show();
     }
 

@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.controlsfx.control.CheckComboBox;
+import org.example.controller.GameMenuController;
 import org.example.controller.MainMenuController;
 import org.example.controller.TradeMenuController;
 import org.example.model.User;
@@ -89,6 +90,17 @@ public class Main extends Application {
                 }
             }
         });
+        trade.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                TradeMain tradeMain = new TradeMain(GameMenuController.getCurrentGame().getCurrentTurn().getOwner());
+                try {
+                    tradeMain.start(Main.stage);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         ObservableList<String> observableList = FXCollections.observableArrayList();
         ArrayList<String> playerNames = new ArrayList<>();
         for (User user : User.getAllUsers()) {
@@ -112,18 +124,18 @@ public class Main extends Application {
                 }
             }
         });
-        trade.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                TradeMenuController.tradeNotification();
-                TradeMain tradeMain = new TradeMain(currentUser);
-                try {
-                    tradeMain.start(stage);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
+//        trade.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent mouseEvent) {
+//                TradeMenuController.tradeNotification();
+//                TradeMain tradeMain = new TradeMain(GameMenuController.getCurrentGame().getCurrentTurn().getOwner());
+//                try {
+//                    tradeMain.start(stage);
+//                } catch (Exception e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        });
         startGame.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -135,7 +147,7 @@ public class Main extends Application {
                 }
             }
         });
-        Buttons.getChildren().addAll(profileMenu , scoreboard, startGame, players);
+        Buttons.getChildren().addAll(profileMenu , scoreboard , startGame, players);
         pane.getChildren().addAll(Buttons  , noBalls);
         pane.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override

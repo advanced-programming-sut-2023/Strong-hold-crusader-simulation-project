@@ -69,12 +69,12 @@ public class TradeMain extends Application {
                 switch (name){
                     case "Esc":{
                         if (vBox.isVisible()){
-                        Main main = new Main(currentUser);
-                        try {
-                            main.start(stage);
-                        } catch (Exception e) {
-                            throw new RuntimeException(e);
-                        }}
+                            GameMenu gameMenu = new GameMenu();
+                            try {
+                                gameMenu.start(stage);
+                            } catch (Exception e) {
+                                throw new RuntimeException(e);
+                            }}
                     }
                 }
             }
@@ -169,8 +169,8 @@ public class TradeMain extends Application {
             return;
         }
         VBox Whole = new VBox(); Whole.setAlignment(Pos.CENTER); Whole.setSpacing(5);
-        HashMap<String , TextField > getPrice = new HashMap<>();
-        HashMap<String , TextField > getNumber = new HashMap<>();
+        HashMap<Resources , TextField > getPrice = new HashMap<>();
+        HashMap<Resources , TextField > getNumber = new HashMap<>();
         this.scrollPane = new ScrollPane();
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
@@ -203,7 +203,8 @@ public class TradeMain extends Application {
             remove.getChildren().addAll(Signup.LabelMaker("remove" , 14 , Color.GOLD) , negative);
             ResourceName.setAlignment(Pos.CENTER); Number.setAlignment(Pos.CENTER); TotalPrice.setAlignment(Pos.CENTER);
             add.setAlignment(Pos.CENTER); remove.setAlignment(Pos.CENTER);
-            getPrice.put(resource.getName(), totalPrice);
+            getPrice.put(resource, totalPrice);
+            getNumber.put(resource , number);
             positive.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -254,9 +255,9 @@ public class TradeMain extends Application {
             public void handle(KeyEvent keyEvent) {
                 String name = keyEvent.getCode().getName();
                 if (name.equals("Esc")){
-                    TradeMain tradeMain = new TradeMain(currentUser);
+                    GameMenu gameMenu = new GameMenu();
                     try {
-                        tradeMain.start(Main.stage);
+                        gameMenu.start(stage);
                     } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
@@ -266,9 +267,9 @@ public class TradeMain extends Application {
         back.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                TradeMain tradeMain = new TradeMain(currentUser);
+                GameMenu gameMenu = new GameMenu();
                 try {
-                    tradeMain.start(Main.stage);
+                    gameMenu.start(stage);
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -279,12 +280,13 @@ public class TradeMain extends Application {
             public void handle(MouseEvent mouseEvent) {
                 int x = 0;
                 for (Resources resources : Resources.values()){
-                    if (!getPrice.get(resources.getName()).getText().equals("0")){
+                    if (!getPrice.get(resources).getText().equals("0")){
                         x++;
                     }
                 }
                 if (x > 1) {
                     errorMaker("invalid amount" , "you can't trade multiple items at the same time" , false);
+                    System.out.println(0);
                     return;
                 }
                 if (x == 0){
@@ -297,23 +299,26 @@ public class TradeMain extends Application {
                 }
                 else {
                     for (Resources resources : Resources.values()){
-                        if (!getPrice.get(resources.getName()).getText().equals("0")){
-                            if (Integer.parseInt(getPrice.get(resources.getName()).getText()) >
+                        if (!getPrice.get(resources).getText().equals("0")){
+                            if (Integer.parseInt(getPrice.get(resources).getText()) >
                                     Government.getGovernmentByUser(currentUser).getBalance()){
                                 errorMaker("invalid balance" , "you don't have enough balance for this trade" , false);
+                                System.out.println(1);
                             }
                             else if (Government.getGovernmentByUser(currentUser).getResourceCount().get(resources) +
                             Integer.parseInt(getNumber.get(resources).getText()) < 0  ||
                             Government.getGovernmentByUser(user).getResourceCount().get(resources) -
                                     Integer.parseInt(getNumber.get(resources).getText()) < 0){
                                 errorMaker("invalid amount" , "there isn't enough resources to do this trade" , false);
+                                System.out.println(2);
                             }
                             else {
                                 Government government = Government.getGovernmentByUser(user);
                                 Game currentGame = Controller.getCurrentGame();
                                 government.getTradeNotification().add(new Trade(government, currentGame.getCurrentTurn(),
                                         Integer.parseInt(getPrice.get(resources).getText()), resources
-                                        , Integer.parseInt(getNumber.get(resources.getName()).getText() ) , "message by graphic"));
+                                        , Integer.parseInt(getNumber.get(resources).getText() ) , "message by graphic"));
+                                System.out.println(3);
                                 TradeMain tradeMain = new TradeMain(currentUser);
                                 try {
                                     tradeMain.start(stage);
@@ -348,7 +353,7 @@ public class TradeMain extends Application {
             return;
         }
     for (Trade trade : Trade.getAllTrades()) {
-        if (!trade.isAccepted() || !trade.getRecipient().equals(Controller.getCurrentGame().getCurrentTurn()))
+        if ( !trade.getRecipient().equals(Controller.getCurrentGame().getCurrentTurn()))
             continue;
         VBox vBox1 = new VBox(); vBox1.setSpacing(5); vBox1.setAlignment(Pos.CENTER);
         ImageView iv = new ImageView(new Image(TradeMain.class.getResource("/Images/SimpleBackground.jpg").toExternalForm()));
@@ -414,6 +419,7 @@ public class TradeMain extends Application {
             return false;
         }
     }
+
 }
 
 

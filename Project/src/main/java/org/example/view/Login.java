@@ -25,6 +25,7 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Login extends Application {
+
     private int state = 0 ;
     public static Stage stage;
     public static Pane pane;
